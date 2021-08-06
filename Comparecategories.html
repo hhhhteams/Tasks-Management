@@ -1,0 +1,124 @@
+<script type="text/javascript" src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/Style%20Library/js/angular/Online/Tasks%20Management/Comparecategories.js"></script>
+<div ng-controller="CategoriesComponentController">
+    <div class="" ng-cloak>
+        <div class="panel-body">
+            <div class="row Doc-align">
+                <div class="col-sm-2">Search in all Categories data:</div>
+                <div class="col-sm-4">
+                    <input id="searchinput" type="search" ng-model="Globalsearch" placeholder="Search all..." class="form-control searchbox_height">
+                    <span class="searchclear" ng-click="clearControl('searchinput')">X</span>
+                </div>
+                <div class="col-sm-2 no-padding">
+                    Showing {{FilteredInstitutions.length}} of {{totalTaggedTask.length}} Categories
+                </div>
+                <div class="col-sm-1 padL-0">
+                    <a data-ng-click="ClearFilters()" class="hreflink pull-right">Clear All <img ng-src="/_layouts/images/delete.gif"></a>
+                </div>
+                <div class="col-sm-1 padL-0 pull-right">
+                    <img class="pull-right" ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/24/icon_excel.png" ng-click="exportToExcel(FilteredInstitutions)" />
+                </div>
+            </div>
+            <div id="contacttabs" class="exTab3">
+                <div class="tab-content">
+                    <div id="Institution">
+                        <div id="table-wrapper-institution" class="section-event">
+                            <div class="container-new">
+                                <table id="contact" class="table table-hover SAP-Project" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 1%"><div style="width: 1%"></div></th>
+                                            <th style="width: 1%"><div style="width: 1%"></div></th>
+                                            <th style="width: 33%;">
+                                                <div style="width: 33%">
+                                                    <input id="searchCompany" type="text" placeholder="Title" class="form-control searchbox_height" ng-model="searchTitle" />
+                                                    <span class="searchclear" ng-click="clearControl('searchTitle')">X</span>
+                                                    <span class="{{orderBy=='Title'&&!reverse?'glyphicon_active':'glyphicon'}}  glyphicon-chevron-up direction-arrow arrow_up" ng-click="sortBy('Title', false)"></span>
+                                                    <span class="{{orderBy=='Title'&&reverse?'glyphicon_active':'glyphicon'}}  glyphicon-chevron-down direction-arrow arrow_down" ng-click="sortBy('Title', true)"></span>
+
+                                                </div>
+                                            </th>
+                                            <th style="width: 15%;">
+                                                <div style="width: 15%">
+                                                    <input id="searchCompany" type="text" placeholder="Categories" class="form-control searchbox_height" ng-model="searchCategories" />
+                                                    <span class="searchclear" ng-click="clearControl('searchCategories')">X</span>
+                                                    <span class="{{orderBy=='Categories'&&!reverse?'glyphicon_active':'glyphicon'}}  glyphicon-chevron-up direction-arrow arrow_up" ng-click="sortBy('Categories', false)"></span>
+                                                    <span class="{{orderBy=='Categories'&&reverse?'glyphicon_active':'glyphicon'}}  glyphicon-chevron-down direction-arrow arrow_down" ng-click="sortBy('Categories', true)"></span>
+
+                                                </div>
+                                            </th>
+                                            <th style="width: 5%"><div style="width: 5%"></div></th>
+                                            <th style="width: 18%;">
+                                                <div style="width: 18%">
+                                                    <input id="searchInstitutionType" type="text" placeholder="Shareweb Categories" class="form-control searchbox_height" ng-model="searchSharewebCategories" />
+                                                    <span class="searchclear" ng-click="clearControl('searchSharewebCategories')">X</span>
+                                                    <span class="{{orderBy=='SharewebCategories'&&!reverse?'glyphicon_active':'glyphicon'}}  glyphicon-chevron-up direction-arrow arrow_up" ng-click="sortBy('SharewebCategories', false)"></span>
+                                                    <span class="{{orderBy=='SharewebCategories'&&reverse?'glyphicon_active':'glyphicon'}}  glyphicon-chevron-down direction-arrow arrow_down" ng-click="sortBy('SharewebCategories', true)"></span>
+
+                                                </div>
+                                            </th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="item in FilteredInstitutions = (totalTaggedTask | filter: Globalsearch  | orderBy:orderBy:reverse | filter:{Title:searchTitle,Categories:searchCategories})" style="width:100%">
+                                            <td style="width:9%;">
+                                                <img ng-if="item.siteType =='Gruene'" class="icon-sites-img ml-8"
+                                                     ng-src="{{pageContextInfo.siteAbsoluteUrl}}/SiteCollectionImages/ICONS/Foundation/logo-gruene.png">
+                                                <img ng-if="item.siteType =='Gender'" class="icon-sites-img ml-8"
+                                                     ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Shareweb/site_gender.png">
+                                                <img ng-if="item.siteType =='DE'" class="icon-sites-img ml-8"
+                                                     ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Shareweb/site_de.png" />
+                                                <img ng-if="item.siteType =='DRR'" class="icon-sites-img ml-8"
+                                                     ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Shareweb/site_drr.png">
+                                                <img ng-if="item.siteType =='Education'" class="icon-sites-img ml-8"
+                                                     ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Shareweb/site_education.png">
+                                                <img ng-if="item.siteType =='EI'" class="icon-sites-img ml-8"
+                                                     ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Shareweb/site_ei.png">
+                                                <img ng-if="item.siteType =='EPS'" class="icon-sites-img ml-8"
+                                                     ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Shareweb/site_eps.png">
+                                                <img ng-if="item.siteType =='Health'" class="icon-sites-img ml-8"
+                                                     ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Shareweb/site_health.png">
+                                                <img ng-if="item.siteType =='QA'" class="icon-sites-img ml-8"
+                                                     ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Shareweb/site_qa.png">
+                                                <img ng-if="item.siteType =='Shareweb'" class="icon-sites-img ml-8"
+                                                     ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Shareweb/site_shareweb.png">
+                                                <img ng-if="item.siteType =='HHHH'" class="icon-sites-img ml-8"
+                                                     ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Foundation/icon_hhhh.png">
+                                                <img ng-if="item.siteType =='Small Projects'" class="icon-sites-img ml-8"
+                                                     ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Shareweb/small_project.png">
+                                            </td>
+                                            <td>
+                                                <img class="mb-3 right-icon icon_siz19" ng-src="/_layouts/15/images/ichtm.gif?rev=23">
+                                            </td>
+                                            <td style="width:33%;">
+                                                <a class="ForAll hreflink" target="_blank" ng-href="/SitePages/Task-Profile.aspx?taskId={{item.Id}}&amp;Site={{item.siteType}}" href="/SitePages/Task-Profile.aspx?taskId=813&amp;Site=Offshore Tasks ">{{item.Title}}</a>
+                                            </td>
+                                            <td style="width:15%;">
+                                                {{item.Categories}}
+                                            </td>
+                                            <td>
+                                                <span class="col-sm-12 text-center">
+                                                    <img src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/SiteCollectionImages/ICONS/Shareweb/Arrow_Right.png" title="Switch Items" data-toggle="popover" data-trigger="hover" ng-click="LeftToRight(item);">
+                                                </span>
+                                                <span class="col-sm-12 text-center">
+                                                    <img src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/SiteCollectionImages/ICONS/Shareweb/Arrow_Left.png" title="Switch Items" data-toggle="popover" data-trigger="hover" ng-click="RightToLeft(item);">
+                                                </span>
+                                            </td>
+                                            <td style="width:30%;">
+                                                <span ng-repeat="obj in item.SharewebCategories.results">
+                                                    {{obj.Title}};
+                                                </span>
+                                            </td>
+
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

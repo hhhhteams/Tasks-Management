@@ -1,0 +1,28 @@
+﻿<script src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/Style%20Library/js/angular/Templates/HCTemplateControllers.js"></script>
+<script src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/Style%20Library/js/angular/Online/Tasks%20Management/TaskMovement.js"></script>
+
+<div ng-controller="SmartMetaSearchTaskController"  ng-cloak>
+
+ 
+    <table width="100%">
+
+        <tr>
+            <td ng-repeat="SitesData in AllSiteDataCol" valign="top">
+               
+                    <h2>{{SitesData[0].siteType}}</h2>
+                <input type="text" style="font-weight:normal;" id="searchTitle" placeholder="{{SitesData[0].siteType}}" class="form-control searchbox_height" ng-model="searchTitle" />
+                <span class="searchclear" ng-click="clearControl('searchTitle')">X</span>
+
+                <div class="col-sm-" ng-repeat="item in filtered =(SitesData | filter:{Title:searchTitle}) ">
+
+                    <div class="row" ui-draggable="true" drag="item" data-toggle="popover" ui-on-drop="onDropRemoveItem($event,$data, SitesData,'{{SitesData[0].siteType}}')" on-drop-success="dropSuccessHandler($event, $index, SitesData)">
+                        {{item.Title}}
+                    </div>
+                </div>
+               
+
+            </td>
+        </tr>
+    </table>
+    <shareweb-progress-bar progressbarid="'showSmartMetaSearchTaskprogressbar'"></shareweb-progress-bar>
+</div>

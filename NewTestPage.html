@@ -1,0 +1,37 @@
+<script type="text/javascript" src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/Style%20Library/js/angular/Online/Tasks%20Management/NewTestPage.js"></script>
+
+<div ng-controller="NewTestPageController"  ng-cloak>
+    <div>
+        <div class="col-sm-12 padL-0 PadR0">
+            <div class="col-sm-4 no-padding">
+                <input id="searchinput" type="search" ng-model="searchGlobal" placeholder="Search all..." class="form-control searchbox_height ng-valid ng-dirty ng-touched ng-empty ng-pristine">
+                <span class="searchclear" ng-click="clearControl('searchinput')">X</span>
+            </div>
+
+
+            <!--<div class="col-sm-5">
+        <input id="searchinput" type="search" ng-model="searchGlobal"
+               placeholder="Type here contact/institution's name and click on search"
+               class="form-control searchbox_height" autocomplete="off">
+        <span class="searchclear" ng-click="clearControl('searchinput')">X</span>
+    </div>-->
+
+            <div class="col-sm-1">
+                <button type="button" class="btn btn-primary pull-right" ng-click="ShowAllItem()">
+                    Search
+                </button>
+            </div>
+            <div class="col-sm-2 no-padding forshowingcontact">
+                <p>Showing {{filtered.length}} of {{totalTaggedTask[0].length}} AllData</p>
+            </div>
+        </div>
+        <div>
+            <table>
+                <tr ng-repeat="Data in filtered=(smarsearch)">
+                    <td>{{ Data.Title}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+

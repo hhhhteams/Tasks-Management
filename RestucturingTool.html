@@ -1,0 +1,1396 @@
+﻿<script src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/Style%20Library/js/angular/Online/Tasks%20Management/RestructuringTool.js"></script>
+<script src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/Style%20Library/js/angular/Services/alasql.min.js"></script>
+<script src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/Style%20Library/js/angular/Templates/HCTemplateControllers.js"></script>
+<style>
+
+      #pageTitle a {
+        display: none !important;
+    }
+    
+    #contentRow {
+        padding-top: 0px !important;
+        margin-top: -15px;
+    }
+    
+    .pagecolor {
+        color: #228b22 !important;
+    }
+    
+    .pagecolor1 {
+        color: #f98b36 !important;
+    }
+	.mr-2{margin-right:2px;}
+    .displayLabel {
+        display: none;
+    }
+
+    .container-new td {
+        word-break: break-all !important;
+    }
+
+    .button-icon {
+        width: 18px;
+    }
+
+    .ml-8 {
+        margin-left: -8px;
+    }
+
+    .tooltipte .tooltiptext {
+        visibility: hidden;
+        min-width: 350px;
+        background-color: #fff;
+        color: #000;
+        text-align: center;
+        padding: 5px 0;
+        position: absolute;
+        z-index: 1;
+       font-size: 13px;
+        font-weight: normal;
+        line-height: 18px;
+        border-width: 1px;
+        color: #333;
+        padding: 0px;
+        font-size: 12px;
+        font-family: Verdana, Arial;
+        max-height: 350px;
+        text-align: left;
+        left: 26px;
+        box-shadow: 0 4px 9px rgba(0, 0, 0, 0.05), 0 0px 3px rgba(0, 0, 0, 0.02);
+    }
+
+    .tooltipte .tooltiptitle {
+        color: #6b6a6a;
+        font-size: 16px !Important;
+        font-weight: 600;
+        background: #e8e6e6;
+        padding: 6px 10px;
+        border: 1px solid #ccc;
+        margin-bottom: 0px;
+    }
+
+    .tooltip_Desc {
+        padding: 10px;
+        background: #fff;
+    }
+
+    .project-tool:hover .tooltiptext {
+        visibility: visible;
+        position: absolute;
+        border: 1px solid #ccc;
+    }
+
+    .tooltip-area {
+        visibility: visible;
+        position: absolute;
+        border: 1px solid #ccc;
+        left: -286px !important;
+        top: 27px !important;
+    }
+
+    .tooltip_Desc td {
+        background: #fff !important;
+        font-weight: 500 !important;
+    }
+
+    .project-tool {
+        width: 20px;
+        display: inherit;
+        position: relative;
+    }
+
+        .project-tool a.text-white {
+            color: #ffffff !important;
+            font-size: 22px !important;
+            font-weight: 600;
+        }
+
+    .pd5 {
+        padding: 5px;
+    }
+
+    .parent_iconsize {
+        width: 25px;
+        height: 25px
+    }
+
+    .MR5 {
+        margin-right: 5px;
+    }
+
+    .page-content {
+        width: auto !important;
+        margin-right: 36px !important;
+        height: auto !important;
+        margin-left: -25px !important;
+    }
+
+    /*** for table use ***/
+
+    .for-lis {
+        display: inline-flex;
+        width: 100%;
+        padding: 5px;
+    }
+
+    .pt-0 {
+        padding-top: 0px !important;
+    }
+
+
+    .padLR {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    .arrow_up {
+        margin-top: -4px;
+        cursor: pointer;
+        margin-left: 4px;
+    }
+
+    .arrow_down {
+        margin-top: 10px;
+        cursor: pointer;
+        margin-left: 4px;
+    }
+
+    .glyphicon {
+        right: auto !important;
+    }
+
+    .for-c0l {
+        background: #e7e3e3 !important;
+        border: 1px solid #fff;
+    }
+
+    .for-c02 {
+        background: #f7f5f5 !important;
+        border: 1px solid #fff;
+    }
+
+    .for-c03 {
+        background: #fff !important;
+        border: 1px solid #eee;
+    }
+
+    .tdrows {
+        border: 1px solid #f2f2f2 !important;
+    }
+
+    .project_active {
+        background: #cecccc !important;
+    }
+
+    .section-event .searchclear {
+        right: auto !important;
+        margin-left: -19px;
+        bottom: auto;
+        top: 10px !important;
+    }
+
+    .glyphicon_active {
+        right: auto !important;
+    }
+
+    .width-90 {
+        width: 90%;
+    }
+
+    .ml5 {
+        margin-left: 10px;
+    }
+
+    .ml20 {
+        margin-left: 28px;
+    }
+
+    .ml35 {
+        margin-left: 45px;
+    }
+
+    .highlighted {
+        background-color: yellow;
+    }
+
+    .subTemplateselects {
+        text-align: center;
+        padding: 5px;
+    }
+
+        .subTemplateselects .subTemplateselect {
+            width: 12%;
+            display: inline-block;
+            vertical-align: top;
+            text-decoration: none;
+            background: #000066;
+            min-height: 100px;
+            text-align: center;
+        }
+
+        .subTemplateselects .text-label {
+            display: block;
+            font-weight: 400;
+            color: #ffffff;
+            text-align: center;
+            padding-top: 19px;
+        }
+
+    .selectedsubTemplate {
+        background: #1e90ff !important;
+        color: #fff;
+    }
+
+    .bold {
+        font-weight: 700;
+    }
+
+    .serviceColor_Active {
+        color: forestgreen !important;
+    }
+
+    .bdrbox {
+        border: 1px solid #ccc;
+    }
+</style>
+<style>
+    .dropBox {
+        background: #ccc !important;
+    }
+
+    .icon-sites-img {
+        height: 26px;
+        width: 26px !important;
+    }
+
+    .dashboard {
+        width: 1280px !important;
+        margin-top: 1px;
+    }
+
+    .wrapper .glyphicon_active {
+        position: absolute;
+        right: 9px;
+        color: #000069;
+    }
+
+    .for-size {
+        width: 880px;
+        margin: 0 auto;
+    }
+
+    .for_model_use {
+        display: block;
+        width: 500px;
+        margin: 0 auto;
+        background-color: #fff !important;
+    }
+
+    .for_border_use {
+        border: 1px solid #ccc !important;
+        background-color: #fff;
+        padding: 7px;
+        font-size: 13px;
+        font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+        font-weight: 600;
+    }
+
+    .header_back_clr {
+        background: #bbb3b3;
+        color: #fff;
+    }
+
+    .for_height_use {
+        border: 1px solid #ababab;
+        height: auto;
+        background: #ffffff;
+    }
+
+    .checkbox,
+    .radio {
+        margin-left: 11px;
+    }
+
+    .trbox_bdr {
+        border-bottom: 1px solid #ccc !important;
+    }
+
+    .back_box_clr {
+        background-color: #f5f5f5;
+        border: 1px solid #ccc;
+    }
+
+    .box_bdr {
+        border: 1px solid #ccc;
+    }
+
+    .font_bold_size {
+        font-weight: 700;
+        cursor: pointer;
+    }
+
+    .pb_15 {
+        padding-bottom: 15px;
+    }
+
+    .table_shadow_box {
+        box-shadow: 0 5px 6px 0 #d7d7d7;
+        transition: all 0.3s ease 0s;
+    }
+
+    .for_dotted {
+        border: 2px dotted #ccc;
+        min-height: 100px;
+    }
+
+    .for_text {
+        padding: 7px;
+        font-weight: 600;
+    }
+
+    .backarea {
+        min-width: 120px;
+        background-color: #000066;
+        display: inline-block;
+        margin-left: 5px;
+        color: #fff;
+        padding: 2px;
+    }
+
+    .box_height_scroll {
+        height: 260px;
+        overflow-y: scroll;
+    }
+
+    .panel-headingtitle {
+        text-align: center;
+        color: #fff !important;
+        font-size: 13px;
+    }
+
+    .panel-heading.bg-blue {
+        padding: 5px 5px 4px 4px !important;
+        background: #000069 !important;
+    }
+      .glyphicon.filterupangle{right: -15px !important;}
+   .glyphicon.filterdownangle{right: -15px !important;}
+</style>
+
+<div ng-controller="componentsReStructureController" ng-cloak class="for-size component componet-portfoliblue {{PortfolioType=='Service'?'ServicePortfoliopg':''}}{{PortfolioType=='Event'?'EventPortfoliopg':''}}">
+    <div>
+        <h1 ng-show="PortfolioType=='Component'" class="blue-clr">{{PortfolioType}} Restructuring Tool</h1>
+        <h1 ng-show="PortfolioType=='Service'" class="pagecolor">{{PortfolioType}} Restructuring Tool</h1>
+        <h1 ng-show="PortfolioType=='Event'" class="pagecolor1">{{PortfolioType}} Restructuring Tool</h1>
+    </div>
+    <div ng-show="pageload" id="allCompponentDataStructure">
+        <div class="container dashboard no-padding">
+            <div class="col-sm-10 no-padding">
+                <span>
+                    <div class="toggleboxOffshore-Dashboard">
+                        <fieldset>
+                            <legend>
+                                <span class="plus-icon" ng-if="itemdisplay ==false" style="cursor:pointer;"
+                                      ng-click="toggleGroupSmartSearchfilter(true);">
+                                    <img ng-src="{{siteUrl}}/SiteCollectionImages/ICONS/{{PortfolioType=='Service'?'24/right-list-icon.png':'Service_Icons/Rightarrowicon-green.png'}}">
+                                </span>
+                                <span class="plus-icon" ng-if="itemdisplay==true" style="cursor:pointer;"
+                                      ng-click="toggleGroupSmartSearchfilter(false);">
+                                    <img ng-src="{{siteUrl}}/SiteCollectionImages/ICONS/{{PortfolioType=='Service'?'Service_Icons/Downarrowicon-green.png':'24/list-icon.png'}}">
+                                </span>
+                            </legend>
+                            <!--<label class="control-label checkbox">
+                                <input type="checkbox" id="C" class="icon-input" ng-model="filterItem.Selected"
+                                    ng-click="ComponetsData('Component',filterItem.Selected)" /> Components
+                            </label>
+                            <label class="control-label checkbox">
+                                <input type="checkbox" id="a" class="icon-input" ng-model="filterItem.Selected1"
+                                    ng-click="ComponetsData('SubComponent',filterItem.Selected1)" /> Subcomponents
+                            </label>
+                            <label class="control-label checkbox">
+                                <input type="checkbox" id="v" class="icon-input" ng-model="filterItem.Selected2"
+                                    ng-click="ComponetsData('Feature',filterItem.Selected2)" /> Features
+                            </label>-->
+                            <div style="{{itemdisplay?'display:inline;':'display:none;'}}"></div>
+                        </fieldset>
+                    </div>
+                </span>
+            </div>
+        </div>
+        <div class="col-sm-12 form-group padL-0 PadR0 mt-10">
+            <div class="col-sm-5 padL-0 PadR0">
+                <input type="text" class="form-control searchbox_height" placeholder="Search in All Components"
+                       ng-model="SearchComponent.GlobalSearch">
+            </div>
+            <div class="col-sm-2 mt-5">
+                <a data-ng-click="ClearFilters('SearchComponent')" class="hreflink pull-right">
+                    Clear All <img ng-src="/_layouts/images/delete.gif">
+                </a>
+
+            </div>
+            <div class="col-sm-3 padL-0 PadR0 mb-5">
+                <button type="button" ng-disabled="checkflag" class="btn btn-primary mt-10 mb-10 pull-right" ng-click="changescreen()">
+                    NEXT
+                </button>
+            </div>
+
+            <div class="col-sm-2 pull-right">
+                <span class="headcontainer no-padding pull-right" style="cursor: pointer;">
+                    <img ng-src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/SiteCollectionImages/ICONS/24/icon_excel.png"
+                         ng-click="exportToExcel()" />
+                </span>
+            </div>
+        </div>
+        <div>
+            <div class="col-sm-12 padL-0">
+                <div id="portfolio" class="section-event pt-0">
+                    <ul class="table">
+                        <li class="for-lis">
+                            <div style="width:1%;">
+                                <div style="width:85%;">
+                                    <a class="hreflink" ng-show="expand_collapse"
+                                       ng-click="filterExpanded(ComponetsData.allComponentItemWithStructure)" title="Tap to expand the childs">
+                                        <img style="width:10px;" src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/SiteCollectionImages/ICONS/{{PortfolioType=='Service'?'24/right-list-icon.png':'Service_Icons/Rightarrowicon-green.png'}}">
+                                    </a>
+                                    <a class="hreflink" ng-show="!expand_collapse"
+                                       ng-click="filterCollapsed(ComponetsData.allComponentItemWithStructure)" title="Tap to Shrink the childs">
+                                        <img style="width:10px;" src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/SiteCollectionImages/ICONS/{{PortfolioType=='Service'?'Service_Icons/Downarrowicon-green.png':'24/list-icon.png'}}">
+                                    </a>
+                                </div>
+                            </div>
+                            <div style="width: 2%;">
+                                <div style="width: 80%; ">
+
+                                </div>
+                            </div>
+                            <div style="width: 8%;">
+                                <div style="width:80%;">
+                                    <!--<span>
+                                        <a class="icontype display_hide hreflink no-padding" title="ChangeView" data-toggle="modal" ng-click="ChangeViewfilter()">
+                                            <img src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/SiteCollectionImages/ICONS/{{PortfolioType=='Service'?'Service_Icon':'Shareweb'}}/Filter-11-WF.png">
+                                        </a>
+                                        <a class="icontype display_hide hreflink no-padding" title="CreateComponent" data-toggle="modal" ng-click="openComponentPopup()">
+                                            <img class="button-icon" ng-src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/SiteCollectionImages/ICONS/{{PortfolioType=='Service'?'Service_Icon':'Shareweb'}}/Add-New.png">
+                                        </a>
+
+                                    </span>-->
+
+                                </div>
+                            </div>
+                            <div style="width:45%;">
+
+                                <div style="width:95%;" class="headcontainer">
+                                    <input type="search" placeholder="Title" class="searchbox_height width-90" ng-model="SearchComponent.Title">
+                                    <span class="searchclear" ng-click="clearSearchBox('SearchComponent','Title')">X</span>
+                                    <span class="{{orderBy.orderComponent=='Title'&&!reverse.orderComponent?'glyphicon_active':'glyphicon'}}  glyphicon-chevron-up direction-arrow arrow_up" ng-click="sortBy('orderComponent','Title', false)"></span>
+                                    <span class="{{orderBy.orderComponent=='Title'&&reverse.orderComponent?'glyphicon_active':'glyphicon'}}  glyphicon-chevron-down direction-arrow arrow_down" ng-click="sortBy('orderComponent','Title', true)"></span>
+                                </div>
+                            </div>
+                            <div style="width:15%;">
+                                <div style="width:90%;" class="displayLabel">
+
+                                    <label class="head">Category</label>
+                                </div>
+                                <div style="width:70%" class="headcontainer">
+                                    <input type="search" placeholder="Category" class="searchbox_height width-90"
+                                           ng-model="SearchComponent.Categories">
+                                    <span class="searchclear"
+                                          ng-click="clearSearchBox('SearchComponent','Categories')">X</span>
+                                    <span class="{{orderBy.orderComponent=='Categories'&&!reverse.orderComponent?'glyphicon_active':'glyphicon'}}  glyphicon-chevron-up direction-arrow arrow_up"
+                                          ng-click="sortBy('orderComponent','Categories', false)"></span>
+                                    <span class="{{orderBy.orderComponent=='Categories'&&reverse.orderComponent?'glyphicon_active':'glyphicon'}}  glyphicon-chevron-down direction-arrow arrow_down"
+                                          ng-click="sortBy('orderComponent','Categories', true)"></span>
+                                </div>
+                            </div>
+                            <div style="width:9%;">
+                                <div style="width:90%;" class="displayLabel">
+
+                                    <label class="head">Status</label>
+                                </div>
+                                <div style="width:80%" class="headcontainer">
+                                    <input type="search" placeholder="Status" class="searchbox_height width-90"
+                                           ng-model="SearchComponent.PercentComplete">
+                                    <span class="searchclear"
+                                          ng-click="clearSearchBox('SearchComponent','PercentComplete')">X</span>
+                                    <span class="{{orderBy.orderComponent=='PercentComplete'&&!reverse.orderComponent?'glyphicon_active':'glyphicon'}}  glyphicon-chevron-up direction-arrow arrow_up"
+                                          ng-click="sortBy('orderComponent','PercentComplete', false)"></span>
+                                    <span class="{{orderBy.orderComponent=='PercentComplete'&&reverse.orderComponent?'glyphicon_active':'glyphicon'}}  glyphicon-chevron-down direction-arrow arrow_down"
+                                          ng-click="sortBy('orderComponent','PercentComplete', true)"></span>
+                                </div>
+                            </div>
+                            <div style="width:11%;">
+                                <div style="width:80%;" class="displayLabel">
+
+                                    <label class="head">ItemRank</label>
+                                </div>
+                                <div style="width:80%" class="headcontainer">
+                                    <input type="search" placeholder="ItemRank" class="searchbox_height width-90"
+                                           ng-model="SearchComponent.ItemRank" />
+                                    <span class="searchclear"
+                                          ng-click="clearSearchBox('SearchComponent','ItemRank')">X</span>
+                                    <span class="{{orderBy.orderComponent=='ItemRank'&&!reverse.orderComponent?'glyphicon_active':'glyphicon'}}  glyphicon-chevron-up direction-arrow arrow_up"
+                                          ng-click="sortBy('orderComponent','ItemRank', false)"></span>
+                                    <span class="{{orderBy.orderComponent=='ItemRank'&&reverse.orderComponent?'glyphicon_active':'glyphicon'}}  glyphicon-chevron-down direction-arrow arrow_down"
+                                          ng-click="sortBy('orderComponent','ItemRank', true)"></span>
+                                </div>
+                            </div>
+                            <div style="width:8%;">
+                                <div style="width:17%;" class="displayLabel">
+
+                                    <label class="head">Priority</label>
+                                </div>
+                                <div style="width:82%" class="headcontainer">
+                                    <input type="search" placeholder="Priority" class="searchbox_height width-90"
+                                           ng-model="SearchComponent.Priority" />
+                                    <span class="searchclear"
+                                          ng-click="clearSearchBox('SearchComponent','Priority')">X</span>
+                                    <span class="{{orderBy.orderComponent=='Priority_x0020_Rank'&&!reverse.orderComponent?'glyphicon_active':'glyphicon'}}  glyphicon-chevron-up direction-arrow arrow_up"
+                                          ng-click="sortBy('orderComponent','Priority_x0020_Rank', false)"></span>
+                                    <span class="{{orderBy.orderComponent=='Priority_x0020_Rank'&&reverse.orderComponent?'glyphicon_active':'glyphicon'}}  glyphicon-chevron-down direction-arrow arrow_down"
+                                          ng-click="sortBy('orderComponent','Priority_x0020_Rank', true)"></span>
+                                </div>
+                            </div>
+                            <!--<div style="width:9%;">
+                                <div style="width:17%;" class="displayLabel">
+
+                                    <label class="head">Completed</label>
+                                </div>
+                                <div style="width:90%;" class="headcontainer">
+                                    <input type="search" placeholder="Completed" class="searchbox_height width-90"
+                                           ng-model="SearchComponent.CompletedDate" />
+                                    <span class="searchclear"
+                                          ng-click="clearSearchBox('SearchComponent','CompletedDate')">X</span>
+                                    <span class="{{orderBy.orderComponent=='DateTaskDueDate'&&!reverse.orderComponent?'glyphicon_active':'glyphicon'}}  glyphicon-chevron-up direction-arrow arrow_up"
+                                          ng-click="sortBy('orderComponent','DateTaskDueDate', false)"></span>
+                                    <span class="{{orderBy.orderComponent=='DateTaskDueDate'&&reverse.orderComponent?'glyphicon_active':'glyphicon'}}  glyphicon-chevron-down direction-arrow arrow_down"
+                                          ng-click="sortBy('orderComponent','DateTaskDueDate', true)"></span>
+                                </div>
+                            </div>-->
+
+
+                            <div style="width:2%;">
+                                <div style="width:2%;"></div>
+                            </div>
+                        </li>
+                        <div class="wrapper">
+                            <li ng-show="item.flag==true" class="for-lis bold {{item.expanded?'project_active tdrows':'tdrows'}} {{item.isService?'serviceColor_Active':''}}"
+                                ng-repeat-start="item in filterComponent=(ComponetsData.allComponentItemWithStructure | orderBy:orderBy['orderComponent']:reverse['orderComponent']|filter:SearchComponent.GlobalSearch|filter:SearchComponent.Priority |filter:SearchComponent.Categories|filter:SearchComponent.PercentComplete|filter:SearchComponent.CompletedDate|filter:SearchComponent.ItemRank|filter:{Modified:SearchComponent.Modified})"
+                                lvl-drop-target="true" on-drop="dropped(dragSrc,item)">
+                                <div style="width:1%;" class="">
+                                    <a class="hreflink" ng-show="item.childs.length>0&&!item.expanded"
+                                       ng-click="item.expanded=true" title="Expand {{item.Title}} childs">
+                                        <img ng-src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/SiteCollectionImages/ICONS/{{PortfolioType=='Service'?'24/right-list-icon.png':'Service_Icons/Rightarrowicon-green.png'}}">
+                                    </a>
+                                    <a class="hreflink" ng-show="item.childs.length>0&&item.expanded"
+                                       ng-click="item.expanded=false" title="Collapse {{item.Title}} childs">
+                                        <img ng-src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/SiteCollectionImages/ICONS/{{PortfolioType=='Service'?'Service_Icons/Downarrowicon-green.png':'24/list-icon.png'}}">
+                                    </a>
+                                </div>
+                                <div style="width:3%;" class="padLR">
+                                    <input type="radio" ng-model="item.checked" ng-click="checkeditem(item)" name="checked" />
+                                </div>
+                                <div style="width:7%;" class="padLR">
+                                    <span>
+                                        <img ng-if="item.Item_x0020_Type =='Component'" class="icon-sites-img ml-8"
+                                             ng-src="{{pageContextInfo.siteAbsoluteUrl}}/SiteCollectionImages/ICONS/{{PortfolioType=='Service'?'Service_Icon':'Shareweb'}}/component_icon.png">
+                                        <img ng-if="item.Item_x0020_Type =='SubComponent'" class="icon-sites-img ml-8"
+                                             ng-src="{{pageContextInfo.siteAbsoluteUrl}}/SiteCollectionImages/ICONS/{{PortfolioType=='Service'?'Service_Icon':'Shareweb'}}/SubComponent_icon.png">
+                                        <img ng-if="item.Item_x0020_Type =='Feature'" class="icon-sites-img ml-8"
+                                             ng-src="{{pageContextInfo.siteAbsoluteUrl}}/SiteCollectionImages/ICONS/{{PortfolioType=='Service'?'Service_Icon':'Shareweb'}}/feature_icon.png">
+                                    </span>
+                                </div>
+
+                                <div style="width:45%;" class="padLR">
+                                    <span>
+                                        <a class="hreflink" target="_blank"
+                                           ng-href="{{pageContextInfo.webAbsoluteUrl}}/SitePages/Portfolio-Profile.aspx?taskId={{item.Id}}" ng-bind-html="item.Title">
+                                        </a>
+                                    </span>
+
+                                </div>
+                                <div style="width:15%;" class="padLR">
+                                    {{item.Categories}}
+                                </div>
+                                <div style="width:9%;" class="padLR">
+                                    {{item.PercentComplete}}
+                                </div>
+                                <div style="width:11%;" class="padLR">
+                                    {{item.ItemRank}}
+                                </div>
+                                <div style="width:8%;" class="padLR">
+                                    {{item.Priority_x0020_Rank}}
+                                </div>
+                                <!--<div style="width:9%;" class="padLR">
+                                    {{item.CompletedDate}}
+                                </div>-->
+
+                                <div style="width:2%;" class="icontype display_hide">
+                                    <a class="hreflink" title="Edit {{item.Title}}" data-toggle="modal"
+                                       ng-click="EditComponent(item)">
+                                        <img class="img-focus"
+                                             src="/_layouts/images/edititem.gif">
+                                    </a>
+                                </div>
+                            </li>
+                            <li ng-if="item.expanded" class="active" ng-repeat-end>
+                                <ul class="table">
+                                    <li ng-show="item.childs.length >0 && child.flag ==true"
+                                        ng-repeat-start="child in item.childs " lvl-drop-target="true"
+                                        on-drop="dropped(dragSrc,child)"
+                                        class="for-c0l for-lis {{child.expanded?'project_actives tdrows':'tdrows'}} {{child.isService?'serviceColor_Active':''}}">
+                                        <div style="width:1%;" class="">
+                                            <a class="hreflink" ng-show="child.childs.length>0&&!child.expanded"
+                                               ng-click="child.expanded=true"
+                                               title="Expand {{child.Title}} childs">
+                                                <img ng-src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/SiteCollectionImages/ICONS/{{PortfolioType=='Service'?'24/right-list-icon.png':'Service_Icons/Rightarrowicon-green.png'}}">
+                                            </a>
+                                            <a class="hreflink" ng-show="child.childs.length>0&&child.expanded"
+                                               ng-click="child.expanded=false"
+                                               title="Collapse {{child.Title}} childs">
+                                                <img ng-src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/SiteCollectionImages/ICONS/{{PortfolioType=='Service'?'Service_Icons/Downarrowicon-green.png':'24/list-icon.png'}}">
+                                            </a>
+                                        </div>
+                                        <!-- <div style="width:2%;" class="padLR " ng-show="item.siteType !='Master Tasks'"> -->
+                                        <!-- </div> -->
+                                        <div style="width:3%;" class="padLR">
+                                            <span>
+                                                <input type="radio" ng-model="child.checked" ng-click="checkeditem(child)" name="checked" />
+                                            </span>
+                                        </div>
+                                        <div style="width:7%;" class="padLR">
+                                            <span>
+
+                                                <img ng-if="child.Item_x0020_Type =='Component'" class="icon-sites-img ml5"
+                                                     ng-src="{{pageContextInfo.siteAbsoluteUrl}}/SiteCollectionImages/ICONS/{{PortfolioType=='Service'?'Service_Icon':'Shareweb'}}/component_icon.png">
+                                                <img ng-if="child.Item_x0020_Type =='SubComponent'"
+                                                     class="icon-sites-img ml5"
+                                                     ng-src="{{pageContextInfo.siteAbsoluteUrl}}/SiteCollectionImages/ICONS/{{PortfolioType=='Service'?'Service_Icon':'Shareweb'}}/SubComponent_icon.png">
+                                                <img ng-if="child.Item_x0020_Type =='Feature'" class="icon-sites-img ml5"
+                                                     ng-src="{{pageContextInfo.siteAbsoluteUrl}}/SiteCollectionImages/ICONS/{{PortfolioType=='Service'?'Service_Icon':'Shareweb'}}/feature_icon.png">
+                                            </span>
+                                        </div>
+                                        <div style="width:45%;" class="padLR">
+
+                                            <span class="">
+                                                <a class="hreflink" target="_blank"
+                                                   ng-href="{{pageContextInfo.webAbsoluteUrl}}/SitePages/Portfolio-Profile.aspx?taskId={{child.Id}}" ng-bind-html="child.Title">
+                                                </a>
+
+
+                                            </span>
+
+                                        </div>
+                                        <div style="width:15%;" class="padLR">
+                                            {{child.Categories}}
+                                        </div>
+                                        <div style="width:9%;" class="padLR">
+                                            {{child.PercentComplete}}
+                                        </div>
+                                        <div style="width:11%;" class="padLR">
+                                            {{child.ItemRank}}
+                                        </div>
+                                        <div style="width:8%;" class="padLR">
+                                            {{child.Priority_x0020_Rank}}
+                                        </div>
+                                        <!--<div style="width:9%;" class="padLR">
+                                            {{child.CompletedDate}}
+                                        </div>-->
+
+
+                                        <div style="width:2%;" class="icontype display_hide">
+                                            <a class="hreflink" title="Edit {{child.Title}}" data-toggle="modal"
+                                               ng-click="EditComponent(child)">
+                                                <img class="img-focus"
+                                                     src="/_layouts/images/edititem.gif">
+                                            </a>
+                                        </div>
+                                    </li>
+                                    <li ng-show="child.expanded " class=" active" ng-repeat-end>
+                                        <ul class="table">
+                                            <li ng-show="subchild.flag==true"
+                                                ng-repeat="subchild in child.childs"
+                                                lvl-drop-target="true" on-drop="dropped(dragSrc,subchild)"
+                                                class="for-lis for-c02 {{subchild.expanded?'project_activess tdrows':'tdrows'}} {{subchild.isService?'serviceColor_Active':''}}">
+                                                <div style="width:1%;" class="">
+                                                    <a class="hreflink"
+                                                       ng-show="subchild.childs.length>0&&!subchild.expanded"
+                                                       ng-click="subchild.expanded=true"
+                                                       title="Expand {{subchild.Title}} childs">
+                                                        <img ng-src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/SiteCollectionImages/ICONS/{{PortfolioType=='Service'?'24/right-list-icon.png':'Service_Icons/Rightarrowicon-green.png'}}">
+                                                    </a>
+                                                    <a class="hreflink"
+                                                       ng-show="subchild.childs.length>0&&subchild.expanded"
+                                                       ng-click="subchild.expanded=false"
+                                                       title="Collapse {{subchild.Title}} childs">
+                                                        <img ng-src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/SiteCollectionImages/ICONS/{{PortfolioType=='Service'?'Service_Icons/Downarrowicon-green.png':'24/list-icon.png'}}">
+                                                    </a>
+                                                </div>
+                                                <!-- <div style="width:2%;" class="padLR" ng-show="item.siteType !='Master Tasks'"> -->
+                                                <!-- </div> -->
+                                                <div style="width:3%;" class="padLR">
+                                                    <span class="">
+                                                        <input type="radio" ng-model="subchild.checked" ng-click="checkeditem(subchild)" name="checked" />
+                                                    </span>
+                                                </div>
+                                                <div style="width:7%;" class="padLR">
+
+                                                    <img ng-if="subchild.Item_x0020_Type =='Component'"
+                                                         class="icon-sites-img ml20"
+                                                         ng-src="{{pageContextInfo.siteAbsoluteUrl}}/SiteCollectionImages/ICONS/{{PortfolioType=='Service'?'Service_Icon':'Shareweb'}}/component_icon.png">
+                                                    <img ng-if="subchild.Item_x0020_Type =='SubComponent'"
+                                                         class="icon-sites-img ml20"
+                                                         ng-src="{{pageContextInfo.siteAbsoluteUrl}}/SiteCollectionImages/ICONS/{{PortfolioType=='Service'?'Service_Icon':'Shareweb'}}/SubComponent_icon.png">
+                                                    <img ng-if="subchild.Item_x0020_Type =='Feature'"
+                                                         class="icon-sites-img ml20"
+                                                         ng-src="{{pageContextInfo.siteAbsoluteUrl}}/SiteCollectionImages/ICONS/{{PortfolioType=='Service'?'Service_Icon':'Shareweb'}}/feature_icon.png">
+                                                </div>
+                                                <div style="width:45%;" class="padLR">
+                                                    <span class="">
+                                                        <a class="hreflink" target="_blank"
+                                                           ng-href="{{pageContextInfo.webAbsoluteUrl}}/SitePages/Portfolio-Profile.aspx?taskId={{subchild.Id}}" ng-bind-html="subchild.Title">
+                                                        </a>
+
+
+                                                    </span>
+
+                                                </div>
+                                                <div style="width:15%;" class="padLR">
+                                                    {{subchild.Categories}}
+                                                </div>
+                                                <div style="width:9%;" class="padLR">
+                                                    {{subchild.PercentComplete}}
+                                                </div>
+                                                <div style="width:11%;" class="padLR">
+                                                    {{subchild.ItemRank}}
+                                                </div>
+                                                <div style="width:8%;" class="padLR">
+                                                    {{subchild.Priority_x0020_Rank}}
+                                                </div>
+                                                <!--<div style="width:9%;" class="padLR">
+                                                    {{subchild.CompletedDate}}
+                                                </div>-->
+
+
+                                                <div class="icontype display_hide" style="width:2%;">
+                                                    <a class="hreflink" title="Edit {{subchild.Title}}"
+                                                       data-toggle="modal" ng-click="EditComponent(subchild)">
+                                                        <img class="img-focus"
+                                                             src="/_layouts/images/edititem.gif">
+                                                    </a>
+                                                </div>
+                                            </li>
+
+                                        </ul>
+
+                                    </li>
+                                </ul>
+
+                            </li>
+                        </div>
+                    </ul>
+                </div>
+                <div class="col-sm-12 PadR0">
+                    <button type="button" ng-disabled="checkflag" class="btn btn-primary mt-10 mb-10 pull-right"
+                            ng-click="changescreen()">
+                        NEXT
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div ng-show="selectedTaxItem" class="container dashboard no-padding">
+        <div class="col-sm-12 padL-0 PadR0 pdl4" style="background: #f5f5f5;">
+            <div class="col-sm-12 mt-10">
+                <div class="col-sm-3 padL-0">
+                    <label>Selected Component :</label>
+                </div>
+                <div class="col-sm-9">
+                    <a class="font_bold_size" target="_blank" ng-href="https://hhhhteams.sharepoint.com/sites/HHHHTeams/sp/SitePages/Portfolio-Profile.aspx?taskId={{SelectedtaxonomyItem.Id}}">
+                        <img ng-if="SelectedtaxonomyItem.Item_x0020_Type =='Component'" class="icon-sites-img"
+                             ng-src="{{pageContextInfo.siteAbsoluteUrl}}/SiteCollectionImages/ICONS/{{PortfolioType=='Service'?'Service_Icon':'Shareweb'}}/component_icon.png">
+                        <img ng-if="SelectedtaxonomyItem.Item_x0020_Type =='SubComponent'" class="icon-sites-img"
+                             ng-src="{{pageContextInfo.siteAbsoluteUrl}}/SiteCollectionImages/ICONS/{{PortfolioType=='Service'?'Service_Icon':'Shareweb'}}/SubComponent_icon.png">
+                        <img ng-if="SelectedtaxonomyItem.Item_x0020_Type =='Feature'" class="icon-sites-img"
+                             ng-src="{{pageContextInfo.siteAbsoluteUrl}}/SiteCollectionImages/ICONS/{{PortfolioType=='Service'?'Service_Icon':'Shareweb'}}/feature_icon.png"> {{SelectedtaxonomyItem.Title}}
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm-12  mt-10">
+                <div class="col-sm-3 padL-0">
+                    <label>Select Component Type :</label>
+                </div>
+                <div class="col-sm-9">
+                    <div class="col-sm-3 padL-0">
+                        <input type="radio" ng-disabled="SelectedtaxonomyItem.Item_x0020_Type=='Component'"
+                               name="checked" ng-click="Checkversion(SelectedtaxonomyItem,'Component')" />
+                        <label>Component</label>
+                    </div>
+                    <div class="col-sm-3 padL-0">
+                        <input type="radio" ng-disabled="SelectedtaxonomyItem.Item_x0020_Type=='SubComponent'"
+                               name="checked" ng-click="Checkversion(SelectedtaxonomyItem,'SubComponent')" />
+                        <label>SubComponent</label>
+                    </div>
+                    <div class="col-sm-3 padL-0">
+                        <input type="radio" ng-disabled="SelectedtaxonomyItem.Item_x0020_Type=='Feature'"
+                               name="checked" ng-click="Checkversion(SelectedtaxonomyItem,'Feature')" />
+                        <label>Feature</label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 mt-10 pb_15" ng-hide="changetoTaxType=='Component'">
+                <div class="col-sm-3 padL-0">
+                    <label>Select Parent :</label>
+                </div>
+                <div class="col-sm-9">
+                    <!--<a ng-hide="SelectedParentComponet.length!=0" > Click Here To Select Parent <img ng-click="showParents()" class="img-focus" src="/_layouts/images/edititem.gif"></a>-->
+                    <a ng-show="SelectedParentComponet.length!=0" class="font_bold_size" target="_blank" ng-href="https://hhhhteams.sharepoint.com/sites/HHHHTeams/sp/SitePages/Portfolio-Profile.aspx?taskId={{SelectedParentComponet[0].Id}}">
+                        <img ng-if="SelectedParentComponet[0].Item_x0020_Type =='Component'" class="icon-sites-img"
+                             ng-src="{{pageContextInfo.siteAbsoluteUrl}}/SiteCollectionImages/ICONS/{{PortfolioType=='Service'?'Service_Icon':'Shareweb'}}/component_icon.png">
+                        <img ng-if="SelectedParentComponet[0].Item_x0020_Type =='SubComponent'" class="icon-sites-img"
+                             ng-src="{{pageContextInfo.siteAbsoluteUrl}}/SiteCollectionImages/ICONS/{{PortfolioType=='Service'?'Service_Icon':'Shareweb'}}/SubComponent_icon.png">
+                        <img ng-if="SelectedParentComponet[0].Item_x0020_Type =='Feature'" class="icon-sites-img"
+                             ng-src="{{pageContextInfo.siteAbsoluteUrl}}/SiteCollectionImages/ICONS/{{PortfolioType=='Service'?'Service_Icon':'Shareweb'}}/feature_icon.png">{{SelectedParentComponet[0].Title}}
+                    </a>
+                    <span class="hreflink" ng-show="SelectedParentComponet.length==0">Click here to Select Parent <a class="hreflink" title="Edit Parent Component" data-toggle="modal" ng-click="showParents()"><img class="img-focus" src="/_layouts/images/edititem.gif"> </a></span>
+                    <a ng-show="SelectedParentComponet.length!=0" class="hreflink" title="Edit Parent Component" data-toggle="modal" ng-click="showParents()"><img class="img-focus" src="/_layouts/images/edititem.gif"> </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-12 PadR0" style="text-align:end">
+            <button type="button" class="btn btn-primary mt-10 mb-10" ng-click="backtoscreenone()">BACK</button>
+            <button ng-show="SelectedtaxonomyItem.Item_x0020_Type =='Component'" type="button" ng-disabled="isSelected" ng-click="FindChildItems(SelectedtaxonomyItem)" class="btn btn-primary mt-10 mb-10">NEXT</button>
+            <button ng-show="SelectedtaxonomyItem.Item_x0020_Type !='Component'" type="button" ng-disabled="Disabled && isSelected" ng-click="FindChildItems(SelectedtaxonomyItem)" class="btn btn-primary mt-10 mb-10">NEXT</button>
+
+        </div>
+    </div>
+    <!-------------------------------------------------------------------------------------------------------------------------------------------------------->
+    <div ng-show="Finalscreenoofitem" id="finalupdate">
+        <div class="row first_box_clr back_box_clr pb_15">
+            <div class="col-sm-12 mt-10">
+                <div class="col-sm-3">
+                    <label>Selected Component</label>
+                </div>
+                <div class="col-sm-9">
+                    <a target="_blank" class="font_bold_size" ng-href="https://hhhhteams.sharepoint.com/sites/HHHHTeams/sp/SitePages/Portfolio-Profile.aspx?taskId={{SelectedtaxonomyItem.Id}}">
+                        <img ng-if="SelectedtaxonomyItem.Item_x0020_Type =='Component'" class="icon-sites-img"
+                             ng-src="{{pageContextInfo.siteAbsoluteUrl}}/SiteCollectionImages/ICONS/{{PortfolioType=='Service'?'Service_Icon':'Shareweb'}}/component_icon.png">
+                        <img ng-if="SelectedtaxonomyItem.Item_x0020_Type =='SubComponent'" class="icon-sites-img"
+                             ng-src="{{pageContextInfo.siteAbsoluteUrl}}/SiteCollectionImages/ICONS/{{PortfolioType=='Service'?'Service_Icon':'Shareweb'}}/SubComponent_icon.png">
+                        <img ng-if="SelectedtaxonomyItem.Item_x0020_Type =='Feature'" class="icon-sites-img"
+                             ng-src="{{pageContextInfo.siteAbsoluteUrl}}/SiteCollectionImages/ICONS/{{PortfolioType=='Service'?'Service_Icon':'Shareweb'}}/feature_icon.png"> {{SelectedtaxonomyItem.Title}}
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm-12 mt-10">
+                <div class="col-sm-3">
+                    <label>Selected New Type</label>
+                </div>
+                <div class="col-sm-9">
+                    <span class="font_bold_size">{{changetoTaxType}}</span>
+                </div>
+            </div>
+            <div class="col-sm-12 mt-10">
+                <div class="col-sm-3">
+                    <label>Selected Parent</label>
+                </div>
+                <div class="col-sm-9">
+                    <a class="font_bold_size" target="_blank" ng-href="https://hhhhteams.sharepoint.com/sites/HHHHTeams/sp/SitePages/Portfolio-Profile.aspx?taskId={{SelectedParentComponet[0].Id}}">
+                        <img ng-if="SelectedParentComponet[0].Item_x0020_Type =='Component'" class="icon-sites-img"
+                             ng-src="{{pageContextInfo.siteAbsoluteUrl}}/SiteCollectionImages/ICONS/{{PortfolioType=='Service'?'Service_Icon':'Shareweb'}}/component_icon.png">
+                        <img ng-if="SelectedParentComponet[0].Item_x0020_Type =='SubComponent'" class="icon-sites-img"
+                             ng-src="{{pageContextInfo.siteAbsoluteUrl}}/SiteCollectionImages/ICONS/{{PortfolioType=='Service'?'Service_Icon':'Shareweb'}}/SubComponent_icon.png">
+                        <img ng-if="SelectedParentComponet[0].Item_x0020_Type =='Feature'" class="icon-sites-img"
+                             ng-src="{{pageContextInfo.siteAbsoluteUrl}}/SiteCollectionImages/ICONS/{{PortfolioType=='Service'?'Service_Icon':'Shareweb'}}/feature_icon.png"> {{SelectedParentComponet[0].Title}}
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row second_box_clr back_box_clr mt-10 pb_15" ng-show="ChildExist">
+            <div class="col-sm-12 mt-10">
+                <div class="col-sm-6">
+                    <div class="panel panel-primary-head blocks">
+                        <div class="panel-heading bg-blue">
+                            <h3 class="panel-title panel-headingtitle">
+                                Child Items of <img ng-if="SelectedtaxonomyItem.Item_x0020_Type =='Component'" class="icon-sites-img"
+                                                    ng-src="{{pageContextInfo.siteAbsoluteUrl}}/SiteCollectionImages/ICONS/{{PortfolioType=='Service'?'Service_Icon':'Shareweb'}}/component_icon.png">
+                                <img ng-if="SelectedtaxonomyItem.Item_x0020_Type =='SubComponent'" class="icon-sites-img"
+                                     ng-src="{{pageContextInfo.siteAbsoluteUrl}}/SiteCollectionImages/ICONS/{{PortfolioType=='Service'?'Service_Icon':'Shareweb'}}/SubComponent_icon.png">
+                                <img ng-if="SelectedtaxonomyItem.Item_x0020_Type =='Feature'" class="icon-sites-img"
+                                     ng-src="{{pageContextInfo.siteAbsoluteUrl}}/SiteCollectionImages/ICONS/{{PortfolioType=='Service'?'Service_Icon':'Shareweb'}}/feature_icon.png">
+
+                                {{SelectedtaxonomyItem.Title}}
+                                <span class="pull-right">
+                                    <img style="width:22px;" ng-src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/SiteCollectionImages/ICONS/{{PortfolioType=='Service'?'Service_Icon':'Shareweb'}}/Move-all.png" title="Move All" ng-click="moveAll()" />
+                                </span>
+                            </h3>
+                        </div>
+                        <div class="panel-body for_height_use box_height_scroll" ui-on-drop="onDropRemoveTeam($event,$data,SelectedtaxonomyItem.childs)">
+                            <!--ui-on-drop="onDropTeam($event,$data,SelectedtaxonomyItem.childs)"-->
+                            <table class="tables_ui table table-info table-striped mb30 table table-hover">
+                                <thead>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="item in SelectedtaxonomyItem.childs track by $index">
+                                        <td>
+                                            <input type="checkbox" ng-click="SelectComponent(item)" value="" ng-model="item.checked" name="checkTask" />
+                                        </td>
+                                        <td>
+                                            <img ng-if="item.Item_x0020_Type =='Component'" style="height: 25px; width: 25px !important;"
+                                                 ng-src="{{pageContextInfo.siteAbsoluteUrl}}/SiteCollectionImages/ICONS/{{PortfolioType=='Service'?'Service_Icon':'Shareweb'}}/component_icon.png">
+                                            <img ng-if="item.Item_x0020_Type =='SubComponent'" style="height: 25px; width: 25px !important;"
+                                                 ng-src="{{pageContextInfo.siteAbsoluteUrl}}/SiteCollectionImages/ICONS/{{PortfolioType=='Service'?'Service_Icon':'Shareweb'}}/SubComponent_icon.png">
+                                            <img ng-if="item.Item_x0020_Type =='Feature'" style="height: 25px; width: 25px !important;"
+                                                 ng-src="{{pageContextInfo.siteAbsoluteUrl}}/SiteCollectionImages/ICONS/{{PortfolioType=='Service'?'Service_Icon':'Shareweb'}}/feature_icon.png">
+                                        </td>
+                                        <td ui-draggable="true" drag="item" on-drop-success="dropSuccessHandler($event, $index,  SelectedtaxonomyItem.childs)" title="{{item.Title}}" data-toggle="popover" data-trigger="hover">
+                                            {{item.Title}}
+                                        </td>
+                                        <td>
+                                            <a class="hreflink" title="{{item.Title}}" data-toggle="modal" ng-click="deleteitem(item,SelectedtaxonomyItem.childs);">
+                                                <img ng-src="/_layouts/images/delete.gif" src="/_layouts/images/delete.gif">
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <span><a class="font_bold_size" ng-click="showParentforchilds()">Select other parent to move childs</a></span>
+                    <div class="col-sm-12 padL-0" ng-show="AllSelectedParentsDropBoxd.length>0" ng-repeat=" item in AllSelectedParentsDropBoxd track by $index">
+                        <div class="panel panel-primary-head blocks" ui-on-drop="onDropRemoveTeam($event,$data,item.ChildItem)" id="SelectedParent{{item.Id}}" ui-on-drop="onDropTeam($event,$data,item.ChildItem)">
+                            <div class="panel-heading bg-blue">
+                                <h3 class="panel-title panel-headingtitle">
+                                    <img ng-if="item.Item_x0020_Type =='Component'" class="icon-sites-img"
+                                         ng-src="{{pageContextInfo.siteAbsoluteUrl}}/SiteCollectionImages/ICONS/{{PortfolioType=='Service'?'Service_Icon':'Shareweb'}}/component_icon.png">
+                                    <img ng-if="item.Item_x0020_Type =='SubComponent'"
+                                         class="icon-sites-img"
+                                         ng-src="{{pageContextInfo.siteAbsoluteUrl}}/SiteCollectionImages/ICONS/{{PortfolioType=='Service'?'Service_Icon':'Shareweb'}}/SubComponent_icon.png">
+                                    <img ng-if="item.Item_x0020_Type =='Feature'" class="icon-sites-img"
+                                         ng-src="{{pageContextInfo.siteAbsoluteUrl}}/SiteCollectionImages/ICONS/{{PortfolioType=='Service'?'Service_Icon':'Shareweb'}}/feature_icon.png">
+                                    {{item.Title}}
+                                </h3>
+                            </div>
+                            <div class="panel-body for_height_use box_height_scroll">
+                                <!--ui-on-drop="onDropTeam($event,$data,SelectedtaxonomyItem.childs)"-->
+                                <table class="tables_ui table table-info table-striped mb30 table table-hover">
+                                    <thead>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="child in item.ChildItem track by $index" ui-draggable="true" drag="child" on-drop-success="dropSuccessHandler($event, $index, item.ChildItem)" title="{{item.Title}}" data-toggle="popover" data-trigger="hover">
+                                            <td>
+                                                <img ng-if="child.Item_x0020_Type =='Component'" class="icon-sites-img"
+                                                     ng-src="{{pageContextInfo.siteAbsoluteUrl}}/SiteCollectionImages/ICONS/{{PortfolioType=='Service'?'Service_Icon':'Shareweb'}}/component_icon.png">
+                                                <img ng-if="child.Item_x0020_Type =='SubComponent'"
+                                                     class="icon-sites-img"
+                                                     ng-src="{{pageContextInfo.siteAbsoluteUrl}}/SiteCollectionImages/ICONS/{{PortfolioType=='Service'?'Service_Icon':'Shareweb'}}/SubComponent_icon.png">
+                                                <img ng-if="child.Item_x0020_Type =='Feature'" class="icon-sites-img"
+                                                     ng-src="{{pageContextInfo.siteAbsoluteUrl}}/SiteCollectionImages/ICONS/{{PortfolioType=='Service'?'Service_Icon':'Shareweb'}}/feature_icon.png">
+
+                                            </td>
+                                            <td>
+                                                {{child.Title}}
+                                            </td>
+                                            <td>
+                                                <a class="hreflink" title="{{child.Title}}" data-toggle="modal" ng-click="deleteitem(child,item.ChildItem);">
+                                                    <img ng-src="/_layouts/images/delete.gif" src="/_layouts/images/delete.gif">
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+
+
+                        <!--<div class="" ng-repeat=" item in AllSelectedParentsDropBoxd track by $index">
+                            <div class="col-sm-12 mt-10 for_text header_back_clr">
+                                <img ng-if="item.Item_x0020_Type =='Component'" class="icon-sites-img"
+                                     ng-src="{{pageContextInfo.siteAbsoluteUrl}}/SiteCollectionImages/ICONS/{{PortfolioType=='Service'?'Service_Icon':'Shareweb'}}/component_icon.png">
+                                <img ng-if="item.Item_x0020_Type =='SubComponent'"
+                                     class="icon-sites-img"
+                                     ng-src="{{pageContextInfo.siteAbsoluteUrl}}/SiteCollectionImages/ICONS/{{PortfolioType=='Service'?'Service_Icon':'Shareweb'}}/SubComponent_icon.png">
+                                <img ng-if="item.Item_x0020_Type =='Feature'" class="icon-sites-img"
+                                     ng-src="{{pageContextInfo.siteAbsoluteUrl}}/SiteCollectionImages/ICONS/{{PortfolioType=='Service'?'Service_Icon':'Shareweb'}}/feature_icon.png">
+                                {{item.Title}}
+                            </div>
+                            <div class="col-sm-12 for_dotted" ui-on-drop="onDropRemoveTeam($event,$data,item.ChildItem)" id="SelectedParent{{item.Id}}" ui-on-drop="onDropTeam($event,$data,item.ChildItem)">
+                                <div class="backarea mt-5" ng-repeat="child in item.ChildItem track by $index" ui-draggable="true" drag="child" on-drop-success="dropSuccessHandler($event, $index, item.ChildItem)" title="{{item.Title}}" data-toggle="popover" data-trigger="hover">
+                                    <img ng-if="child.Item_x0020_Type =='Component'" class="icon-sites-img"
+                                         ng-src="{{pageContextInfo.siteAbsoluteUrl}}/SiteCollectionImages/ICONS/{{PortfolioType=='Service'?'Service_Icon':'Shareweb'}}/component_icon.png">
+                                    <img ng-if="child.Item_x0020_Type =='SubComponent'"
+                                         class="icon-sites-img"
+                                         ng-src="{{pageContextInfo.siteAbsoluteUrl}}/SiteCollectionImages/ICONS/{{PortfolioType=='Service'?'Service_Icon':'Shareweb'}}/SubComponent_icon.png">
+                                    <img ng-if="child.Item_x0020_Type =='Feature'" class="icon-sites-img"
+                                         ng-src="{{pageContextInfo.siteAbsoluteUrl}}/SiteCollectionImages/ICONS/{{PortfolioType=='Service'?'Service_Icon':'Shareweb'}}/feature_icon.png">
+                                    {{child.Title}}
+                                </div>
+                            </div>
+                        </div>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-10" style="text-align:end">
+            <button type="button" class="btn btn-primary" ng-click="backtoscreentwo()">BACK</button>
+            <button type="button" ng-show="(changetoTaxType!='Component'&&changetoTaxType!=undefine)" ng-disabled="SelectedtaxonomyItem.childs.length!=0" class="btn btn-primary" ng-click="updateall(AllSelectedParentsDropBoxd)">Submit</button>
+            <button type="button" ng-show="(changetoTaxType=='Component'&&changetoTaxType!=undefined)" class="btn btn-primary" ng-click="changetocomponent(SelectedtaxonomyItem,changetoTaxType)">Submit</button>
+        </div>
+    </div>
+    <!---------------------------------------------------------------------------------------------------------------------------------------------------->
+    <!--********************************Show Parent Items For Degrading Component*************************-->
+    <div id="ParentItemsCollection" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" ng-click="closeparentselection()"
+                            style="min-width: 10px;">
+                        &times;
+                    </button>
+                    <h4 class="modal-title">
+                        Select Parent Component
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <div class="divPanelBody tab-content  col-sm-12 padL-0 PadR0">
+                        <div id="portfolio" class="section-event pt-0">
+                            <ul class="table">
+                                <li class="for-lis tdrows">
+                                    <div style="width: 4%;">
+                                        <div style="width: 80%; ">
+
+                                        </div>
+                                    </div>
+                                    <div style="width: 6%;">
+                                        <div style="width:80%;">
+                                        </div>
+                                    </div>
+                                    <div style="width:90%;">
+                                        <div style="width:95%;" class="headcontainer">
+                                            <input type="search" placeholder="Title" class="searchbox_height width-90" ng-model="SearchComponent.newTitle">
+                                            <span class="searchclear" ng-click="clearSearchBox('SearchComponent','newTitle')">X</span>
+                                            <span class="{{orderBy.orderComponent=='Title'&&!reverse.orderComponent?'glyphicon_active':'glyphicon'}}  glyphicon-chevron-up direction-arrow arrow_up" ng-click="sortBy('orderComponent','Title', false)"></span>
+                                            <span class="{{orderBy.orderComponent=='Title'&&reverse.orderComponent?'glyphicon_active':'glyphicon'}}  glyphicon-chevron-down direction-arrow arrow_down" ng-click="sortBy('orderComponent','Title', true)"></span>
+                                        </div>
+                                    </div>
+
+                                </li>
+
+                                <li class="for-lis tdrows "
+                                    ng-repeat="item in filterseddata=(AllComponentsData|orderBy:orderBy['orderComponent']:reverse['orderComponent']|filter:{Title:SearchComponent.newTitle}) track by $index"
+                                    lvl-drop-target="true" on-drop="dropped(dragSrc,item)">
+
+                                    <div style="width:4%;" class="padLR">
+                                        <input ng-show="forOrigenalItem" type="radio" ng-click="SelectedAsSingleparent(item)" value="" ng-disabled="(item.Id==SelectedtaxonomyItem.Id||item.Parent.Id==SelectedtaxonomyItem.Id)" ng-model="item.checked" name="chkCompleted" />
+                                        <input ng-show="forChilsItem" type="checkbox" ng-click="SelectedAsparent(item)" value="" ng-disabled="(item.Id==SelectedtaxonomyItem.Id||item.Parent.Id==SelectedtaxonomyItem.Id)" ng-model="item.checked" name="chkCompleted" />
+
+                                    </div>
+                                    <div style="width:6%;" class="padLR">
+                                        <span>
+                                            <img ng-if="item.Item_x0020_Type =='Component'" class="icon-sites-img ml-8"
+                                                 ng-src="{{pageContextInfo.siteAbsoluteUrl}}/SiteCollectionImages/ICONS/{{PortfolioType=='Service'?'Service_Icon':'Shareweb'}}/component_icon.png">
+                                            <img ng-if="item.Item_x0020_Type =='SubComponent'" class="icon-sites-img ml-8"
+                                                 ng-src="{{pageContextInfo.siteAbsoluteUrl}}/SiteCollectionImages/ICONS/{{PortfolioType=='Service'?'Service_Icon':'Shareweb'}}/SubComponent_icon.png">
+                                            <img ng-if="item.Item_x0020_Type =='Feature'" class="icon-sites-img ml-8"
+                                                 ng-src="{{pageContextInfo.siteAbsoluteUrl}}/SiteCollectionImages/ICONS/{{PortfolioType=='Service'?'Service_Icon':'Shareweb'}}/feature_icon.png">
+                                        </span>
+                                    </div>
+
+                                    <div style="width:45%;" class="padLR">
+                                        <span>
+                                            <a class="hreflink" target="_blank"
+                                               ng-href="{{pageContextInfo.webAbsoluteUrl}}/SitePages/Portfolio-Profile.aspx?taskId={{item.Id}}" ng-bind-html="item.Title">
+
+                                            </a>
+                                        </span>
+
+                                    </div>
+                                </li>
+
+
+                            </ul>
+                        </div>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button ng-show="forOrigenalItem" type="button" class="btn btn-primary mt-10" ng-click="setasparentforcurrentitem()">OK</button>
+                        <button ng-show="forChilsItem" type="button" class="btn btn-primary mt-10" ng-click="Savechangesinproperties()">OK</button>
+                        <!--<button type="button" class="btn btn-primary mt-10" ng-click="Savechangesinproperties()">OK</button>-->
+                        <button type="button" class="mt-10" ng-click="closeparentselection()">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!------------------------------------------------------PopUp To Create Component Starts Here------------------------------------>
+    <div class="modal" id="Componentpoup" role="dialog" style="display:none;">
+        <div class="modal-dialog modal-md">
+            <div class="panel panel-default">
+                <div class="panel-title">
+                    <button type="button" style="min-width:10px;" class="close"
+                            ng-click="createComponent['closeCreateComponentwizard']();">
+                        &times;
+                    </button>
+                    <h3>Create Parent for Subitems</h3>
+                </div>
+                <div class="modal-body tab-content">
+                    <div class="col-sm-12">
+                        <div class="col-sm-12 form-group padL-0 PadR0">
+                            <label class="full_width mt-10">Title</label>
+                            <input class="form-control full_width" type="text" ng-model="createnewTitle">
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" ng-disabled="createnewTitle.length<0" ng-click="createComponent['submitCreateComponent']();">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!------------------------------------------------------PopUp To Create Component END Here------------------------------------>
+    <!--***********************************************Pop up for selecting Parent for Current Item ******************************************************-->
+    <div id="ParentItemsCollectionForitem" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" ng-click="closeshowParentforItem()"
+                            style="min-width: 10px;">
+                        &times;
+                    </button>
+                    <h4 class="modal-title">
+                        Select Parent Component
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <div class="divPanelBody tab-content  col-sm-12 padL-0 PadR0">
+                        <div id="portfolio" class="section-event pt-0">
+                            <ul class="table">
+                                <li class="for-lis">
+                                    <div style="width:1%;">
+                                        <div style="width:85%;">
+                                        </div>
+                                    </div>
+                                    <div style="width: 4%;">
+                                        <div style="width: 80%; ">
+
+                                        </div>
+                                    </div>
+                                    <div style="width: 8%;">
+                                        <div style="width:80%;">
+                                        </div>
+                                    </div>
+                                    <div style="width:87%;">
+
+                                        <div style="width:95%;" class="headcontainer">
+                                            <input type="search" placeholder="Title" class="searchbox_height width-90" ng-model="SearchComponent.newTitle">
+                                            <span class="searchclear" ng-click="clearSearchBox('SearchComponent','newTitle')">X</span>
+                                            <span class="{{orderBy.orderComponent=='Title'&&!reverse.orderComponent?'glyphicon_active':'glyphicon'}}  glyphicon-chevron-up direction-arrow arrow_up" ng-click="sortBy('orderComponent','Title', false)"></span>
+                                            <span class="{{orderBy.orderComponent=='Title'&&reverse.orderComponent?'glyphicon_active':'glyphicon'}}  glyphicon-chevron-down direction-arrow arrow_down" ng-click="sortBy('orderComponent','Title', true)"></span>
+                                        </div>
+                                    </div>
+
+
+                                </li>
+                                <div class="wrapper">
+                                    <li ng-show="item.flag==true" class="for-lis bold {{item.expanded?'project_active tdrows':'tdrows'}} {{item.isService?'serviceColor_Active':''}}"
+                                        ng-repeat-start="item in filterComponent=(AllpossibleParents | orderBy:orderBy['orderComponent']:reverse['orderComponent'])"
+                                        lvl-drop-target="true" on-drop="dropped(dragSrc,item)">
+                                        <div style="width:1%;" class="">
+                                            <a class="hreflink" ng-show="item.childs.length>0&&!item.expanded"
+                                               ng-click="item.expanded=true" title="Expand {{item.Title}} childs">
+                                                <img src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/SiteCollectionImages/ICONS/{{PortfolioType=='Service'?'24/right-list-icon.png':'Service_Icons/Rightarrowicon-green.png'}}">
+                                            </a>
+                                            <a class="hreflink" ng-show="item.childs.length>0&&item.expanded"
+                                               ng-click="item.expanded=false" title="Collapse {{item.Title}} childs">
+                                                <img src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/SiteCollectionImages/ICONS/{{PortfolioType=='Service'?'Service_Icons/Downarrowicon-green.png':'24/list-icon.png'}}">
+                                            </a>
+                                        </div>
+                                        <div style="width:4%;" class="padLR">
+                                            <input ng-show="forOrigenalItem" type="radio" ng-click="SelectedAsSingleparent(item)" value="" ng-disabled="(item.Id==SelectedtaxonomyItem.Id||item.Parent.Id==SelectedtaxonomyItem.Id)" ng-model="item.checked" name="chkCompleted1" />
+                                            <input ng-show="forChilsItem" type="checkbox" ng-click="SelectedAsparent(item)" value="" ng-disabled="(item.Id==SelectedtaxonomyItem.Id||item.Parent.Id==SelectedtaxonomyItem.Id)" ng-model="item.checked" name="chkCompleted1" />
+
+                                        </div>
+                                        <div style="width:8%;" class="padLR">
+                                            <span>
+                                                <img ng-if="item.Item_x0020_Type =='Component'" class="icon-sites-img ml-8"
+                                                     ng-src="{{pageContextInfo.siteAbsoluteUrl}}/SiteCollectionImages/ICONS/{{PortfolioType=='Service'?'Service_Icon':'Shareweb'}}/component_icon.png">
+                                                <img ng-if="item.Item_x0020_Type =='SubComponent'" class="icon-sites-img ml-8"
+                                                     ng-src="{{pageContextInfo.siteAbsoluteUrl}}/SiteCollectionImages/ICONS/{{PortfolioType=='Service'?'Service_Icon':'Shareweb'}}/SubComponent_icon.png">
+                                                <img ng-if="item.Item_x0020_Type =='Feature'" class="icon-sites-img ml-8"
+                                                     ng-src="{{pageContextInfo.siteAbsoluteUrl}}/SiteCollectionImages/ICONS/{{PortfolioType=='Service'?'Service_Icon':'Shareweb'}}/feature_icon.png">
+                                            </span>
+                                        </div>
+
+                                        <div style="width:87%;" class="padLR">
+                                            <span>
+                                                <a class="hreflink" target="_blank"
+                                                   ng-href="{{pageContextInfo.webAbsoluteUrl}}/SitePages/Portfolio-Profile.aspx?taskId={{item.Id}}" ng-bind-html="item.Title">
+                                                </a>
+                                            </span>
+
+                                        </div>
+                                    </li>
+                                    <li ng-if="item.expanded" class="active" ng-repeat-end>
+                                        <ul class="table">
+                                            <li ng-show="item.childs.length >0 && child.flag ==true && child.Item_x0020_Type!='Feature'"
+                                                ng-repeat="child in item.childs " lvl-drop-target="true"
+                                                on-drop="dropped(dragSrc,child)"
+                                                class="for-c0l for-lis">
+                                                <div style="width:1%;" class="">
+
+                                                </div>
+                                                <!-- <div style="width:2%;" class="padLR " ng-show="item.siteType !='Master Tasks'"> -->
+                                                <!-- </div> -->
+                                                <div style="width:4%;" class="padLR">
+                                                    <span>
+                                                        <input ng-show="forOrigenalItem" type="radio" ng-click="SelectedAsSingleparent(child)" value="" ng-disabled="(child.Id==SelectedtaxonomyItem.Id||child.Parent.Id==SelectedtaxonomyItem.Id)" ng-model="child.checked" name="chkCompleted1" />
+                                                        <input ng-show="forChilsItem" type="checkbox" ng-click="SelectedAsparent(child)" value="" ng-disabled="(child.Id==SelectedtaxonomyItem.Id||child.Parent.Id==SelectedtaxonomyItem.Id)" ng-model="child.checked" name="chkCompleted1" />
+
+                                                    </span>
+                                                </div>
+                                                <div style="width:8%;" class="padLR">
+                                                    <span>
+
+                                                        <img ng-if="child.Item_x0020_Type =='Component'" class="icon-sites-img ml5"
+                                                             ng-src="{{pageContextInfo.siteAbsoluteUrl}}/SiteCollectionImages/ICONS/{{PortfolioType=='Service'?'Service_Icon':'Shareweb'}}/component_icon.png">
+                                                        <img ng-if="child.Item_x0020_Type =='SubComponent'"
+                                                             class="icon-sites-img ml5"
+                                                             ng-src="{{pageContextInfo.siteAbsoluteUrl}}/SiteCollectionImages/ICONS/{{PortfolioType=='Service'?'Service_Icon':'Shareweb'}}/SubComponent_icon.png">
+                                                        <img ng-if="child.Item_x0020_Type =='Feature'" class="icon-sites-img ml5"
+                                                             ng-src="{{pageContextInfo.siteAbsoluteUrl}}/SiteCollectionImages/ICONS/{{PortfolioType=='Service'?'Service_Icon':'Shareweb'}}/feature_icon.png">
+                                                    </span>
+                                                </div>
+                                                <div style="width:87%;" class="padLR">
+
+                                                    <span class="">
+                                                        <a class="hreflink" target="_blank"
+                                                           ng-href="{{pageContextInfo.webAbsoluteUrl}}/SitePages/Portfolio-Profile.aspx?taskId={{child.Id}}" ng-bind-html="child.Title">
+                                                        </a>
+
+
+                                                    </span>
+
+                                                </div>
+
+
+
+                                            </li>
+
+                                        </ul>
+
+                                    </li>
+                                </div>
+                            </ul>
+                        </div>
+                        <div class="modal-footer">
+                            <button ng-show="forOrigenalItem" type="button" class="btn btn-primary mt-10" ng-click="setasparentforcurrentitem()">OK</button>
+                            <button ng-show="forChilsItem" type="button" class="btn btn-primary mt-10" ng-click="Savechangesinproperties()">OK</button>
+                            <button type="button" class="mt-10" ng-click="closeshowParentforItem()">Cancel</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!------------------------------------------------------------------------------------------------------------------------------------------------------>
+    <!--***********************************************-->
+    <div id="ParentItemsCollectionData" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" ng-click="closeparentselectionFor('ParentItemsCollectionData')"
+                            style="min-width: 10px;">
+                        &times;
+                    </button>
+                    <h4 class="modal-title">
+                        Select Parent Component/Subcomponent
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <div class="divPanelBody tab-content  col-sm-12 padL-0 PadR0">
+                        <div id="portfolio" class="section-event pt-0">
+                            <ul class="table">
+                                <li class="for-lis tdrows">
+
+
+                                </li>
+
+                                <li class="for-lis "
+                                    ng-repeat="item in AllSelectedParentsDropBoxd track by $index"
+                                    lvl-drop-target="true" on-drop="dropped(dragSrc,item)">
+
+                                    <div style="width:4%;" class="padLR">
+                                        <input type="radio" ng-click="SelectedForParent(item)" value="" name="chkCompleted" />
+                                    </div>
+                                    <div style="width:7%;" class="padLR">
+                                        <span>
+                                            <img ng-if="item.Item_x0020_Type =='Component'" class="icon-sites-img ml-8"
+                                                 ng-src="{{pageContextInfo.siteAbsoluteUrl}}/SiteCollectionImages/ICONS/{{PortfolioType=='Service'?'Service_Icon':'Shareweb'}}/component_icon.png">
+                                            <img ng-if="item.Item_x0020_Type =='SubComponent'" class="icon-sites-img ml-8"
+                                                 ng-src="{{pageContextInfo.siteAbsoluteUrl}}/SiteCollectionImages/ICONS/{{PortfolioType=='Service'?'Service_Icon':'Shareweb'}}/SubComponent_icon.png">
+                                            <img ng-if="item.Item_x0020_Type =='Feature'" class="icon-sites-img ml-8"
+                                                 ng-src="{{pageContextInfo.siteAbsoluteUrl}}/SiteCollectionImages/ICONS/{{PortfolioType=='Service'?'Service_Icon':'Shareweb'}}/feature_icon.png">
+                                        </span>
+                                    </div>
+
+                                    <div style="width:45%;" class="padLR">
+                                        <span>
+                                            <a class="hreflink" target="_blank"
+                                               ng-href="{{pageContextInfo.webAbsoluteUrl}}/SitePages/Portfolio-Profile.aspx?taskId={{item.Id}}" ng-bind-html="item.Title">
+                                            </a>
+                                        </span>
+
+                                    </div>
+                                </li>
+
+
+                            </ul>
+                        </div>
+
+                        <!--<div class="section-event">
+                            <div class="container-new">
+                                <nav id="nav_pop-up">
+
+                                    <table style="width:100%;" class="tbody_scroll_fix rmv-x-scroll tables_ui table table-info table-striped mb30 table table-hover">
+
+                                        <tbody>
+                                            <tr ng-repeat="item in AllSelectedParentsDropBoxd track by $index" class="trbox_bdr">
+                                                <td>
+                                                    <img ng-if="item.Item_x0020_Type =='Component'" class="icon-sites-img ml5"
+                                                         ng-src="{{pageContextInfo.siteAbsoluteUrl}}/SiteCollectionImages/ICONS/{{PortfolioType=='Service'?'Service_Icon':'Shareweb'}}/component_icon.png">
+                                                    <img ng-if="item.Item_x0020_Type =='SubComponent'"
+                                                         class="icon-sites-img ml5"
+                                                         ng-src="{{pageContextInfo.siteAbsoluteUrl}}/SiteCollectionImages/ICONS/{{PortfolioType=='Service'?'Service_Icon':'Shareweb'}}/SubComponent_icon.png">
+                                                    <img ng-if="item.Item_x0020_Type =='Feature'" class="icon-sites-img ml5"
+                                                         ng-src="{{pageContextInfo.siteAbsoluteUrl}}/SiteCollectionImages/ICONS/{{PortfolioType=='Service'?'Service_Icon':'Shareweb'}}/feature_icon.png">
+                                                    </span>
+                                                </td>
+                                                <td>
+
+                                                    {{item.Title}}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </nav>
+                            </div>
+                        </div>-->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary mt-10" ng-click="SaveAllParent()">OK</button>
+                        <!--<button type="button" class="btn btn-primary mt-10" ng-click="Savechangesinproperties()">OK</button>-->
+                        <button type="button" class="mt-10" ng-click="closeparentselectionFor('ParentItemsCollectionData')">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--**********************************************-->
+</div>

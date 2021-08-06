@@ -1,0 +1,907 @@
+﻿<script src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/Style%20Library/js/angular/Templates/HCTemplateControllers.js"></script>
+<script src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/Style%20Library/js/angular/Online/Tasks%20Management/TaskFeedback.js"></script>
+<script src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/Style%20Library/js/angular/Services/config.peoplepicker.js"></script>
+<script src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/Style%20Library/js/angular/Services/datetimepicker.js"></script>
+<script type="text/javascript" src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/Style%20Library/js/angular/Online/Tasks%20Management/AdminTaskManagement.js"></script>
+<style type="text/css">
+	
+</style>
+<div ng-controller="TaskManagementController">
+	<div class="panel" ng-cloak>
+		<div class="panel-body" style="padding:15px !important;">
+			<div class="row">
+				<div class="form-group">
+					<div class="row padb-10">
+
+						<span>
+							<div class="togglebox">
+								<p>​​<a class="toggler" style="text-decoration: none;">SmartSearch – Filters</a></p>
+								<div class="togglecontent" style="display: block;">
+									<p>
+										<div class="container">
+											<div class="col-sm-12">
+												<table width="100%" class="indicator_search">
+													<tr>
+														<td valign="top" ng-repeat="item in filterGroups">
+															<fieldset>
+																<legend style="margin-bottom: 2px; display:inline; float:left">{{item}}</legend>
+																<div ng-if="filterItem.Group == item" ng-repeat="filterItem in filterItems" class="col-sm-4 toggle-task">
+																	<span ng-if="filterItem.childs.length>0 && !filterItem.expanded" class="hreflink plus-icon" ng-click="loadMoreFilters(filterItem);">
+																		<img ng-src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/SiteCollectionImages/ICONS/32/right-list-icon.png">
+																	</span>
+																	<span ng-if="filterItem.childs.length>0 && filterItem.expanded" class="hreflink plus-icon" ng-click="loadMoreFilters(filterItem);">
+																		<img ng-src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/SiteCollectionImages/ICONS/32/list-icon.png">
+																	</span>
+																	<input type="checkbox" class="mt--2" ng-model="filterItem.Selected" ng-click="FilterTask(filterItem)" />
+																	{{filterItem.Title}}
+
+																	<ul id="id_{{filterItem.Id}}" style="display:none;" class="subfilter">
+																		<li ng-repeat="child1 in filterItem.childs">
+																			<span ng-if="child1.childs.length>0 && !child1.expanded" class="hreflink plus-icon" ng-click="loadMoreFilters(child1);">
+																				<img ng-src="/site/EI/SiteCollectionImages/ICONS/32/right-list-icon.png">
+																			</span>
+																			<span ng-if="child1.childs.length>0 && child1.expanded" class="hreflink plus-icon" ng-click="loadMoreFilters(child1);">
+																				<img ng-src="/site/EI/SiteCollectionImages/ICONS/32/list-icon.png">
+																			</span>
+																			<input type="checkbox" class="mt--2" ng-model="child1.Selected" ng-click="FilterTask(child1)" />
+																			{{child1.Title}}
+
+																			<ul id="id_{{child1.Id}}" style="display:none;" class="subfilter">
+																				<li ng-repeat="child2 in child1.childs">
+																					<input type="checkbox" class="mt--2" ng-model="child2.Selected" ng-click="FilterTask(child2)" />
+																					{{child2.Title}}
+																				</li>
+																			</ul>
+																		</li>
+																	</ul>
+																</div>
+															</fieldset>
+														</td>
+													</tr>
+												</table>
+											</div>
+										</div>
+									</p>
+								</div>
+							</div>
+						</span>
+
+
+					</div>
+				</div>
+			</div>
+			<div class="row Doc-align">
+				<div class="col-sm-2" style="padding-left:0px;padding-right:0px;width:125px;">Search in all Tasks:</div>
+				<div class="col-sm-5">
+					<input id="searchinput" type="search" ng-model="globalSearch" placeholder="Search all..." class="form-control height-30">
+				</div>
+				<div class="col-sm-2">
+					<button type="button" class="btn btn-info" style="background-color:#c9c9c9" id="clearFilter" data-ng-click="ClearFilters()">Clear All</button>
+				</div>
+				<div class=" col-sm-1 pull-right" style="width:140px;">
+					<button type="button" class="btn btn-primary " data-toggle="modal" ng-click="showaddNewTaskPopUp()">Add New Task</button>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			<div class="row">
+				<div class="tabBox clearfix">
+					<div id="tabs" class="exTab3">
+						<ul class="nav nav-pills">
+							<li class="active">
+								<a href="#AllTasks" data-toggle="tab">All Tasks </a>
+							</li>
+							<li>
+								<a href="#PendingTasks" data-toggle="tab">Pending Tasks </a>
+							</li>
+							<li>
+								<a href="#MyTasks" data-toggle="tab">My Tasks </a>
+							</li>
+							<li>
+								<a href="#CreatedByMe" data-toggle="tab">Created by me  </a>
+							</li>
+							<li>
+								<a href="#CompletedTasks" data-toggle="tab">Completed Tasks</a>
+							</li>
+
+						</ul>
+						<div class="tab-content pad10">
+							<div id="AllTasks" class="tab-pane fade in active">
+								<div id="table-wrapper" class="section-event pt-0 group-by">
+									
+										<ul id="Projects" class="table table-hover" width="100%">
+											<li class="for-lis">
+													<div style="width:2%;"><div style="width:80%;"></div></div>
+													<div style="width:2%;"><div style="width:80%;"></div></div>
+													<div style="width:2%;"><div style="width:80%;"></div></div>
+													<div style="width:2%;"><div style="width:80%;"></div></div>
+													<div style="width:10%;">
+														<div style="width:80%;">
+															<input id="searchCategory" type="text" placeholder="Category" class="searchbox_height width-90" ng-model="searchCategory" />
+															<span class="searchclear" ng-click="clearControl('searchCategory')">X</span>
+														</div>
+													</div>
+													<div style="width:23%;">
+														<div style="width:80%;">
+															<input id="searchTitle" type="text" placeholder="Task Name" class="searchbox_height width-90" ng-model="searchTitle" />
+															<span class="searchclear" ng-click="clearControl('searchTitle')">X</span>
+														</div>
+													</div>
+													<div style="width:15%;">
+														<div style="width:80%;">
+															<input id="searchAssignedTo" type="text" placeholder="Assigned To" class="searchbox_height width-90" ng-model="searchAssignedTo" />
+															<span class="searchclear" ng-click="clearControl('searchAssignedTo')">X</span>
+														</div>
+													</div>
+													<div style="width:10%;">
+														<div style="width:80%;">
+															<input id="searchCreated" type="text" placeholder="Created" class="searchbox_height width-90" ng-model="searchCreated" />
+															<span class="searchclear" ng-click="clearControl('searchCreated')">X</span>
+														</div>
+													</div>
+													<div style="width:10%;">
+														<div style="width:80%;">
+															<input id="searchAuthor" type="text" placeholder="Created by" class="searchbox_height width-90" ng-model="searchAuthor" />
+															<span class="searchclear" ng-click="clearControl('searchAuthor')">X</span>
+														</div>
+													</div>
+													<div style="width:10%;">
+														<div style="width:80%;">
+															<input id="searchStatus" type="text" placeholder="Status" class="searchbox_height width-90" ng-model="searchStatus" />
+															<span class="searchclear" ng-click="clearControl('searchStatus')">X</span>
+														</div>
+													</div>
+													<div style="width:10%;">
+														<div style="width:80%;">
+															<input id="searchDuedate" type="text" placeholder="Due Date" class="searchbox_height width-90" ng-model="searchDuedate" />
+															<span class="searchclear" ng-click="clearControl('searchDuedate')">X</span>
+														</div>
+													</div>
+													<div style="width:2%;"><div style="width:80%;"></div></div>
+													<div style="width:2%;"><div style="width:80%;"></div></div>
+
+												</li>
+											<div class="container-new">
+												<!--   <tr ng-repeat="item in filtered = (Tasks|orderBy:sortColumn:reverseSort|filter:globalSearch | filter:{Title:searchTitle,AssignedTo:searchAssignedTo})">-->
+												<li class="for-lis tdrows {{item.class}}" ng-repeat="item in filtered = (AllSitesTask | filter:globalSearch | orderBy:orderBy:reverse
+                                            | filter:{Title:searchTitle, Priority:searchPriority, Company:searchCategory, Status: searchStatus,TaskDueDate:searchDuedate,Author:searchAuthor,CreatedDate:searchCreated,AssignedTo:searchAssignedTo} | filter:filterAssignedTo | filter:filterAuthor | filter:filterDuedate | filter:filterCreatedDate)">
+													<div style="width:2%;" ng-if="item.editable != true">
+														<span ng-if="item.class=='lowpriority'"><img style="width:17px;" ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/32/icon_Low.png"></span>
+														<span ng-if="item.class=='highpriority'" class="highpriorityTask"><img style="width:20px;" ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/32/icon_High.png"></span>
+													</div>
+													<div style="width:2%;" ng-if="item.editable == true">
+														<select class="form-control" ng-model="item.Priority">
+															<option value="(1) High">(1) High</option>
+															<option value="(2) Normal">(2) Normal</option>
+															<option value="(3) Low">(3) Low</option>
+														</select>
+													</div>
+													<div style="width:2%;" ng-if="item.editable != true">
+														<span ng-if="item.Status=='Completed'"><img style="width:20px;" class="okicon" ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/32/icon_ok.png"></span>
+													</div>
+													<div style="width:2%;" ng-if="item.editable != true">
+														<img ng-if="item.Attachments" ng-src="https://www.shareweb.ch/_layouts/15/images/attach16.png?rev=23">
+													</div>
+													<div style="width:2%;">
+														<a ng-if="item.editable != true" class="hreflink" title="Edit" ng-click="inlineEditDetails(item,'AllTasks')">
+															<img style="width:24px;" ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/32/icon_inline.png">
+														</a>
+														<a ng-if="item.editable == true" class="hreflink" title="Save" ng-click="SaveItem(item)">
+															<img style="width:22px;" ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/32/save.png">
+														</a>
+														</a>
+														<a ng-if="item.editable == true" class="hreflink" title="Cancel" ng-click="CancelItem(item)">
+															<img style="width:22px;" ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/32/cancel.png">
+														</a>
+													</div>
+													<div style="width:10%;" class="padLR">
+														<span ng-if="item.editable != true" ng-click="EditTask(item)">{{item.TaskCompanies}}</span>
+														<!--<input ng-if="item.editable == true" class="form-control" ng-model="item.Company" type="text" />-->
+														<select ng-if="item.editable == true" class="form-control" ng-model="item.Company">
+															<option value="Admin">Admin</option>
+															<option value="Communication">Communication</option>
+															<option value="Technical Question">Technical Question</option>
+															<option value="Content">Content</option>
+															<option value="Bug">Bug</option>
+														</select>
+													</div>
+													<div style="width:23%;" class="padLR">
+														<span ng-if="item.editable != true" ng-click="EditTask(item)">{{item.Title}}</span>
+														<input ng-if="item.editable == true" class="form-control" ng-model="item.Title" type="text" />
+													</div>
+													<div style="width:15%;" class="padLR" ng-click="EditTask(item)">{{getMultiUserValues(item)}}</div>
+													<div style="width:11%;" class="padLR" ng-click="EditTask(item)">{{item.CreatedDate}}</div>
+													<div style="width:10%;" class="padLR" ng-click="EditTask(item)">{{item.Author.Title}}</div>
+													<div style="width:10%;" class="padLR">
+														<span ng-if="item.editable != true" ng-click="EditTask(item)">{{item.Status}}</span>
+														<!--<input ng-if="item.editable == true" class="form-control" ng-model="item.Status" type="text" />-->
+														<select ng-if="item.editable == true" class="form-control" ng-model="item.Status">
+															<option value="Not Started">Not Started</option>
+															<option value="In Progress">In Progress</option>
+															<option value="Completed">Completed</option>
+															<option value="Deferred">Deferred</option>
+															<option value="Waiting on someone else">Waiting on someone else</option>
+														</select>
+													</div>
+													<div style="width:9%;" class="padLR">
+														<span ng-if="item.editable != true" ng-click="EditTask(item)">{{item.TaskDueDate}}</span>
+														<input ng-if="item.editable == true" type="text" id="InlinedueDatePicker_AllTasks_{{item.Id}}" placeholder="DD/MM/YYYY" class="form-control" ng-model="item.TaskDueDate" />
+													</div>
+													<div style="width:2%;" class="padLR">
+														<a class="hreflink">
+															{{getTaskComments(item)}}
+														</a>
+													</div>
+
+													<div style="width:2%;" class="padLR">
+														<a class="hreflink" title="Edit" data-toggle="modal" ng-click="EditTask(item)"><img ng-src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/SiteCollectionImages/ICONS/32/edititem.gif"> </a>
+													</div>
+
+												</li>
+											</div>
+											</ul>
+									
+								</div>
+							</div>
+							<div id="MyTasks" class="tab-pane fade">
+								<div id="table-wrapper" class="section-event pt-0 group-by">
+									
+										<ul id="Projects" class="table table-hover" width="100%">
+												<li class="for-lis">
+													<div style="width:2%;"><div style="width:80%;"></div></div>
+													<div style="width:2%;"><div style="width:80%;"></div></div>
+													<div style="width:2%;"><div style="width:80%;"></div></div>
+													<div style="width:2%;"><div style="width:80%;"></div></div>
+													<div style="width:10%;">
+														<div style="width:80%;">
+															<input id="searchCategory" type="text" placeholder="Category" class="searchbox_height width-90" ng-model="searchCategory" />
+															<span class="searchclear" ng-click="clearControl('searchCategory')">X</span>
+														</div>
+													</div>
+													<div style="width:23%;">
+														<div style="width:80%;">
+															<input id="searchTitle" type="text" placeholder="Task Name" class="searchbox_height width-90" ng-model="searchTitle" />
+															<span class="searchclear" ng-click="clearControl('searchTitle')">X</span>
+														</div>
+													</div>
+													<div style="width:15%;">
+														<div style="width:80%;">
+															<input id="searchAssignedTo" type="text" placeholder="Assigned To" class="searchbox_height width-90" ng-model="searchAssignedTo" />
+															<span class="searchclear" ng-click="clearControl('searchAssignedTo')">X</span>
+														</div>
+													</div>
+													<div style="width:10%;">
+														<div style="width:80%;">
+															<input id="searchCreated" type="text" placeholder="Created" class="searchbox_height width-90" ng-model="searchCreated" />
+															<span class="searchclear" ng-click="clearControl('searchCreated')">X</span>
+														</div>
+													</div>
+													<div style="width:10%;">
+														<div style="width:80%;">
+															<input id="searchAuthor" type="text" placeholder="Created by" class="searchbox_height width-90" ng-model="searchAuthor" />
+															<span class="searchclear" ng-click="clearControl('searchAuthor')">X</span>
+														</div>
+													</div>
+													<div style="width:10%;">
+														<div style="width:80%;">
+															<input id="searchStatus" type="text" placeholder="Status" class="searchbox_height width-90" ng-model="searchStatus" />
+															<span class="searchclear" ng-click="clearControl('searchStatus')">X</span>
+														</div>
+													</div>
+													<div style="width:10%;">
+														<div style="width:80%;">
+															<input id="searchDuedate" type="text" placeholder="Due Date" class="searchbox_height width-90" ng-model="searchDuedate" />
+															<span class="searchclear" ng-click="clearControl('searchDuedate')">X</span>
+
+														</div>
+													</div>
+													<div style="width:2%;"><div style="width:80%;"></div></div>
+													<div style="width:2%;"><div style="width:80%;"></div></div>
+
+												</li>
+											<div class="container-new">	
+												<!--   <tr ng-repeat="item in filtered = (Tasks|orderBy:sortColumn:reverseSort|filter:globalSearch | filter:{Title:searchTitle,AssignedTo:searchAssignedTo})">-->
+												<li class="for-lis tdrows {{item.class}}" ng-if="item.AssignedTo.results.Id == CurrentUserId && item.Status.toLowerCase() != 'Completed'" ng-repeat="item in filtered = (AllSitesTask | filter:globalSearch | orderBy:orderBy:reverse
+                                            | filter:{Title:searchTitle, Priority:searchPriority, Company:searchCategory, Status: searchStatus} | filter:filterAssignedTo | filter:filterAuthor | filter:filterDuedate | filter:filterCreatedDate)">
+													<div style="width:2%;" ng-if="item.editable != true">
+														<span ng-if="item.class=='lowpriority'"><img style="width:17px;" ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/32/icon_Low.png"></span>
+														<span ng-if="item.class=='highpriority'" class="highpriorityTask"><img style="width:20px;" ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/32/icon_High.png"></span>
+													</div>
+													<div style="width:2%;" ng-if="item.editable == true" colspan="3">
+														<select class="form-control" ng-model="item.Priority">
+															<option value="(1) High">(1) High</option>
+															<option value="(2) Normal">(2) Normal</option>
+															<option value="(3) Low">(3) Low</option>
+														</select>
+													</div>
+													<div style="width:2%;" ng-if="item.editable != true">
+														<span ng-if="item.Status=='Completed'"><img style="width:20px;" class="okicon" ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/32/icon_ok.png"></span>
+													</div>
+													<div style="width:2%;" ng-if="item.editable != true">
+														<img ng-if="item.Attachments" ng-src="https://www.shareweb.ch/_layouts/15/images/attach16.png?rev=23">
+													</div>
+													<div style="width:2%;">
+														<a ng-if="item.editable != true" class="hreflink" title="Edit" ng-click="inlineEditDetails(item,'AllTasks')">
+															<img style="width:24px;" ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/32/icon_inline.png">
+														</a>
+														<a ng-if="item.editable == true" class="hreflink" title="Save" ng-click="SaveItem(item)">
+															<img style="width:22px;" ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/32/save.png">
+														</a>
+														</a>
+														<a ng-if="item.editable == true" class="hreflink" title="Cancel" ng-click="CancelItem(item)">
+															<img style="width:22px;" ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/32/cancel.png">
+														</a>
+													</div>
+													<div style="width:10%;" class="padLR">
+														<span ng-if="item.editable != true" ng-click="EditTask(item)">{{item.Company}}</span>
+														<!--<input ng-if="item.editable == true" class="form-control" ng-model="item.Company" type="text" />-->
+														<select ng-if="item.editable == true" class="form-control" ng-model="item.Company">
+															<option value="Admin">Admin</option>
+															<option value="Communication">Communication</option>
+															<option value="Technical Question">Technical Question</option>
+															<option value="Content">Content</option>
+															<option value="Bug">Bug</option>
+														</select>
+													</div>
+													<div style="width:23%;" class="padLR">
+														<span ng-if="item.editable != true" ng-click="EditTask(item)">{{item.Title}}</span>
+														<input ng-if="item.editable == true" class="form-control" ng-model="item.Title" type="text" />
+													</div>
+													<div style="width:15%;" class="padLR" ng-click="EditTask(item)">{{getMultiUserValues(item)}}</div>
+													<div style="width:11%;" class="padLR" ng-click="EditTask(item)">{{item.CreatedDate}}</div>
+													<div style="width:10%;" class="padLR" ng-click="EditTask(item)">{{item.Author.Title}}</div>
+													<div style="width:10%;" class="padLR">
+														<span ng-if="item.editable != true" ng-click="EditTask(item)">{{item.Status}}</span>
+														<!--<input ng-if="item.editable == true" class="form-control" ng-model="item.Status" type="text" />-->
+														<select ng-if="item.editable == true" class="form-control" ng-model="item.Status">
+															<option value="Not Started">Not Started</option>
+															<option value="In Progress">In Progress</option>
+															<option value="Completed">Completed</option>
+															<option value="Deferred">Deferred</option>
+															<option value="Waiting on someone else">Waiting on someone else</option>
+														</select>
+													</div>
+													<div style="width:9%;" class="padLR">
+														<span ng-if="item.editable != true" ng-click="EditTask(item)">{{item.TaskDueDate}}</span>
+														<input ng-if="item.editable == true" type="text" id="InlinedueDatePicker_AllTasks_{{item.Id}}" placeholder="DD/MM/YYYY" class="form-control" ng-model="item.TaskDueDate" />
+													</div>
+													<div style="width:2%;" class="padLR">
+														<a class="hreflink">
+															{{getTaskComments(item)}}
+														</a>
+													</div>
+
+													<div style="width:2%;" class="padLR">
+														<a class="hreflink" title="Edit" data-toggle="modal" ng-click="EditTask(item)"><img ng-src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/SiteCollectionImages/ICONS/32/edititem.gif"> </a>
+													</div>
+												</li>
+											</div>
+											</ul>
+									
+								</div>
+							</div>
+							<div id="CreatedByMe" class="tab-pane fade ">
+								<div id="table-wrapper" class="section-event pt-0 group-by">
+									
+										<ul id="Projects" class="table table-hover" cellspacing="0" width="100%">
+												<li class="for-lis">
+													<div style="width:2%;"><div style="width:80%;"></div></div>
+													<div style="width:2%;"><div style="width:80%;"></div></div>
+													<div style="width:2%;"><div style="width:80%;"></div></div>
+													<div style="width:2%;"><div style="width:80%;"></div></div>
+													<div style="width:10%;">
+														<div style="width:80%;">
+															<input id="searchCategory" type="text" placeholder="Category" class="searchbox_height width-90" ng-model="searchCategory" />
+															<span class="searchclear" ng-click="clearControl('searchCategory')">X</span>
+														</div>
+													</div>
+													<div style="width:25%;">
+														<div style="width:80%;">
+															<input id="searchTitle" type="text" placeholder="Task Name" class="searchbox_height width-90" ng-model="searchTitle" />
+															<span class="searchclear" ng-click="clearControl('searchTitle')">X</span>
+														</div>
+													</div>
+													<div style="width:11%;">
+														<div style="width:80%;">
+															<input id="searchAssignedTo" type="text" placeholder="Assigned To" class="searchbox_height width-90" ng-model="searchAssignedTo" />
+															<span class="searchclear" ng-click="clearControl('searchAssignedTo')">X</span>
+														</div>
+													</div>
+													<div style="width:11%;">
+														<div style="width:80%;">
+															<input id="searchCreated" type="text" placeholder="Created" class="searchbox_height width-90" ng-model="searchCreated" />
+															<span class="searchclear" ng-click="clearControl('searchCreated')">X</span>
+														</div>
+													</div>
+													<div style="width:11%;">
+														<div style="width:80%;">
+															<input id="searchAuthor" type="text" placeholder="Created by" class="searchbox_height width-90" ng-model="searchAuthor" />
+															<span class="searchclear" ng-click="clearControl('searchAuthor')">X</span>
+														</div>
+													</div>
+													<div style="width:10%;">
+														<div style="width:80%;">
+															<input id="searchStatus" type="text" placeholder="Status" class="searchbox_height width-90" ng-model="searchStatus" />
+															<span class="searchclear" ng-click="clearControl('searchStatus')">X</span>
+														</div>
+													</div>
+													<div style="width:10%;">
+														<div style="width:80%;">
+															<input id="searchDuedate" type="text" placeholder="Due Date" class="searchbox_height width-90" ng-model="searchDuedate" />
+															<span class="searchclear" ng-click="clearControl('searchDuedate')">X</span>
+														</div>
+													</div>
+													<div style="width:2%;"><div style="width:80%;"></div></div>
+													<div style="width:2%;"><div style="width:80%;"></div></div>
+												</li>
+											<div class="container-new">
+												<!--   <tr ng-repeat="item in filtered = (Tasks|orderBy:sortColumn:reverseSort|filter:globalSearch | filter:{Title:searchTitle,AssignedTo:searchAssignedTo})">-->
+												<li class="for-lis tdrows {{item.class}}" ng-if="item.Author.Id == CurrentUserId" ng-repeat="item in filtered = (AllSitesTask | filter:globalSearch | orderBy:orderBy:reverse
+                                            | filter:{Title:searchTitle, Priority:searchPriority, Company:searchCategory, Status: searchStatus} | filter:filterAssignedTo | filter:filterAuthor | filter:filterDuedate | filter:filterCreatedDate)">
+													<div style="width:2%;" ng-if="item.editable != true">
+														<span ng-if="item.class=='lowpriority'"><img style="width:17px;" ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/32/icon_Low.png"></span>
+														<span ng-if="item.class=='highpriority'" class="highpriorityTask"><img style="width:20px;" ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/32/icon_High.png"></span>
+													</div>
+													<div style="width:2%;" ng-if="item.editable == true">
+														<select class="form-control" ng-model="item.Priority">
+															<option value="(1) High">(1) High</option>
+															<option value="(2) Normal">(2) Normal</option>
+															<option value="(3) Low">(3) Low</option>
+														</select>
+													</div>
+													<div style="width:2%;" ng-if="item.editable != true">
+														<span ng-if="item.Status=='Completed'"><img style="width:20px;" class="okicon" ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/32/icon_ok.png"></span>
+													</div>
+													<div style="width:2%;" ng-if="item.editable != true">
+														<img ng-if="item.Attachments" ng-src="https://www.shareweb.ch/_layouts/15/images/attach16.png?rev=23">
+													</div>
+													<div style="width:2%;">
+														<a ng-if="item.editable != true" class="hreflink" title="Edit" ng-click="inlineEditDetails(item,'AllTasks')">
+															<img style="width:24px;" ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/32/icon_inline.png">
+														</a>
+														<a ng-if="item.editable == true" class="hreflink" title="Save" ng-click="SaveItem(item)">
+															<img style="width:22px;" ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/32/save.png">
+														</a>
+														</a>
+														<a ng-if="item.editable == true" class="hreflink" title="Cancel" ng-click="CancelItem(item)">
+															<img style="width:22px;" ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/32/cancel.png">
+														</a>
+													</div>
+													<div style="width:10%;" class="padLR">
+														<span ng-if="item.editable != true" ng-click="EditTask(item)">{{item.Company}}</span>
+														<!--<input ng-if="item.editable == true" class="form-control" ng-model="item.Company" type="text" />-->
+														<select ng-if="item.editable == true" class="form-control" ng-model="item.Company">
+															<option value="Admin">Admin</option>
+															<option value="Communication">Communication</option>
+															<option value="Technical Question">Technical Question</option>
+															<option value="Content">Content</option>
+															<option value="Bug">Bug</option>
+														</select>
+													</div>
+													<div style="width:25%;" class="padLR">
+														<span ng-if="item.editable != true" ng-click="EditTask(item)">{{item.Title}}</span>
+														<input ng-if="item.editable == true" class="form-control" ng-model="item.Title" type="text" />
+													</div>
+													<div style="width:11%;" class="padLR" ng-click="EditTask(item)">{{getMultiUserValues(item)}}</div>
+													<div style="width:12%;" class="padLR" ng-click="EditTask(item)">{{item.CreatedDate}}</div>
+													<div style="width:11%;" class="padLR" ng-click="EditTask(item)">{{item.Author.Title}}</div>
+													<div style="width:10%;" class="padLR">
+														<span ng-if="item.editable != true" ng-click="EditTask(item)">{{item.Status}}</span>
+														<!--<input ng-if="item.editable == true" class="form-control" ng-model="item.Status" type="text" />-->
+														<select ng-if="item.editable == true" class="form-control" ng-model="item.Status">
+															<option value="Not Started">Not Started</option>
+															<option value="In Progress">In Progress</option>
+															<option value="Completed">Completed</option>
+															<option value="Deferred">Deferred</option>
+															<option value="Waiting on someone else">Waiting on someone else</option>
+														</select>
+													</div>
+													<div style="width:9%;" class="padLR">
+														<span ng-if="item.editable != true" ng-click="EditTask(item)">{{item.TaskDueDate}}</span>
+														<input ng-if="item.editable == true" type="text" id="InlinedueDatePicker_AllTasks_{{item.Id}}" placeholder="DD/MM/YYYY" class="form-control" ng-model="item.TaskDueDate" />
+													</div>
+													<div style="width:2%;" class="padLR">
+														<a class="hreflink">
+															{{getTaskComments(item)}}
+														</a>
+													</div>
+													<div style="width:2%;" class="padLR">
+														<a class="hreflink" title="Edit" data-toggle="modal" ng-click="EditTask(item)"><img ng-src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/SiteCollectionImages/ICONS/32/edititem.gif"> </a>
+													</div>
+												</li>
+											</div>
+											</ul>
+									
+								</div>
+							</div>
+							<div id="PendingTasks" class="tab-pane fade">
+								<div id="table-wrapper" class="section-event pt-0  group-by">
+									
+										<ul id="Projects" class="table table-hover"  width="100%">				
+												<li class="for-lis">
+													<div style="width:2%;"><div style="width:80%;"></div></div>
+													<div style="width:2%;"><div style="width:80%;"></div></div>
+													<div style="width:2%;"><div style="width:80%;"></div></div>
+													<div style="width:2%;"><div style="width:80%;"></div></div>
+													<div style="width:10%;">
+														<div style="width:80%;">
+															<input id="searchCategory" type="text" placeholder="Category" class="searchbox_height width-90" ng-model="searchCategory" />
+															<span class="searchclear" ng-click="clearControl('searchCategory')">X</span>
+														</div>
+													</div>
+													<div style="width:25%;">
+														<div style="width:80%;">
+															<input id="searchTitle" type="text" placeholder="Task Name" class="searchbox_height width-90" ng-model="searchTitle" />
+															<span class="searchclear" ng-click="clearControl('searchTitle')">X</span>
+														</div>
+													</div>
+													<div style="width:11%;">
+														<div style="width:80%;">
+															<input id="searchAssignedTo" type="text" placeholder="Assigned To" class="searchbox_height width-90" ng-model="searchAssignedTo" />
+															<span class="searchclear" ng-click="clearControl('searchAssignedTo')">X</span>
+														</div>
+													</div>
+													<div style="width:11%;">
+														<div style="width:80%;">
+															<input id="searchCreated" type="text" placeholder="Created" class="searchbox_height width-90" ng-model="searchCreated" />
+															<span class="searchclear" ng-click="clearControl('searchCreated')">X</span>
+														</div>
+													</div>
+													<div style="width:11%;">
+														<div style="width:80%;">
+															<input id="searchAuthor" type="text" placeholder="Created by" class="searchbox_height width-90" ng-model="searchAuthor" />
+															<span class="searchclear" ng-click="clearControl('searchAuthor')">X</span>
+														</div>
+													</div>
+													<div style="width:10%;">
+														<div style="width:80%;">
+															<input id="searchStatus" type="text" placeholder="Status" class="searchbox_height width-90" ng-model="searchStatus" />
+															<span class="searchclear" ng-click="clearControl('searchStatus')">X</span>
+														</div>
+													</div>
+													<div style="width:10%;">
+														<div style="width:80%;">
+															<input id="searchDuedate" type="text" placeholder="Due Date" class="searchbox_height width-90" ng-model="searchDuedate" />
+															<span class="searchclear" ng-click="clearControl('searchDuedate')">X</span>
+														</div>
+													</div>
+													<div style="width:2%;"><div style="width:80%;"></div></th>
+													<div style="width:2%;"><div style="width:80%;"></div></th>
+												</li>
+										    <div class="container-new">
+												<!--   <tr ng-repeat="item in filtered = (Tasks|orderBy:sortColumn:reverseSort|filter:globalSearch | filter:{Title:searchTitle,AssignedTo:searchAssignedTo})">-->
+												<li class="for-lis tdrows {{item.class}}" ng-if="item.Status.toLowerCase() != 'completed'" ng-repeat="item in filtered = (AllSitesTask | filter:globalSearch | orderBy:orderBy:reverse
+                                            | filter:{Title:searchTitle, Priority:searchPriority, Company:searchCategory, Status: searchStatus} | filter:filterAssignedTo | filter:filterAuthor | filter:filterDuedate | filter:filterCreatedDate)">
+													<div style="width:2%;" ng-if="item.editable != true">
+														<span ng-if="item.class=='lowpriority'"><img style="width:17px;" ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/32/icon_Low.png"></span>
+														<span ng-if="item.class=='highpriority'" class="highpriorityTask"><img style="width:20px;" ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/32/icon_High.png"></span>
+													</div>
+													<div style="width:2%;" ng-if="item.editable == true" colspan="3">
+														<select class="form-control" ng-model="item.Priority">
+															<option value="(1) High">(1) High</option>
+															<option value="(2) Normal">(2) Normal</option>
+															<option value="(3) Low">(3) Low</option>
+														</select>
+													</div>
+													<div style="width:2%;" ng-if="item.editable != true">
+														<span ng-if="item.Status=='Completed'"><img style="width:20px;" class="okicon" ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/32/icon_ok.png"></span>
+													</div>
+													<div style="width:2%;" ng-if="item.editable != true">
+														<img ng-if="item.Attachments" ng-src="https://www.shareweb.ch/_layouts/15/images/attach16.png?rev=23">
+													</div>
+													<div style="width:2%;">
+														<a ng-if="item.editable != true" class="hreflink" title="Edit" ng-click="inlineEditDetails(item,'AllTasks')">
+															<img style="width:24px;" ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/32/icon_inline.png">
+														</a>
+														<a ng-if="item.editable == true" class="hreflink" title="Save" ng-click="SaveItem(item)">
+															<img style="width:22px;" ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/32/save.png">
+														</a>
+														</a>
+														<a ng-if="item.editable == true" class="hreflink" title="Cancel" ng-click="CancelItem(item)">
+															<img style="width:22px;" ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/32/cancel.png">
+														</a>
+													</div>
+													<div style="width:10%;" class="padLR">
+														<span ng-if="item.editable != true" ng-click="EditTask(item)">{{item.Company}}</span>
+														<!--<input ng-if="item.editable == true" class="form-control" ng-model="item.Company" type="text" />-->
+														<select ng-if="item.editable == true" class="form-control" ng-model="item.Company">
+															<option value="Admin">Admin</option>
+															<option value="Communication">Communication</option>
+															<option value="Technical Question">Technical Question</option>
+															<option value="Content">Content</option>
+															<option value="Bug">Bug</option>
+														</select>
+													</div>
+													<div style="width:25%;" class="padLR">
+														<span ng-if="item.editable != true" ng-click="EditTask(item)">{{item.Title}}</span>
+														<input ng-if="item.editable == true" class="form-control" ng-model="item.Title" type="text" />
+													</div>
+													<div style="width:11%;" class="padLR" ng-click="EditTask(item)">{{getMultiUserValues(item)}}</div>
+													<div style="width:12%;" class="padLR" ng-click="EditTask(item)">{{item.CreatedDate}}</div>
+													<div style="width:11%;" class="padLR" ng-click="EditTask(item)">{{item.Author.Title}}</div>
+													<div style="width:10%;" class="padLR">
+														<span ng-if="item.editable != true" ng-click="EditTask(item)">{{item.Status}}</span>
+														<!--<input ng-if="item.editable == true" class="form-control" ng-model="item.Status" type="text" />-->
+														<select ng-if="item.editable == true" class="form-control" ng-model="item.Status">
+															<option value="Not Started">Not Started</option>
+															<option value="In Progress">In Progress</option>
+															<option value="Completed">Completed</option>
+															<option value="Deferred">Deferred</option>
+															<option value="Waiting on someone else">Waiting on someone else</option>
+														</select>
+													</div>
+													<div style="width:9%;" class="padLR">
+														<span ng-if="item.editable != true" ng-click="EditTask(item)">{{item.TaskDueDate}}</span>
+														<input ng-if="item.editable == true" type="text" id="InlinedueDatePicker_AllTasks_{{item.Id}}" placeholder="DD/MM/YYYY" class="form-control" ng-model="item.TaskDueDate" />
+													</div>
+													<div style="width:2%;" class="padLR">
+														<a class="hreflink">
+															{{getTaskComments(item)}}
+														</a>
+													</div>
+													<div style="width:2%;" class="padLR">
+														<a class="hreflink" title="Edit" data-toggle="modal" ng-click="EditTask(item)"><img ng-src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/SiteCollectionImages/ICONS/32/edititem.gif"> </a>
+													</div>
+												</li>
+											</div>
+											</ul>
+									
+								</div>
+							</div>
+							<div id="CompletedTasks" class="tab-pane fade">
+								<div id="table-wrapper" class="section-event pt-0 group-by">
+									
+										<ul id="Projects" class="table table-hover"  width="100%">
+											<li class="for-lis">
+												<div style="width:2%;"><div style="width:80%;"></div></div>
+												<div style="width:2%;"><div style="width:80%;"></div></div>
+												<div style="width:2%;"><div style="width:80%;"></div></div>
+												<div style="width:2%;"><div style="width:80%;"></div></div>
+												<div style="width:10%;">
+													<div style="width:80%;">
+														<input id="searchCategory" type="text" placeholder="Category" class="searchbox_height width-90" ng-model="searchCategory" />
+														<span class="searchclear" ng-click="clearControl('searchCategory')">X</span>
+													</div>
+												</div>
+												<div style="width:25%;">
+													<div style="width:80%;">
+														<input id="searchTitle" type="text" placeholder="Task Name" class="searchbox_height width-90" ng-model="searchTitle" />
+														<span class="searchclear" ng-click="clearControl('searchTitle')">X</span>
+													</div>
+												</div>
+												<div style="width:11%;">
+													<div style="width:80%;">
+														<input id="searchAssignedTo" type="text" placeholder="Assigned To" class="searchbox_height width-90" ng-model="searchAssignedTo" />
+														<span class="searchclear" ng-click="clearControl('searchAssignedTo')">X</span>
+													</div>
+												</div>
+												<div style="width:11%;">
+													<div style="width:80%;">
+														<input id="searchCreated" type="text" placeholder="Created" class="searchbox_height width-90" ng-model="searchCreated" />
+														<span class="searchclear" ng-click="clearControl('searchCreated')">X</span>
+													</div>
+												</div>
+												<div style="width:11%;">
+													<div style="width:80%;">
+														<input id="searchAuthor" type="text" placeholder="Created by" class="searchbox_height width-90" ng-model="searchAuthor" />
+														<span class="searchclear" ng-click="clearControl('searchAuthor')">X</span>
+													</div>
+												</div>
+												<div style="width:10%;">
+													<div style="width:80%;">
+														<input id="searchStatus" type="text" placeholder="Status" class="searchbox_height width-90" ng-model="searchStatus" />
+														<span class="searchclear" ng-click="clearControl('searchStatus')">X</span>
+													</div>
+												</div>
+												<div style="width:10%;">
+													<div style="width:80%;">
+														<input id="searchDuedate" type="text" placeholder="Due Date" class="searchbox_height width-90" ng-model="searchDuedate" />
+														<span class="searchclear" ng-click="clearControl('searchDuedate')">X</span>
+													</div>
+												</div>
+												<div style="width:2%;"><div style="width:80%;"></div></th>
+												<div style="width:2%;"><div style="width:80%;"></div></th>
+											</li>
+											<div class="container-new">
+												<!--   <tr ng-repeat="item in filtered = (Tasks|orderBy:sortColumn:reverseSort|filter:globalSearch | filter:{Title:searchTitle,AssignedTo:searchAssignedTo})">-->
+												<li class="for-lis tdrows {{item.class}}" ng-if="item.Status.toLowerCase() == 'completed'" ng-repeat="item in filtered = (AllSitesTask | filter:globalSearch | orderBy:orderBy:reverse
+                                            | filter:{Title:searchTitle, Priority:searchPriority, Company:searchCategory, Status: searchStatus} | filter:filterAssignedTo | filter:filterAuthor | filter:filterDuedate | filter:filterCreatedDate)">
+													<div style="width:2%;" ng-if="item.editable != true">
+														<span ng-if="item.class=='lowpriority'"><img style="width:17px;" ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/32/icon_Low.png"></span>
+														<span ng-if="item.class=='highpriority'" class="highpriorityTask"><img style="width:20px;" ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/32/icon_High.png"></span>
+													</div>
+													<div style="width:2%;" ng-if="item.editable == true">
+														<select class="form-control" ng-model="item.Priority">
+															<option value="(1) High">(1) High</option>
+															<option value="(2) Normal">(2) Normal</option>
+															<option value="(3) Low">(3) Low</option>
+														</select>
+													</div>
+													<div style="width:2%;" ng-if="item.editable != true">
+														<span ng-if="item.Status=='Completed'"><img style="width:20px;" class="okicon" ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/32/icon_ok.png"></span>
+													</div>
+													<div style="width:2%;" ng-if="item.editable != true">
+														<img ng-if="item.Attachments" ng-src="https://www.shareweb.ch/_layouts/15/images/attach16.png?rev=23">
+													</div>
+													<div style="width:2%;">
+														<a ng-if="item.editable != true" class="hreflink" title="Edit" ng-click="inlineEditDetails(item,'AllTasks')">
+															<img style="width:24px;" ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/32/icon_inline.png">
+														</a>
+														<a ng-if="item.editable == true" class="hreflink" title="Save" ng-click="SaveItem(item)">
+															<img style="width:22px;" ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/32/save.png">
+														</a>
+														</a>
+														<a ng-if="item.editable == true" class="hreflink" title="Cancel" ng-click="CancelItem(item)">
+															<img style="width:22px;" ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/32/cancel.png">
+														</a>
+													</div>
+													<div style="width:10%;" class="padLR">
+														<span ng-if="item.editable != true" ng-click="EditTask(item)">{{item.Company}}</span>
+														<!--<input ng-if="item.editable == true" class="form-control" ng-model="item.Company" type="text" />-->
+														<select ng-if="item.editable == true" class="form-control" ng-model="item.Company">
+															<option value="Admin">Admin</option>
+															<option value="Communication">Communication</option>
+															<option value="Technical Question">Technical Question</option>
+															<option value="Content">Content</option>
+															<option value="Bug">Bug</option>
+														</select>
+													</div>
+													<div style="width:25%;" class="padLR">
+														<span ng-if="item.editable != true" ng-click="EditTask(item)">{{item.Title}}</span>
+														<input ng-if="item.editable == true" class="form-control" ng-model="item.Title" type="text" />
+													</div>
+													<div style="width:11%;" class="padLR" ng-click="EditTask(item)">{{getMultiUserValues(item)}}</div>
+													<div style="width:12%;" class="padLR" ng-click="EditTask(item)">{{item.CreatedDate}}</div>
+													<div style="width:11%;" class="padLR" ng-click="EditTask(item)">{{item.Author.Title}}</div>
+													<div style="width:10%;" class="padLR">
+														<span ng-if="item.editable != true" ng-click="EditTask(item)">{{item.Status}}</span>
+														<!--<input ng-if="item.editable == true" class="form-control" ng-model="item.Status" type="text" />-->
+														<select ng-if="item.editable == true" class="form-control" ng-model="item.Status">
+															<option value="Not Started">Not Started</option>
+															<option value="In Progress">In Progress</option>
+															<option value="Completed">Completed</option>
+															<option value="Deferred">Deferred</option>
+															<option value="Waiting on someone else">Waiting on someone else</option>
+														</select>
+													</div>
+													<div style="width:9%;" class="padLR">
+														<span ng-if="item.editable != true" ng-click="EditTask(item)">{{item.TaskDueDate}}</span>
+														<input ng-if="item.editable == true" type="text" id="InlinedueDatePicker_AllTasks_{{item.Id}}" placeholder="DD/MM/YYYY" class="form-control" ng-model="item.TaskDueDate" />
+													</div>
+
+													<div style="width:2%;" class="padLR">
+														<a class="hreflink">
+															{{getTaskComments(item)}}
+														</a>
+													</div>
+													<div style="width:2%;" class="padLR">
+														<a class="hreflink" title="Edit" data-toggle="modal" ng-click="EditTask(item)"><img ng-src="/_layouts/images/edititem.gif"> </a>
+													</div>
+												</li>
+											</div>
+											</ul>
+									
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row pull-right">
+				<a target="_blank" ng-href="https://hhhhteams.sharepoint.com/sites/HHHHTeams/Lists/{{ListType}}/NewForm.aspx">Go to out-of-the-box Tasks</a>
+			</div>
+		</div>
+		<!--End of Add new Task-->
+
+	</div>
+
+	<!--Start of Add new Task-->
+	<div id="addNewTasks" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" style="display: none;">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close minwid-10" data-dismiss="modal" ng-click="cancelItemAdd()" >&times;</button>
+					<h5 class="modal-title">Add new Task</h5>
+				</div>
+				<div class="modal-body pad10">
+					<ng-form name="TaskNewForm" novalidate role="form">
+						<div class="form-horizontal">
+							<div class="row padb-10">
+								<div class="col-sm-4">
+									Shareweb Sites:
+								</div><span class="required"> *</span>
+
+								<div class="col-sm-8">
+									<select class="form-control" ng-required="true" ng-model="SiteType" ng-change="selectedAddTaskitems(SiteType)">
+										<option value="">Select Site</option>
+										<option ng-repeat="item in SitesConfig" value="{{item.siteName}}">{{item.siteName}}</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-12">
+									<label class="full_width">Title<span class="required"> *</span></label>
+									<input type="text" class="form-control" placeholder="Task Name" ng-required="true" ng-model="task.Title" />
+								</div>
+
+							</div>
+
+						</div>
+					</ng-form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" ng-disabled="TaskNewForm.$error.required" ng-click="addNewTask()">Save</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal" ng-click="cancelItemAdd()">Cancel</button>
+				</div>
+
+			</div>
+		</div>
+
+	</div>
+	<!--start of reference item-->
+	<div id="ReferencePopUp" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" style="display: none;">
+		<div class="modal-dialog" style="width:80%">
+			<div class="modal-content">
+				<ng-form name="TaskForm" novalidate role="form">
+					<div class="modal-header">
+						<button type="button" class="close minwid-10" data-dismiss="modal" ng-click="cancelReferenceItem()">&times;</button>
+						<h3 class="modal-title"> Select Reference Item</h3>
+					</div>
+
+					<div class="modal-body">
+						<div class="form-horizontal">
+							<div class="form-group">
+
+								<div class="col-sm-2" title="Reference Item">
+									<label for="dropReferenceItem">Reference Item</label>
+								</div>
+								<div class="col-sm-10">
+
+									<input class="form-check-input" name="radioReferenceItem" type="radio" ng-click="getDocumentItems()"> Documents
+									<input class="form-check-input" name="radioReferenceItem" type="radio" ng-click="getPageItems()"> Pages
+									<input class="form-check-input" name="radioReferenceItem" type="radio" ng-click="getNewsItems()"> News
+									<input class="form-check-input" name="radioReferenceItem" type="radio" ng-click="getEvents()"> Events
+									<input class="form-check-input" name="radioReferenceItem" type="radio" ng-click="getProjectItems()"> Projects
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-2">Search :</div>
+								<div class="col-sm-10">
+									<input id="searchinput" type="search" ng-model="SmartDocumentSearch" placeholder="Search..." class="form-control height-30">
+									<span class="searchclear" style="left:98%!important;" ng-click="clearAll('searchinput')">X</span>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+							<div id="table-wrapper">
+								<div id="table-scroll">
+									<table id="Projects" class="table table-hover" cellspacing="0" width="100%">
+										<tbody>
+											<tr ng-repeat="item in AllReferences | orderBy:orderBy:reverse | filter : SmartDocumentSearch">
+												<td><input type="radio" name="radioSelectProject" ng-click="selectReference(item)"></td>
+												<td>
+													<div ng-if="referenceType=='Project'" class="col-sm-8">{{item.ProjectNumber}}</div>
+													<div class="col-sm-4">{{item.Title}}</div>
+													<div ng-if="referenceType!='Document'||referenceType=='Page'" class="col-sm-8">
+														<a target="_blank" ng-href="{{item.Url}}">
+															{{item.Url}}
+														</a>
+													</div>
+
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+		
+					</div>
+				</ng-form>
+			</div>
+		</div>
+	</div>
+	<shareweb-progress-bar progressbarid="'feedbackprogressbar'"></shareweb-progress-bar>
+	<shareweb-progress-bar progressbarid="'sharewebprogressbar'"></shareweb-progress-bar>
+</div>
+<div class="modal-backdrop fade in" style="height: 242px; display: none; opacity: 0.9;"></div>

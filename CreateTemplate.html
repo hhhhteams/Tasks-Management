@@ -1,0 +1,156 @@
+﻿<script src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/Style%20Library/js/angular/Online/Tasks%20Management/TaskFeedback.js"></script>
+<script src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/Style%20Library/js/angular/Templates/HCTemplateControllers.js"></script>
+<script src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/Style%20Library/js/angular/Online/Tasks%20Management/CreateTemplate.js"></script>
+<script type="text/javascript" src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/Style%20Library/js/angular/Services/froala_editor.pkgd.min.js"></script>
+<div ng-controller="CreateTemplateController" ng-cloak>
+    <div class="panel panel-default menuhoverlist1">
+        <div class="tabBox clearfix">
+            <div class="tab-pane"></div>
+            <div class="col-sm-12">
+                <div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-9 padL-0">
+                                <fieldset class="fieldsett">
+                                    <legend class="activity">Template Name</legend>
+                                    <div class="col-sm-8 form-group mt-10">
+                                        <div class="col-sm-12 padL-0 PadR0">
+                                            <input id="searchinput" type="search" autocomplete="off" ng-model="globalSearchAndTitle" debounce="500" immediate="true" placeholder="Enter Template Name.. " class="searchhbox_height t form-control searchbox_height">
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+
+
+                            <div class="col-md-3 mb-20 form-group padL-0">
+                                <fieldset class="fieldsett col-sm-12">
+                                    <legend class="activity">Select Component</legend>
+                                    <div class="col-sm-12 PadR0 mt-10">
+                                        <div class="col-sm-11 padL-0 Doc-align">
+                                            <input type="text" class="form-control ui-autocomplete-input" id="txtSharewebComponentcrt" autocomplete="off"><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
+                                            <div class="col-sm-12 mt-5 padL-0 PadR0">
+                                                <div class="col-sm-12 block" title="{{ComponentTitle.STRING}}" ng-repeat="item in smartComponent track by $index">
+                                                    <a class="hreflink" target="_blank" ng-href="https://hhhhteams.sharepoint.com/sites/HHHHTeams/sp/SitePages/Portfolio-Profile.aspx?taskId={{item.Id}}&amp;Site={{item.siteType}}">{{item.Title}}</a>
+                                                    <a class="hreflink" ng-click="removeSmartComponent(item.Id)">
+                                                        <img ng-src="/_layouts/images/delete.gif">
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-1 padL-0">
+                                            <img ng-src="https://www.shareweb.ch/_layouts/15/images/EMMCopyTerm.png" ng-click="openSmartTaxonomyPopup('Components',smartComponent);" src="https://www.shareweb.ch/_layouts/15/images/EMMCopyTerm.png">
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
+                   
+
+                </div>
+            </div>
+            <div class="col-sm-8 mt1 Doc-align padR-5">
+                <div class="forFullScreenButton" id="Short_x0020_Description_x0020_On" ng-model=""></div>
+            </div>
+        </div>      
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" style="margin-top: 10px;" ng-click="addNewComponent()">Submit</button>
+        </div>
+        <!--Component Tagging -->
+        <!--Smart taxonomy popup-->
+        <div id="SmartTaxonomycreatePopup" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" style="display: none;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" ng-click="cancelSmartTaxonomyPopup()" style="min-width: 10px;">&times;</button>
+                        <h4 class="modal-title">
+                            Select -{{Title}}
+                        </h4>
+                        <table class="ms-dialogHeader" cellspacing="0" cellpadding="0" border="0" width="100%" style="padding-top: 8px; padding-bottom: 10px;">
+                            <tbody>
+                                <tr class="">
+                                    <td valign="middle" align="center" style="width:0px; padding-left: 15px; padding-right: 15px;">
+                                        <img ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/24/EMMDoubleTag.png" alt="">
+                                    </td>
+                                    <td class="ms-dialogHeaderDescription" valign="top" style="width:100%;">
+                                        <div id="selectTermDescription" class="none-wordbreak">
+                                            <table class="ms-dialogHeaderDescription">
+                                                <tbody>
+                                                    <tr id="addNewTermDescription" class="">
+                                                        <td>New items are added under the currently selected item.</td>
+                                                        <td class="TaggingLinkWidth">
+                                                            <a style="cursor:pointer;" ng-click="gotomanagetaxonomy();">
+                                                                Add New Item
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr id="SendFeedbackTr">
+                                                        <td>Make a request or send feedback to the Term Set manager.</td>
+                                                        <td class="TaggingLinkWidth">
+                                                            <a href="mailto:e-i@eda.admin.ch">
+                                                                Send Feedback
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </td>
+                                    <td class="ms-dialogHelpLink" align="right" valign="top" style="width:0px; padding-right: 10px;" nowrap="nowrap">
+                                        <!-- Remove -->
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-body">
+                        <div class="col-sm-12 padL-0 PadR0 mb-10 mt-10">
+                            <input type="text" class="form-control ui-autocomplete-input" id="txtSharewebComponentselsction" autocomplete="off"><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
+                        </div>
+                        <div>
+                            <div class="col-sm-10" ng-hide="SmartTaxonomyName=='Topics' || SmartTaxonomyName=='Activities' || SmartTaxonomyName=='Countries' || SmartTaxonomyName=='Shareweb Pages' || SmartTaxonomyName =='Components'|| SmartTaxonomyName =='Categories'">
+                                <input type="text" class="form-control ng-pristine ng-untouched ng-valid ng-empty ui-autocomplete-input" id="txtSmartTaxonomycreatePopup" ng-model="SmartTaxonomyValue" autocomplete="off">
+                                <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
+                            </div>
+                        </div>
+                        <div class="">
+                            <div class="col-sm-12 ActivityBox" ng-show="SmartTaxonomyName =='Components'">
+                                <span class="block" ng-mouseover="HoverIn(item);" ng-mouseleave="ComponentTitle.STRING='';" title="{{ComponentTitle.STRING}}" ng-repeat="item in SmartCompCopy track by $index">{{item.Title}}<a class="hreflink" ng-click="removeEditSmartComponent(item.Id)"> <img ng-src="/_layouts/images/delete.gif"></a></span>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="col-sm-12 ActivityBox" ng-show="SmartTaxonomyName =='Categories'">
+                                <span class="block" ng-repeat="item in smartCategories">{{item.Title}}<a class="hreflink" ng-click="removeCategories(item.Id)"> <img ng-src="/_layouts/images/delete.gif"></a></span>
+                                <div class="clearfix"></div>
+                            </div>
+
+                        </div>
+                        <div class="divPanelBody col-sm-12 padL-0 PadR0">
+                            <nav id="nav_pop-up">
+                                <ul id="main-menu">
+                                    <li ng-repeat="item in TaxonomyItems">
+                                        <a class="hreflink" ng-click="selectItem(item,'Component');"><img ng-if="item.Item_x005F_x0020_Cover.Url != undefined" style="height: 12px; width:18px;" ng-src="{{item.Item_x005F_x0020_Cover.Url}}"> {{item.Title}}</a>
+                                        <ul ng-if="item.childs.length>0" class="sub-menu clr">
+                                            <li ng-repeat="child1 in item.childs">
+                                                <a class="hreflink" ng-click="selectItem(child1,'SubComponent');"><img ng-if="child1.Item_x005F_x0020_Cover.Url != undefined" style="height: 12px; width:18px;" ng-src="{{child1.Item_x005F_x0020_Cover.Url}}"> {{child1.Title}}</a>
+                                                <ul ng-if="child1.childs.length>0" class="sub-menu clr2">
+                                                    <li ng-repeat="child2 in child1.childs">
+                                                        <a class="hreflink" ng-click="selectItem(child2,'Feature');"><img ng-if="child2.Page_x002d_Title!=undefined && child2.ProfileType!=undefined" class="flag_icon" ng-src="{{child2.Item_x0020_Cover.Url}}"> {{child2.Title}}</a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <a href="javascript:void(0);" ng-click="gotomanagetaxonomy();">Manage Smart Taxonomy</a>
+                        <button type="button" class="btn btn-primary" ng-click="copySelectedSmartTaxonomy()">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

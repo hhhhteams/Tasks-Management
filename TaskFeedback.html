@@ -1,0 +1,363 @@
+﻿<style type="text/css">
+.note-editable{
+	min-height: 300px;
+}
+.feedbackcomment {
+	padding-left: 70px!important;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.cmnt{
+   margin-right:21px;
+}
+</style>
+<div ng-cloak>
+    <div class="panel panel-heading">
+        <div class="modal-header feedback_border">
+            <button type="button" class="close" data-dismiss="modal" ng-click="cancelFeedBackPopup()" style="min-width: 10px;">&times;</button>
+            <h5>Task FeedBack-{{Task.Title}}</h5>
+        </div>
+        <div class="panel-body">
+            <div class="tabBox clearfix">
+                <div id="tabs" class="exTab3">
+                    <ul class="nav nav-pills">
+                        <li class="active">
+                            <a href="#basicInfo" data-toggle="tab">BASIC INFORMATION </a>
+                        </li>
+                        <li>
+                            <a href="#teamInfo" data-toggle="tab">TASK TEAM </a>
+                        </li>
+
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane fade in active" id="basicInfo">
+                            <div class="form-horizontal">
+                                <ng-form name="FeedBackNewForm" novalidate role="form">
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <label class="full_width">Title<span class="required"> *</span></label>
+                                            <input type="text" class="form-control" placeholder="FeedBack Title" ng-required="true" ng-model="Task.Title" />
+                                        </div>
+
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-6">
+                                            <label class="full_width">Copy & Paste FeedBack Image </label>
+                                            <div id="FeedBackPic" ng-if="Task.Item_x002d_Image.Url ==undefined"></div>
+                                            <div ng-if="Task.Item_x002d_Image.Url !=undefined">
+                                                <a href="{{Task.Item_x002d_Image.Url}}" target="_blank"><img style="max-width:90%;" ng-src="{{Task.Item_x002d_Image.Url}}"></a>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label class="full_width">Feedback Items:<span class="required"> *</span></label>
+                                            <div ng-repeat='item in DescriptionFields'>
+                                                <div class="col-sm-12 no-padding " ng-if="!item.isShowComment">
+                                                    <a class="pull-right cmnt" style="cursor::pointer;" ng-click="showCommentBox(item)">Comment</a>
+                                                </div>
+                                                <div class="">
+                                                    {{$index+1}} .<input ng-model='item.Title' style="width:94%;height: 35px;" type="text" placeholder='type feedback here' />
+                                                    <span>
+                                                        <input type="checkbox" id="chkCompleted" name="chkCompleted" ng-model="item.Completed" ng-click="checkCompleted(Completed)">
+
+                                                    </span>
+                                                    <div class="clearfix"></div>
+                                                </div>
+                                                <div class="feedbackcomment col-sm-12 no-padding " ng-if="item.isShowComment">
+                                                    <input ng-model='item.Comment' style="width:96%;height: 40px;" type="text" placeholder='type Comment here' />
+                                                    <span><img src="/_layouts/images/delete.gif" ng-click="removeComment(item)" /></span>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                                <button ng-show="$index==DescriptionFields.length-1" type="button" class="btn btn-primary pull-right" ng-click="addColumn(item)" style="margin-top: 5px;">Add New Column</button>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <div class="col-sm-12" style="padding-left:0px !important;">
+                                                <div class="col-sm-8">
+
+                                                    <div class="form-group">
+
+                                                        <div class="col-sm-3">
+                                                            <fieldset>
+                                                                <label>Task Completed</label>
+                                                                <div class="radio">
+                                                                    <label>
+                                                                        <input class="form-check-input" name="radioCompleted" type="radio" value="working on it" ng-click="PercentCompleted()" ng-model="Completed"> 10% working on it
+                                                                    </label>
+                                                                </div>
+                                                                <div class="radio">
+                                                                    <label>
+                                                                        <input class="form-check-input" name="radioCompleted" type="radio" value="Task completed" ng-click="PercentCompleted()" ng-model="Completed">   90% Task completed
+                                                                    </label>
+                                                                </div>
+                                                                <div class="radio">
+                                                                    <label>
+                                                                        <input class="form-check-input" name="radioCompleted" type="radio" value="For Review" ng-click="PercentCompleted()" ng-model="Completed"> 93% For Review
+                                                                    </label>
+                                                                </div>
+                                                                <div class="radio">
+                                                                    <label>
+                                                                        <input class="form-check-input" name="radioCompleted" type="radio" value="Reviewed – further action needed" ng-click="PercentCompleted()" ng-model="Completed"> 95% Reviewed – further action needed
+                                                                    </label>
+                                                                </div>
+                                                                <div class="radio">
+                                                                    <label>
+                                                                        <input class="form-check-input" name="radioCompleted" type="radio" value="Ready for marked completed" ng-click="PercentCompleted()" ng-model="Completed"> 99% Ready for marked completed
+                                                                    </label>
+                                                                </div> <div class="radio">
+                                                                    <label>
+                                                                        <input ng-disabled="!(Item.Editor.Id==userId)" class="form-check-input" name="radioCompleted" type="radio" value="completed" ng-click="PercentCompleted()" ng-model="Completed"> 100% Ready for marked completed
+                                                                    </label>
+                                                                </div>
+
+                                                            </fieldset>
+
+                                                        </div>
+                                                        <div class="col-sm-3">
+                                                            <fieldset>
+                                                                <label>Priority</label>
+                                                                <div class="radio">
+                                                                    <label>
+                                                                        <input class="form-check-input" name="radioPriority" type="radio" value="(1) High" ng-model="Task.Priority">High
+                                                                    </label>
+                                                                </div>
+                                                                <div class="radio">
+                                                                    <label>
+                                                                        <input class="form-check-input" name="radioPriority" type="radio" value="(2) Normal" ng-model="Task.Priority">Normal
+                                                                    </label>
+                                                                </div>
+                                                                <div class="radio">
+                                                                    <label>
+                                                                        <input class="form-check-input" name="radioPriority" type="radio" value="(3) Low" ng-model="Task.Priority">Low
+                                                                    </label>
+                                                                </div>
+
+                                                            </fieldset>
+
+                                                        </div>
+														<div class="col-sm-3">
+															
+															<fieldset>
+															<div class="col-sm-11 no-padding">
+		<label class="full_width">Company</label>
+		<input type="text" class="form-control" id="txtTaskCompanies" ng-model="Task.TaskCompanies" />
+	</div>
+	<div class="col-sm-1 no-padding">
+		<label class="full_width">&nbsp;</label>
+		<img src="https://www.shareweb.ch/_layouts/15/images/EMMCopyTerm.png" ng-click="openSmartTaxonomyPopup('Categories', Task.TaskCompanies);">
+	</div>
+															<!--<div class="radio">
+		<label>
+			<input class="form-check-input" name="radioTaskCategory" type="radio" value="Admin" ng-model="Task.TaskCompanies"> Admin
+		</label>
+	</div>
+	<div class="radio">
+		<label>
+			<input class="form-check-input" name="radioTaskCategory" type="radio" value="Communication" ng-model="Task.TaskCompanies"> Communication
+		</label>
+	</div>
+	<div class="radio">
+		<label>
+			<input class="form-check-input" name="radioTaskCategory" type="radio" value="Technical Question" ng-model="Task.TaskCompanies"> Technical Question
+		</label>
+	</div>
+	<div class="radio">
+		<label>
+			<input class="form-check-input" name="radioTaskCategory" type="radio" value="Content" ng-model="Task.TaskCompanies"> Content
+		</label>
+	</div>
+	<div class="radio">
+		<label>
+			<input class="form-check-input" name="radioTaskCategory" type="radio" value="Bug" ng-model="Task.TaskCompanies"> Bug
+		</label>
+	</div>-->
+															</fieldset>
+
+														</div>
+
+                                                        <div class="col-sm-3">
+                                                            <label>% Complete</label>
+                                                            <input type="text" class="form-control" placeholder="% Complete" ng-model="PercentComplete" ng-change="getpercentnumber()" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </ng-form>
+
+                            </div>
+                        </div>
+
+
+                        <div class="tab-pane fade" id="teamInfo">
+                            <div class="">
+                                <div class="form-group" ui-on-drop="onDropRemoveTeam($event,$data, TeamUsers)">
+                                    <table width="100%">
+                                        <tr>
+                                            <td ng-repeat="item in TeamUsers">
+                                                <img class="AssignPriorityUserPhoto" ui-draggable="true" drag="item" on-drop-success="dropSuccessHandler($event, $index, TeamUsers)" title="{{item.Title}}" data-toggle="popover" data-trigger="hover" ng-src="{{item.userImage}}" />
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+
+                                <div class="row" style="margin-left:0px;margin-right:0px;">
+                                    <div class="col-md-9" style="padding-right:0!important;">
+                                        <div class="form-group">
+                                            <div class="col-sm-12 assignToDropPanel" ui-on-drop="onDropTeam($event,$data,AssignedToUsers,'TeamLeader')">
+                                                <div>
+                                                    <div><img ui-draggable="true" drag="image" on-drop-success="dropSuccessHandler($event, $index, AssignedToUsers)" data-toggle="popover" data-trigger="hover" class="ProirityAssignedUserPhoto" ng-repeat="image in AssignedToUsers" ng-src="{{image.userImage}}" /></div>
+                                                    <span>Drag user here to assign for Team Leader...</span>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-12 assignToDropPanel" ui-on-drop="onDropTeam($event,$data,TeamMemberUsers,'TeamMember')">
+                                                <div>
+                                                    <div><img ui-draggable="true" drag="image" on-drop-success="dropSuccessHandler($event, $index, TeamMemberUsers)" data-toggle="popover" data-trigger="hover" class="ProirityAssignedUserPhoto" ng-repeat="image in TeamMemberUsers" ng-src="{{image.userImage}}" /></div>
+                                                    <span>Drag user here to assign for Team Member...</span>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <div ui-on-drop="onDropRemoveTeam($event,$data, TeamUsers)">
+                                                <img title="Drag user here to  remove user from team for this Network Activity." style="height:160px;" src="https://www.shareweb.ch/site/EPS/SiteCollectionImages/ICONS/96/icon_Dustbin.png" />
+                                                <!--<div>
+                                                 <span>Drag user here to  remove user from priorities for this task...</span>
+                                                </div>-->
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+        </div>
+        <div class="ItemInfo" style="padding-top:15px;">
+            <div>Created <span>{{backupItem.Created}}</span> by <span class="footerUsercolor">{{backupItem.Author.Title}}</span></div>
+            <div>Last modified <span>{{backupItem.Modified}}</span> by <span class="footerUsercolor">{{backupItem.Editor.Title}}</span></div>
+            <div>
+                <a href="javascrpt:void(0);" ng-click="deleteTaskFromPopUp();"><img src="/_layouts/images/delete.gif"> Delete this item</a>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <img ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/32/circle_mail.png" /> <a style="font-size:10px;" target="_blank" ng-href="{{baseUrl}}/SitePages/Task-Profile.aspx?taskId={{Task.Id}}&Site={{siteType}}">Share this task</a>
+            | <a style="font-size:10px;" target="_blank" ng-href="{{baseUrl}}/Lists/{{siteType}}/EditForm.aspx?ID={{Task.Id}}">Open out-of-the-box form</a>
+            <button type="button" class="btn btn-primary" ng-disabled="FeedBackNewForm.$error.required" ng-click="SaveFeedBack()">Save</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="cancelFeedBackPopup()">Cancel</button>
+        </div>
+
+    </div>
+    <!--Smart taxonomy popup-->
+    <div id="SmartTaxonomyPopup" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" style="display: none;">
+        <div class="modal-dialog" style="width:700px">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" ng-click="cancelSmartTaxonomyPopup()" style="min-width: 10px;">&times;</button>
+                    <h4 class="modal-title">
+                        Select {{modelTitle}}
+                    </h4>
+                    <table class="ms-dialogHeader" cellspacing="0" cellpadding="0" border="0" width="100%" style="padding-top: 8px; padding-bottom: 10px;">
+                        <tbody>
+                            <tr class="">
+                                <td valign="middle" align="center" style="width:0px; padding-left: 15px; padding-right: 15px;">
+
+                                    <img src="/_layouts/images/EMMDoubleTag.png" alt="">
+
+                                </td>
+                                <td class="ms-dialogHeaderDescription" valign="top" style="width:100%;">
+
+                                    <div id="selectTermDescription" class="none-wordbreak">
+                                        <table class="ms-dialogHeaderDescription">
+                                            <tbody>
+                                                <tr id="addNewTermDescription" class="">
+                                                    <td>New items are added under the currently selected item.</td>
+                                                    <td class="TaggingLinkWidth">
+                                                        <a href="javascript:void(0);" ng-click="gotomanagetaxonomy();">
+                                                            Add New Item
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                <tr id="SendFeedbackTr">
+                                                    <td>Make a request or send feedback to the Term Set manager.</td>
+                                                    <td class="TaggingLinkWidth">
+                                                        <a href="mailto:e-i@eda.admin.ch">
+                                                            Send Feedback
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </td>
+                                <td class="ms-dialogHelpLink" align="right" valign="top" style="width:0px; padding-right: 10px;" nowrap="nowrap">
+
+                                    <!-- Remove -->
+
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-body" style="min-height: 500px;overflow-y: hidden;background: #f5f5f5;">
+                    <div class="form-group" style="padding-top:15px;">
+                        <div class="col-sm-4 titleLabel"></div>
+                        <div class="col-sm-8">
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="txtSmartTaxonomyPopup" ng-model="SmartTaxonomyValue" />
+                            </div>
+                            <div class="col-sm-2">
+                                <button type="button" class="btn btn-primary" ng-click="copySelectedSmartTaxonomy()">OK</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="divPanelBody">
+                        <nav id="navigation">
+                            <ul id="main-menu">
+                                <li ng-repeat="item in TaxonomyItems">
+                                    <a ng-if="item.Title !='TBD'" href="javascript:void(0);" ng-click="selectItem(item);"><img ng-if="item.Item_x005F_x0020_Cover.Url != undefined" style="height: 12px; width:18px;" ng-src="{{item.Item_x005F_x0020_Cover.Url}}"> {{item.Title}}</a>
+                                    <ul ng-if="item.childs.length>0" class="sub-menu clr">
+                                        <li ng-repeat="child1 in item.childs">
+                                            <a href="javascript:void(0);" ng-click="selectItem(child1);"><img ng-if="child1.Item_x005F_x0020_Cover.Url != undefined" style="height: 12px; width:18px;" ng-src="{{child1.Item_x005F_x0020_Cover.Url}}"> {{child1.Title}}</a>
+                                            <ul ng-if="child1.childs.length>0" class="sub-menu ">
+                                                <li ng-repeat="child2 in child1.childs">
+                                                    <a href="javascript:void(0);" ng-click="selectItem(child2);"><img ng-if="child2.Item_x005F_x0020_Cover.Url != undefined" style="height: 12px; width:18px;" ng-src="{{child2.Item_x005F_x0020_Cover.Url}}"> {{child2.Title}}</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a href="javascript:void(0);" ng-click="gotomanagetaxonomy();">Manage Smart Taxonomy</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

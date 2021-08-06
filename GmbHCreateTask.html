@@ -1,0 +1,290 @@
+<script src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/Style%20Library/js/angular/Online/Tasks%20Management/TaskFeedback.js"></script>
+<script src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/Style%20Library/js/angular/Templates/HCTemplateControllers.js"></script>
+<script src="/https://hhhhteams.sharepoint.com/sites/HHHHTeams/Style%20Library/js/angular/Services/SharewebCommon.js?updated=25-05-2018"></script>
+<script src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/Style%20Library/js/angular/Online/Tasks%20Management/GmbHCreateTask.js"></script>
+<style>
+</style>
+<div ng-controller="CreateTaskController" ng-cloak>
+    <div class="panel panel-default">
+        <div class="tabBox clearfix">
+            <div class="tab-pane"></div>
+            <div class="container">
+                <div>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+
+                            <!--<label class="col-sm-12 no-padding">Url</label>--><!--&nbsp;&nbsp;&nbsp;<a target="_blank" ng-href="{{Item.component_x0020_link.Url}}">{{Item.component_x0020_link.Url}}</a>-->
+                            <div class="col-sm-12 no-padding">
+                                <input type="text" class="form-control" placeholder="Enter URL" ng-change="UrlPasteTitle()" ng-model="component_x0020_link" />
+                            </div>
+                        </div>
+
+                    </div>
+                    <div id="ShareWeb">
+                        <div class="row">
+
+                            <div class="col-md-12">
+                                <fieldset class="fieldsett">
+                                    <legend>Sites</legend>
+
+                                    <ul class="quick-actions">
+
+                                        <li ng-if="item.Title !=undefined" class="bg_lb" id="{{TaskListId(item)}}" ng-repeat="item in SitesTypes">
+                                            <a ng-click="SiteDetail(item);"><span class="icon-sites"><img class="icon-sites" ng-if="item.Item_x005F_x0020_Cover!=undefined" src="{{item.Item_x005F_x0020_Cover.Url}}"></span>{{item.Title}} </a>
+
+                                        </li>
+
+                                    </ul>
+
+                                </fieldset>
+                            </div>
+
+                        </div>
+                    </div>
+               
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <fieldset class="fieldsett">
+                            <legend>Task Categories</legend>
+                            <span class="pull-right clear">
+                                <a ng-click="ClearTaskCategories()" class=" hreflink">Clear Selection<img ng-src="/_layouts/images/delete.gif"></a>
+                            </span>
+
+                            <div ng-repeat="taskCategoy in TaskCategories">
+                                <div class="col-sm-12">
+                                    <div class="tasks col-sm-2">
+                                        <a class="task manage_tiles" id="kindoftasks{{taskCategoy.Id}}">
+                                            <span class="icon-box"><img class="icon-task" ng-if="taskCategoy.Item_x005F_x0020_Cover!=undefined" src="{{taskCategoy.Item_x005F_x0020_Cover.Url}}"></span><span class="tasks-label">{{taskCategoy.Title}}</span>
+                                        </a>
+                                    </div>
+                                    <div class="subcategoryTasks kind_task col-sm-10">
+                                        <a ng-click="selectSubTaskCategory(item.Title, item.Id)" class="text-center subcategoryTask" id="subcategorytasks{{item.Id}}" ng-if="taskCategoy.Id==item.ParentID" ng-repeat="item in subCategories">
+                                            <span class="icon-box"><img class="icon-task" ng-if="item.Item_x005F_x0020_Cover!=undefined" src="{{item.Item_x005F_x0020_Cover.Url}}"></span>
+                                            <span class="tasks-label">{{item.Title}}</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <sapn class="pull-left" style="margin-right:8px;"> <input style="margin-bottom: 2px;" type="checkbox" ng-model="checked" ng-click="filterallItems()" />  &nbsp;Search in selected </sapn>
+                    </div>
+                    <div class="col-md-12 col-xs-12">
+                        <fieldset class="fieldsett">
+                            <legend>Task Name</legend>
+                            <div class="col-sm-12 form-group">
+                                <input id="searchinput" type="search" ng-click="colorfontItem()" ng-model="globalSearchAndTitle" placeholder="Search all..." class="searchhbox_height t form-control searchbox_height">
+                                <span class="searchclear" ng-click="clearControl('searchinput')">X</span>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="section-news">
+                                <div id="TasksTable" class="container-new divPanelBody" style="display: block;">
+                                    <table class="table table-hover" cellspacing="0" width="100%">
+                                        <thead ng-show="globalSearchAndTitle.length>0  || AllSitesselectedItem.length>0">
+                                            <tr  ng-show="filteredItems.length>0 ">
+                                                <!-- <th style="width:1%;"><div style="width:1%;"></div></th>-->
+                                                <th style="width:10%;">
+                                                    <div class="thead_width" style="width:10%;">
+                                                        <input id="searchSiteName" type="text" placeholder="Site" class="searchbox_height form-control" ng-model="searchSiteName">
+                                                        <span class="searchclear" ng-click="clearControlSearch('searchSiteName')">X</span>
+                                                        <span class="{{orderBy=='siteType'&&!reverse?'glyphicon_active':'glyphicon'}}  glyphicon-chevron-up direction-arrow arrow_up" ng-click="sortBy('siteType', false)"></span>
+                                                        <span class="{{orderBy=='siteType'&&reverse?'glyphicon_active':'glyphicon'}}  glyphicon-chevron-down direction-arrow arrow_down" ng-click="sortBy('siteType', true)"></span>
+
+                                                    </div>
+                                                </th>
+
+                                                <!--  <th style="width:1%;"><div style="width:1%;"></div></th>-->
+
+
+                                                <th style="width:39%;">
+                                                    <!--Title<div>Title</div>-->
+                                                    <div style="width:39%;">
+                                                        <input id="searchTitle" type="text" placeholder="Title" class="searchbox_height  form-control" ng-model="searchTitle">
+                                                        <span class="searchclear" ng-click="clearControlSearch('searchTitle')">X</span>
+                                                        <span class="{{orderBy=='Title'&&!reverse?'glyphicon_active':'glyphicon'}}  glyphicon-chevron-up direction-arrow arrow_up" ng-click="sortBy('Title', false)"></span>
+                                                        <span class="{{orderBy=='Title'&&reverse?'glyphicon_active':'glyphicon'}}  glyphicon-chevron-down direction-arrow arrow_down" ng-click="sortBy('Title', true)"></span>
+
+                                                    </div>
+                                                </th>
+
+                                                <th style="width:9%;">
+
+                                                    <!--tatus<div>Status</div>-->
+                                                    <div style="width:9%;">
+                                                        <input id="searchStatus" type="text" placeholder="%Age" class="searchbox_height  form-control" ng-model="searchStatus">
+                                                        <span class="searchclear" ng-click="clearControlSearch('searchStatus')">X</span>
+                                                        <span class="{{orderBy=='PercentComplete'&&!reverse?'glyphicon_active':'glyphicon'}}  glyphicon-chevron-up direction-arrow arrow_up" ng-click="sortBy('PercentComplete', false)"></span>
+                                                        <span class="{{orderBy=='PercentComplete'&&reverse?'glyphicon_active':'glyphicon'}}  glyphicon-chevron-down direction-arrow arrow_down" ng-click="sortBy('PercentComplete', true)"></span>
+
+                                                    </div>
+
+                                                </th>
+                                                <th style="width:12%;">
+
+                                                    <!--Due Date<div>Due Date</div>-->
+                                                    <div style="width:12%;">
+                                                        <input id="searchDueDate" type="text" placeholder="Due Date" class="searchbox_height  form-control" ng-model="searchDueDate">
+                                                        <span class="searchclear" ng-click="clearControlSearch('searchDueDate')">X</span>
+                                                        <span class="{{orderBy=='TaskDueDate'&&!reverse?'glyphicon_active':'glyphicon'}}  glyphicon-chevron-up direction-arrow arrow_up" ng-click="sortBy('TaskDueDate', false)"></span>
+                                                        <span class="{{orderBy=='TaskDueDate'&&reverse?'glyphicon_active':'glyphicon'}}  glyphicon-chevron-down direction-arrow arrow_down" ng-click="sortBy('TaskDueDate', true)"></span>
+
+                                                    </div>
+
+                                                </th>
+                                                <th style="width:14%;">
+
+                                                    <!--AssignedTo<div>AssignedTo</div>-->
+                                                    <div style="width:14%;">
+                                                        <input id="searchCreatedBy" type="text" placeholder="Created By" class="searchbox_height  form-control" ng-model="searchCreatedBy">
+                                                        <span class="searchclear" ng-click="clearControlSearch('searchCreatedBy')">X</span>
+                                                        <span class="{{orderBy=='Author'&&!reverse?'glyphicon_active':'glyphicon'}}  glyphicon-chevron-up direction-arrow arrow_up" ng-click="sortBy('Author', false)"></span>
+                                                        <span class="{{orderBy=='Author'&&reverse?'glyphicon_active':'glyphicon'}}  glyphicon-chevron-down direction-arrow arrow_down" ng-click="sortBy('Author', true)"></span>
+
+                                                    </div>
+
+                                                </th>
+                                                <th style="width:14%;">
+
+                                                    <!--Modified<div>Modified</div>-->
+                                                    <div style="width:14%;">
+                                                        <input id="searchModified" type="text" placeholder="Modified" class="searchbox_height  form-control" ng-model="searchModified">
+                                                        <span class="searchclear" ng-click="clearControlSearch('searchModified')">X</span>
+                                                        <span class="{{orderBy=='DateModified'&&!reverse?'glyphicon_active':'glyphicon'}}  glyphicon-chevron-up direction-arrow arrow_up" ng-click="sortBy('DateModified', false)"></span>
+                                                        <span class="{{orderBy=='DateModified'&&reverse?'glyphicon_active':'glyphicon'}}  glyphicon-chevron-down direction-arrow arrow_down" ng-click="sortBy('DateModified', true)"></span>
+
+                                                    </div>
+
+                                                </th>
+                                                <!-- <th style="width:1%;"><div style="width:1%;"></div></th>-->
+                                            </tr>
+                                        </thead>
+                                        <tbody ng-show="globalSearchAndTitle != undefined && globalSearchAndTitle.length > 0">
+                                            <tr class="tdrow" ng-repeat="item in filteredItems = (AllSitesTask | filter:globalSearchAndTitle | orderBy:orderBy:reverse | filter:{siteType:searchSiteName,Title:searchTitle,CustomStatus:searchStatus,TaskDueDate:searchDueDate,Author:searchCreatedBy,Modified:searchModified})">
+                                                <td>
+                                                    <img style="width:23px;" ng-if="item.siteType =='Gruene'" class="icon-sites-img" ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Foundation/logo-gruene.png">
+                                                    <img style="width:23px;" ng-if="item.siteType =='Gender'" class="icon-sites-img" ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Shareweb/site_gender.png">
+                                                    <img style="width:23px;" ng-if="item.siteType =='DE'" class="icon-sites-img" ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Shareweb/site_de.png" />
+                                                    <img style="width:23px;" ng-if="item.siteType =='DRR'" class="icon-sites-img" ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Shareweb/site_drr.png">
+                                                    <img style="width:23px;" ng-if="item.siteType =='Education'" class="icon-sites-img" ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Shareweb/site_education.png">
+                                                    <img style="width:23px;" ng-if="item.siteType =='EI'" class="icon-sites-img" ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Shareweb/site_ei.png">
+                                                    <img style="width:23px;" ng-if="item.siteType =='EPS'" class="icon-sites-img" ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Shareweb/site_eps.png">
+                                                    <img style="width:23px;" ng-if="item.siteType =='Health'" class="icon-sites-img" ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Shareweb/site_health.png">
+                                                    <img style="width:23px;" ng-if="item.siteType =='QA'" class="icon-sites-img" ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Shareweb/site_qa.png">
+                                                    <img style="width:23px;" ng-if="item.siteType =='Shareweb'" class="icon-sites-img" ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Shareweb/site_shareweb.png">
+                                                    <img style="width:23px;" ng-if="item.siteType =='HHHH'" class="icon-sites-img" ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Foundation/icon_hhhh.png">
+                                                    <img style="width:23px;" ng-if="item.siteType =='Small Projects'" class="icon-sites-img" ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Shareweb/small_project.png">
+                                                </td>
+                                                <td ng-click="EditTask(item)">{{item.Title}}</td>  <!--<span ng-bind-html="item.Title | highlight:searchTitle"></span>-->
+                                                <td ng-click="EditTask(item)" class="complete_dashboard">{{item.PercentComplete}}%</td>
+                                                <td ng-click="EditTask(item)">{{item.TaskDueDate}}</td>
+                                                <td ng-click="EditTask(item)">{{item.Author.Title}}</td>
+                                                <td ng-click="EditTask(item)">
+                                                    {{item.Modified}}
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                        <tbody ng-show="Siteurl !=''  || globalSearchAndTitle.length > -1">
+                                            <tr class="tdrow" ng-repeat="itemnew in AllSitesselectedItem | orderBy:orderBy:reverse ">
+                                                <td>
+                                                    <img style="width:23px;" ng-if="itemnew.siteType =='Gruene'" class="icon-sites-img" ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Foundation/logo-gruene.png">
+                                                    <img style="width:23px;" ng-if="itemnew.siteType =='Gender'" class="icon-sites-img" ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Shareweb/site_gender.png">
+                                                    <img style="width:23px;" ng-if="itemnew.siteType =='DE'" class="icon-sites-img" ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Shareweb/site_de.png" />
+                                                    <img style="width:23px;" ng-if="itemnew.siteType =='DRR'" class="icon-sites-img" ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Shareweb/site_drr.png">
+                                                    <img style="width:23px;" ng-if="itemnew.siteType =='Education'" class="icon-sites-img" ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Shareweb/site_education.png">
+                                                    <img style="width:23px;" ng-if="itemnew.siteType =='EI'" class="icon-sites-img" ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Shareweb/site_ei.png">
+                                                    <img style="width:23px;" ng-if="itemnew.siteType =='EPS'" class="icon-sites-img" ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Shareweb/site_eps.png">
+                                                    <img style="width:23px;" ng-if="itemnew.siteType =='Health'" class="icon-sites-img" ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Shareweb/site_health.png">
+                                                    <img style="width:23px;" ng-if="itemnew.siteType =='QA'" class="icon-sites-img" ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Shareweb/site_qa.png">
+                                                    <img style="width:23px;" ng-if="itemnew.siteType =='Shareweb'" class="icon-sites-img" ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Shareweb/site_shareweb.png">
+                                                    <img style="width:23px;" ng-if="itemnew.siteType =='HHHH'" class="icon-sites-img" ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Foundation/icon_hhhh.png">
+                                                    <img style="width:23px;" ng-if="itemnew.siteType =='Small Projects'" class="icon-sites-img" ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Shareweb/small_project.png">
+                                                </td>
+
+                                                <td ng-click="EditTask(itemnew)">{{itemnew.Title}}</td>  <!--<span ng-bind-html="item.Title | highlight:searchTitle"></span>-->
+                                                <td ng-click="EditTask(itemnew)" class="complete_dashboard">{{itemnew.PercentComplete}}%</td>
+                                                <td ng-click="EditTask(itemnew)">{{itemnew.TaskDueDate}}</td>
+                                                <td ng-click="EditTask(itemnew)">{{itemnew.Author.Title}}</td>
+                                                <td ng-click="EditTask(itemnew)">
+                                                    {{itemnew.Modified}}
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                             
+                            </div>
+                        </fieldset>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 form-group">
+                        <fieldset class="fieldsett">
+                            <legend>Priority</legend>
+                            <span class="pull-right clear">
+                                <a ng-click="ClearPriority()" class="hreflink">Clear Selection<img ng-src="/_layouts/images/delete.gif"></a>
+                            </span>
+                            <div class="subcategoryTasks">
+                                <a ng-click="TasksPriority(item.Title)" class="TaskPriority" id="subcategorytasksPriority{{item.Title}}" ng-repeat="item in PriorityRank"><img class="icon-task" src="{{item.Item_x005F_x0020_Cover.Url}}"><span class="tasks-label"> </span> </a>
+                            </div>
+                        </fieldset>
+                    </div>
+
+                    <div class="col-md-12 form-group">
+                        <fieldset class="fieldsett">
+                            <legend>Time</legend>
+                            <span class="pull-right clear">
+                                <a ng-click="ClearTime()" class="pull-right hreflink">Clear Selection<img ng-src="/_layouts/images/delete.gif"></a>
+                            </span>
+                            <div class="subcategoryTasks">
+                                <a ng-click="setTaskTime(item.Title,item.Id)" class="Timetask" id="Milegetasks{{item.Id}}" ng-repeat="item in SetTime">
+                                    <span class="icon-box">
+                                        <img class="icon-task" ng-if="item.Item_x005F_x0020_Cover!=undedined" src="{{item.Item_x005F_x0020_Cover.Url}}">
+                                    </span>
+                                    <span class="tasks-label">{{item.Title}} </span>
+                                </a>
+                            </div>
+                        </fieldset>
+                    </div>
+
+                    <div class="col-md-12">
+                        <fieldset class="fieldsett">
+                            <legend>Due Date</legend>
+                            <span class="pull-right clear">
+                                <a ng-click="ClearDueDate()" class="hreflink">Clear Selection<img ng-src="/_layouts/images/delete.gif"></a>
+                            </span>
+                            <ul class="due-date">
+                                <li class="bg_lb" id="Today"><a ng-click="DueDate('Today')">Today&nbsp;<span class="white mL40">({{ToDaydate}})</span></a></li>
+                                <li class="bg_lb" id="Tomorrow"><a ng-click="DueDate('Tomorrow');">Tomorrow</a> </li>
+                                <li class="bg_lb" id="ThisWeek"><a ng-click="DueDate('ThisWeek');">This Week</a> </li>
+                                <li class="bg_lb" id="NextWeek"><a ng-click="DueDate('NextWeek');">Next Week</a> </li>
+                                <li class="bg_lb" id="ThisMonth"><a ng-click="DueDate('ThisMonth');">This Month</a> </li>
+                            </ul>
+                        </fieldset>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" style="margin-top: 10px;" ng-click="addNewTask()">Submit</button>
+        </div>
+    </div>
+</div>
+
+

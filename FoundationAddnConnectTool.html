@@ -1,0 +1,1224 @@
+﻿<script src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/Style%20Library/Documents/jquery.treeviewnoredirect1.js"></script>
+<script src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/Style%20Library/js/angular/Services/SharewebCommon.js"></script>
+<link rel="stylesheet" type="text/css" href="https://hhhhteams.sharepoint.com/sites/HHHHTeams/Style%20Library/Documents/jquery.treeview.css">
+
+<script>
+    $(document).ready(function () {
+        $("#closeiconshown").click(function () {
+            $(".crossiconshownone div").css("display", "none")
+        });
+        $(".toggle-box-content").click(function () {
+            $(".crossiconshownone div").toggle()
+        })
+    });
+</script>
+<div id="SharewebAddAndConnectToolId" class="anctool">
+    <div class="panel panel-default" ng-cloak>
+        <div class="panel-title">
+            <button class="close" type="button" data-dismiss="modal" ng-click="cancelTagDocuments()" style=" min-width: 10px;"> &times;</button>
+            <h3>
+                <span class="filter-input">
+                    Add & Connect Tool - {{Item.Title}}
+                    <webpart-settings-info webpartinfo="webPartInfo"></webpart-settings-info>
+                </span>
+
+                <span class="pull-right col-sm-1 marLR10">
+                    <page-settings-info webpartid="'HHHHAnCToolPopup'"></page-settings-info>
+                </span>
+            </h3>
+        </div>
+        <div class="panel-body" style="padding:0px 5px !important;">
+
+            <div class="">
+                <div id="table-wrapper">
+                    <div>
+                        <div class="tabBox clearfix">
+                            <div class="" ng-cloak id="tilesItems">
+                                <div class="col-sm-12 text-center">
+                                    <a class="smart_search_tiles" id="Document" ng-click="showConnectTool('Documents');">
+                                        <img src="{{baseUrl}}/SiteCollectionImages/Tiles/serachDocuments.png" alt="" />
+                                    </a>
+                                </div>
+                                <div class="col-sm-12 text-center">
+                                </div>
+                            </div>
+
+                            <div id="addConnectTooltabs" class="exTab3">
+                                <ul class="nav nav-pills">
+                                    <li>
+                                        <a href="#Document" ng-click="seletedTab('Documents')">Documents </a>
+                                    </li>
+                                    <li ng-show="show_task">
+                                        <a href="#Task" ng-click="seletedTab('Task')">Task</a>
+                                    </li>
+                                    <li ng-show="show_relevant_component">
+                                        <a href="#RelevantComponent" ng-click="seletedTab('RelevantComponent')">
+                                            Relevant
+                                            Component
+                                        </a>
+                                    </li>
+                                    <li ng-show="show_relevant_service">
+                                        <a href="#RelevantService" ng-click="seletedTab('RelevantService')">
+                                            Relevant
+                                            Service
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div id="Document" class=" ">
+                                        <div class="container mt-0 ">
+                                            <div class="col-sm-12 no-padding mt-10">
+                                                <div class="col-sm-12">
+                                                    <div class="col-sm-6 padL-0">
+                                                        <div class="container accordin-header crossiconshownone">
+                                                            <input class="toggle-box-content" id="identifier-0" type="checkbox">
+                                                            <label for="identifier-0" class="ng-binding">
+                                                                <h3 class="panel-title secndmt">
+                                                                    1. Default Folder Content
+                                                                </h3>
+                                                            </label>
+
+
+                                                            <div class="col-sm-12 heightbox354 padL-0 PadR0">
+                                                                <div class="accordin-content">
+
+                                                                    <div class="mt-10">
+                                                                        <input id="searchinput" type="search" ng-model="SmartfolderDocumentItemSearch" placeholder="Search..." class="form-control">
+                                                                        <span class="searchclear-project top14" style="top: 15px;" ng-click="clearAll('folderDocuments')">X</span>
+                                                                        <div class="col-sm-12  padL-0 PadR0">
+                                                                            <div class="fixed-scroll-connectingitems ">
+
+                                                                                <div class="section-new">
+                                                                                    <div class="fixed-scroll-connectingitems">
+                                                                                        <div ng-show="taggedFolderItems.length==0">
+                                                                                            No Documents Available
+                                                                                        </div>
+                                                                                        <table id="taggedDocumentsId" ng-hide="taggedFolderItems.length==0" class="table table-hover" cellspacing="0" width="100%" style="margin-bottom:0px;">
+
+                                                                                            <thead>
+                                                                                                <tr Drag drop Documentsr class="tdrow">
+                                                                                                    <th style="width:2%;">
+                                                                                                        <div style="width:2%;">
+                                                                                                        </div>
+                                                                                                    </th>
+                                                                                                    <th style="width:2%;">
+                                                                                                        <div style="width:2%;">
+                                                                                                        </div>
+                                                                                                    </th>
+                                                                                                    <th style="width:51%;">
+
+                                                                                                        <div style="width:30%;" class="title-glyph">
+                                                                                                            <span style="cursor: pointer;" ng-click="orderBy='Title'; reverse=!reverse;">Title</span>
+
+                                                                                                        </div>
+
+                                                                                                    </th>
+                                                                                                    <th style="width:11%;">
+
+                                                                                                        <div style="width:-1%;" class="serach-glyph">
+                                                                                                            <span style="cursor: pointer;" ng-click="orderBy='Item_x0020_Rank'; reverse=!reverse;">Rank</span>
+
+                                                                                                        </div>
+
+                                                                                                    </th>
+                                                                                                </tr>
+                                                                                            </thead>
+                                                                                            <tbody>
+
+                                                                                                <tr class="tdrow" ng-repeat="item in taggedFolderItems | orderBy:checkeditem:true| filter : SmartfolderDocumentItemSearch">
+                                                                                                    <td Style="width:2%">
+                                                                                                        <input ng-model="item.Selected" type="checkbox" ng-click="tagExistingItems(item)">
+                                                                                                    </td>
+
+                                                                                                    <td ng-if="item.siteType=='sp'" class="P_icon">
+                                                                                                        <img style="width:24px;" ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/siteIcons/icon_sp.png">
+                                                                                                    </td>
+                                                                                                    <td ng-if="item.siteType=='Main Site'" class="P_icon">
+                                                                                                        <img ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/siteIcons/Icon_P.png">
+                                                                                                    </td>
+                                                                                                    <td ng-if="item.siteType=='Community'" class="P_icon">
+                                                                                                        <img ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/siteIcons/Icon_MA.png">
+                                                                                                    </td>
+                                                                                                    <td ng-if="item.siteType=='Team'" class="P_icon">
+                                                                                                        <img ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/siteIcons/Icon_TM.png">
+                                                                                                    </td>
+                                                                                                    <td ng-if="item.siteType=='Admin'" class="P_icon">
+                                                                                                        <img ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/siteIcons/Icon_A.png">
+                                                                                                    </td>
+                                                                                                    <td ng-if="item.siteType=='Cep'" class="P_icon">
+                                                                                                        <img ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/24/icon_Cep.png">
+                                                                                                    </td>
+                                                                                                    <td ng-if="item.siteType=='Management'" class="P_icon">
+                                                                                                        <img ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/24/icon_Management.png">
+                                                                                                    </td>
+                                                                                                    <td ng-if="item.siteType=='Joint'" class="P_icon">
+                                                                                                        <img ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/siteIcons/icon_joint.png">
+                                                                                                    </td>
+                                                                                                    <td Style="width:85%">
+
+                                                                                                        <a ng-if="item.File_x0020_Type == 'aspx'" target="_blank" ng-href="{{item.Url.Url}}">
+                                                                                                            <span ng-if="item.Title!=undefined" data-ng-bind="item.Title"></span>
+                                                                                                            <span ng-if="item.Title==undefined" data-ng-bind="item.FileLeafRef"></span>
+
+                                                                                                        </a>
+                                                                                                        <a ng-if="item.File_x0020_Type != 'aspx'" target="_blank" ng-href="{{item.EncodedAbsUrl}}?web=1">
+                                                                                                            <span ng-if="item.Title!=undefined" data-ng-bind="item.Title"></span>
+                                                                                                            <span ng-if="item.Title==undefined" data-ng-bind="item.FileLeafRef"></span>
+                                                                                                        </a>
+                                                                                                        <span ng-click="editSharewebItem(item.Id, item.siteType, 'Document')">
+                                                                                                            <img ng-src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/SiteCollectionImages/ICONS/32/edititem.gif">
+                                                                                                        </span>
+                                                                                                    </td>
+                                                                                                    <td>
+                                                                                                        {{item.Item_x0020_Rank}}
+                                                                                                    </td>
+                                                                                                </tr>
+                                                                                            </tbody>
+                                                                                        </table>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6 padLR0">
+                                                        <div class="form-group col-sm-12 no-padding">
+                                                            <div class="form-group">
+                                                                <label class="full_width" ng-bind-html="GetColumnDetails('RootFolder') | trustedHTML">
+                                                                    Default
+                                                                    Folder
+                                                                </label>
+                                                                <div ng-if="folderUrl == '' || folderUrl == undefined">
+                                                                    {{FolderPath}}&nbsp;&nbsp;&nbsp;&nbsp;<span>
+                                                                        <a href="javascript:void(0)"
+                                                                           title="Click for Associated Folder"
+                                                                           ng-click="AssociatedFolder('Documents')">Change</a>
+                                                                    </span>
+                                                                </div>
+                                                                <div ng-if="folderUrl != undefined">
+                                                                    {{folderUrl}}
+                                                                    <span ng-if="non_created_folder && !manual_selected_folder" class="highlited_class">/{{non_created_folder}}</span>
+
+                                                                    <span data-toggle="popover" ng-if="non_created_folder && !manual_selected_folder" data-placement="Bottom" data-trigger="hover" data-content="Highlighted folder will be created">
+                                                                        <img style="max-width:15px;"
+                                                                             src="/sites/HHHHTeams/SiteCollectionImages/ICONS/infoIcon.png" />
+                                                                    </span> &nbsp;&nbsp;&nbsp;&nbsp;
+                                                                    <span>
+                                                                        <a href="javascript:void(0)"
+                                                                           title="Click for Associated Folder"
+                                                                           ng-click="AssociatedFolder('Documents')">Change</a>
+                                                                    </span>
+                                                                </div>
+
+                                                                <div class="clearfix"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 webpart-div mt-10">
+                                                    <div class="panel panel-default">
+                                                        <div class="panel-heading">
+                                                            <h3 class="panel-title">
+                                                                2. Connect Existing Documents
+                                                            </h3>
+                                                        </div>
+                                                        <div class="panel-body">
+
+                                                            <div class="col-sm-12 mt-10 heightbox354">
+                                                                <input id="searchinput" type="search" ng-model="SmartDocumentSearch" placeholder="Search..." class="form-control">
+                                                                <span class="searchclear-project" ng-click="clearAll('Documents')">X</span>
+
+                                                                <div class="fixed-scroll-ExistingConnectingItems">
+                                                                    <table id="DocumentsId" class="table table-hover" cellspacing="0" width="100%">
+                                                                        <tbody>
+                                                                            <tr ng-repeat="item in AllFilteredItems | orderBy:checkeditem:true| filter : SmartDocumentSearch">
+                                                                                <td Style="width:2%">
+                                                                                    <input ng-model="item.Selected" type="checkbox" ng-click="tagExistingItems(item)">
+                                                                                </td>
+
+                                                                                <td ng-if="item.siteType=='sp'" class="P_icon">
+                                                                                    <img style="width:24px;" ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/siteIcons/icon_sp.png">
+                                                                                </td>
+                                                                                <td ng-if="item.siteType=='Main Site'" class="P_icon">
+                                                                                    <img ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/siteIcons/Icon_P.png">
+                                                                                </td>
+                                                                                <td ng-if="item.siteType=='Community'" class="P_icon">
+                                                                                    <img ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/siteIcons/Icon_MA.png">
+                                                                                </td>
+                                                                                <td ng-if="item.siteType=='Team'" class="P_icon">
+                                                                                    <img ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/siteIcons/Icon_TM.png">
+                                                                                </td>
+                                                                                <td ng-if="item.siteType=='Admin'" class="P_icon">
+                                                                                    <img ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/siteIcons/Icon_A.png">
+                                                                                </td>
+                                                                                <td ng-if="item.siteType=='Cep'" class="P_icon">
+                                                                                    <img ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/24/icon_Cep.png">
+                                                                                </td>
+                                                                                <td ng-if="item.siteType=='Management'" class="P_icon">
+                                                                                    <img ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/24/icon_Management.png">
+                                                                                </td>
+                                                                                <td ng-if="item.siteType=='Joint'" class="P_icon">
+                                                                                    <img ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/siteIcons/icon_joint.png">
+                                                                                </td>
+                                                                                <td Style="width:2%">
+                                                                                    <img ng-if="item.File_x0020_Type == 'pdf'" ng-src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/SiteCollectionImages/ICONS/24/icon_pdf_16.jpg">
+                                                                                    <img ng-if="item.File_x0020_Type != 'flv' && item.File_x0020_Type != 'js' && item.File_x0020_Type != 'css' && item.File_x0020_Type != 'zip' && item.File_x0020_Type != 'aspx' && item.File_x0020_Type != 'mp4' && item.File_x0020_Type != 'pdf' && item.File_x0020_Type != 'jpg' && item.File_x0020_Type != 'png' && item.File_x0020_Type != 'gif'"
+                                                                                         ng-src="/_layouts/15/images/ic{{item.File_x0020_Type}}.png">
+                                                                                    <img ng-if="item.File_x0020_Type == 'flv' || item.File_x0020_Type == 'js' || item.File_x0020_Type == 'css' || item.File_x0020_Type == 'zip' || item.File_x0020_Type == 'aspx' || item.File_x0020_Type == 'mp4' || item.File_x0020_Type == 'jpg' || item.File_x0020_Type == 'png' || item.File_x0020_Type == 'gif'"
+                                                                                         ng-src="/_layouts/15/images/icgen.gif?rev=23">
+
+                                                                                </td>
+                                                                                <td Style="width:83%">
+
+                                                                                    <a ng-if="item.File_x0020_Type == 'aspx'" target="_blank" ng-href="{{item.Url.Url}}">
+                                                                                        <span ng-if="item.Title!=undefined" data-ng-bind="item.Title"></span>
+                                                                                        <span ng-if="item.Title==undefined" data-ng-bind="item.FileLeafRef"></span>
+                                                                                    </a>
+                                                                                    <a ng-if="item.File_x0020_Type != 'aspx'" target="_blank" ng-href="{{item.EncodedAbsUrl}}?web=1">
+                                                                                        <span ng-if="item.Title!=undefined" data-ng-bind="item.Title"></span>
+                                                                                        <span ng-if="item.Title==undefined" data-ng-bind="item.FileLeafRef"></span>
+                                                                                    </a>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+                                                <div class="col-sm-6 webpart-div no-padding mt-10">
+
+
+                                                    <div class="form-group">
+                                                        <div class="col-sm-12 padL-0 PadR0 mb-10" title="Drag Drop Documents">
+                                                            <div class="panel panel-default add-connect">
+                                                                <div class="panel-heading ">
+                                                                    <h3 class="panel-title">
+                                                                        3. Upload a New Document
+                                                                    </h3>
+                                                                </div>
+                                                                <div class="panel-body" style="padding:6px !important;">
+                                                                    <div class="col-sm-12">
+                                                                        <div class="col-sm-4 padL-0">
+                                                                            <label class="full_width" ng-bind-html="GetColumnDetails('Item_x0020_Rank') | trustedHTML"></label>
+                                                                            <select class="form-control" id="ItemRankType" ng-model="DragDropItemRank">
+                                                                                <option value="">
+                                                                                    Select Item Rank
+                                                                                </option>
+                                                                                <option ng-repeat="item in SharewebItemRank"
+                                                                                        value="{{item.rank}}"
+                                                                                        ng-selected="item.rank==DragDropItemRank">
+                                                                                    {{item.rankTitle}}
+                                                                                </option>
+                                                                            </select>
+                                                                        </div>
+                                                                        <div class="col-sm-2 padL-0">
+                                                                            <label class="full_width">&nbsp;</label>
+                                                                            <input type="text" style="display:block;" class="form-control" ng-model="DragDropItemRank" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-sm-12">
+                                                                        <div id="dropbox" class="dropbox">
+                                                                            <span>
+                                                                                Drag your files here (max. 5
+                                                                                items)
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-12 text-center">OR</div>
+                                                                <div class="panel-body">
+                                                                    <div class="col-sm-12 noitems">
+                                                                        <input class="form-control" ng-model="uploaddocFile" type="file" id="uploaddocFile" valid-file>
+                                                                    </div>
+                                                                    <div class="col-sm-12 noitems" style="margin-top:10px">
+                                                                        <input class="form-control" ng-model="new_name" type="text" id="uploaddocFile" placeholder="Rename your document">
+                                                                    </div>
+                                                                    <div class="col-sm-12 noitems">
+                                                                        <div class="col-sm-6 padL-0"></div>
+                                                                        <div class="col-sm-6 PadR0">
+                                                                            <label class="full_width"></label>
+                                                                            <button style="float:right;" type="button" ng-disabled="!uploaddocFile" class="btn btn-primary" ng-click="CreateProfileDocument('Documents','UploadDocument')">Upload</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-12 no-padding mb-10 mt-10">
+                                                <div class="col-sm-6 webpart-div ">
+                                                    <div class="panel panel-default">
+                                                        <div class="panel-heading">
+                                                            <h3 class="panel-title">
+                                                                Already Tagged Documents
+                                                            </h3>
+                                                        </div>
+                                                        <div class="panel-body">
+                                                            <div class="middlealign col-sm-12 mt-10">
+
+                                                                <div class="col-sm-12 padL-0 PadR0">
+                                                                    <input id="searchinput" type="search" ng-model="SmarttagDocumentSearch" style="display:block;" placeholder="Search..." class="form-control">
+                                                                    <span class="searchclear" ng-click="clearAll('TaggedDocuments')">X</span>
+                                                                </div>
+
+                                                                <div class="col-sm-12 section-new padL-0 PadR0 heightbox209 mb-10">
+                                                                    <div class="fixed-scroll-connectingitems">
+                                                                        <table id="taggedDocumentsId" ng-hide="tabtaggedItems.length==0" class="table table-hover" cellspacing="0" width="100%" style="margin-bottom:0px;">
+                                                                            <thead>
+                                                                                <tr class="tdrow">
+                                                                                    <th style="width:2%;">
+                                                                                        <div style="width:2%;"></div>
+                                                                                    </th>
+                                                                                    <th style="width:2%;">
+                                                                                        <div style="width:2%;"></div>
+                                                                                    </th>
+                                                                                    <th style="width:2%;">
+                                                                                        <div style="width:2%;"></div>
+                                                                                    </th>
+                                                                                    <th style="width:2%;">
+                                                                                        <div style="width:2%;"></div>
+                                                                                    </th>
+                                                                                    <th style="width:40%;">
+                                                                                        <div style="width:40%;" class="title-glyph">
+                                                                                            <span style="cursor: pointer;" ng-click="orderBy='Title'; reverse=!reverse;">Title</span>
+
+                                                                                        </div>
+                                                                                    </th>
+                                                                                    <th style="width:12%;">
+                                                                                        <div style="width:83%;" class="serach-glyph">
+                                                                                            <span style="cursor: pointer;" ng-click="orderBy='Item_x0020_Rank'; reverse=!reverse;">Rank</span>
+
+                                                                                        </div>
+                                                                                    </th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+
+                                                                                <tr class="tdrow" ng-repeat="item in tabtaggedItems | orderBy:orderBy:reverse| filter : SmarttagDocumentSearch">
+                                                                                    <td>
+                                                                                        <input ng-checked="getCheckedItems(item)" ng-model="item.Selected" type="checkbox" ng-click="untagExistingItems(item)">
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <a href="{{item.FileDirRef}}" target="_blank"> <img ng-src="/_layouts/15/images/folder.gif"></a>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <img style="width:24px;" ng-if="getCheckedItems(item)" ng-src="/sites/HHHHTeams/SiteCollectionImages/ICONS/Special/icon_Tick.png">
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <img style="width:24px;" ng-if="getCheckedItems(item)" ng-src="/sites/HHHHTeams/SiteCollectionImages/ICONS/siteIcons/icon_sp.png">
+                                                                                    </td>
+                                                                                    <td ng-if="item.siteType=='Main Site'" class="P_icon">
+                                                                                        <img ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/siteIcons/Icon_P.png">
+                                                                                    </td>
+                                                                                    <td ng-if="item.siteType=='Community'" class="P_icon">
+                                                                                        <img ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/siteIcons/Icon_MA.png">
+                                                                                    </td>
+                                                                                    <td ng-if="item.siteType=='Team'" class="P_icon">
+                                                                                        <img ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/siteIcons/Icon_TM.png">
+                                                                                    </td>
+                                                                                    <td ng-if="item.siteType=='Admin'" class="P_icon">
+                                                                                        <img ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/siteIcons/Icon_A.png">
+                                                                                    </td>
+                                                                                    <td ng-if="item.siteType=='Cep'" class="P_icon">
+                                                                                        <img ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/24/icon_Cep.png">
+                                                                                    </td>
+                                                                                    <td ng-if="item.siteType=='Management'" class="P_icon">
+                                                                                        <img ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/24/icon_Management.png">
+                                                                                    </td>
+                                                                                    <td ng-if="item.siteType=='Joint'" class="P_icon">
+                                                                                        <img ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/siteIcons/icon_joint.png">
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <span>
+                                                                                            <img style="max-width:18px;"
+                                                                                                 ng-if="item.Item_x0020_Cover != null "
+                                                                                                 ng-src="{{item.Item_x0020_Cover.Url}}?RenditionID=11" />
+                                                                                        </span>
+                                                                                        <a ng-if="item.File_x0020_Type == 'aspx'" target="_blank" ng-href="{{item.Url.Url}}">
+                                                                                            <span ng-if="item.Title!=undefined" data-ng-bind="item.Title"></span>
+                                                                                            <span ng-if="item.Title==undefined" data-ng-bind="item.FileLeafRef"></span>
+                                                                                        </a>
+                                                                                        <a ng-if="item.File_x0020_Type != 'aspx'" target="_blank" ng-href="{{item.EncodedAbsUrl}}?web=1">
+                                                                                            <span ng-if="item.Title!=undefined" data-ng-bind="item.Title"></span>
+                                                                                            <span ng-if="item.Title==undefined" data-ng-bind="item.FileLeafRef"></span>
+
+                                                                                        </a>
+                                                                                        <span ng-click="editSharewebItem(item.Id, item.siteType, 'Document')">
+                                                                                            <img ng-src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/SiteCollectionImages/ICONS/32/edititem.gif">
+                                                                                        </span>
+                                                                                    </td>
+
+                                                                                    <td>{{item.Item_x0020_Rank}}</td>
+
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="clearfix"></div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 webpart-div no-padding">
+                                                    <div class="panel panel-default">
+                                                        <div class="panel-heading">
+                                                            <h3 class="panel-title">
+                                                                4. Add a link to a document
+                                                            </h3>
+                                                        </div>
+                                                        <div class="panel-body fixed-scroll-ExistingConnectingItems">
+                                                            <ng-form name="createlinktoDocdocumentForm" novalidate role="form">
+                                                                <div class="form-group">
+                                                                    <div class="col-sm-12">
+                                                                        <label class="full_width" ng-bind-html="GetColumnDetails('FileLeafRef') | trustedHTML">
+                                                                            <b class="span-error">*</b>
+                                                                        </label>
+                                                                        <input id="linktodocTitle" style="display:block;" ng-required="true" class="form-control" type="text" placeholder="Name" ng-model="modelObject[modelValue.Title]">
+                                                                    </div>
+                                                                    <div class="clearfix"></div>
+                                                                </div>
+                                                                <div class="form-group middlealign">
+                                                                    <div class="col-sm-12">
+                                                                        <label class="full_width" ng-bind-html="GetColumnDetails('URL') | trustedHTML">
+                                                                            <b class="span-error">*</b>
+                                                                        </label>
+                                                                        <input id="linktodocUrl" type="text" ng-required="true" class="form-control" style="display:block;" name="linkUrl" ng-pattern="/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/" ng-model="linkUrl" />
+                                                                        <span class="required" ng-show="createlinktoDocdocumentForm.linkUrl.$error.pattern">
+                                                                            Not
+                                                                            a valid url!
+                                                                        </span>
+                                                                    </div>
+                                                                    <div class="clearfix"></div>
+                                                                </div>
+                                                                <div class="col-sm-12 form-group">
+                                                                    <div class="col-sm-4 padL-0">
+                                                                        <label class="full_width" ng-bind-html="GetColumnDetails('Item_x0020_Rank') | trustedHTML"></label>
+                                                                        <select class="form-control" id="ItemRankType" ng-model="linkToDocItemRank">
+                                                                            <option value="">Select Item Rank</option>
+                                                                            <option ng-repeat="item in SharewebItemRank"
+                                                                                    value="{{item.rank}}"
+                                                                                    ng-selected="item.rank==linkToDocItemRank">
+                                                                                {{item.rankTitle}}
+                                                                            </option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="col-sm-2 padL-0">
+                                                                        <label class="full_width">&nbsp;</label>
+                                                                        <input style="display:block;" type="text" class="form-control" ng-model="linkToDocItemRank" />
+                                                                    </div>
+                                                                    <div class="col-sm-6 PadR0">
+                                                                        <label class="full_width">&nbsp;</label>
+                                                                        <button style="float:right;" type="button" ng-disabled="createlinktoDocdocumentForm.$error.required || createlinktoDocdocumentForm.$error.pattern" class="btn btn-primary" ng-click="CreateProfileDocument('Documents','linkToDocument')">Create</button>
+                                                                    </div>
+                                                                </div>
+                                                            </ng-form>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div id="Task" class=" ">
+                                        <div class="container mt-0">
+                                            <div class="col-sm-6 webpart-div mt-10">
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading">
+                                                        <h3 class="panel-title">
+                                                            1. Connect Existing Tasks
+                                                        </h3>
+                                                    </div>
+                                                    <div class="panel-body">
+                                                        <div class="col-sm-12 mt-10 mb-10 heightbox354">
+                                                            <input id="searchinput" style="display:block;" type="search" ng-model="SmartTaskSearch" placeholder="Search..." class="form-control">
+                                                            <span class="searchclear-project" ng-click="clearAll('Task')">X</span>
+
+                                                            <div class="fixed-scroll-ExistingConnectingItems">
+                                                                <table id="TaskId" class="table table-hover" cellspacing="0" width="100%">
+                                                                    <tbody>
+                                                                        <tr class="tdrow" ng-repeat="item in filteredTask = (AllFilteredItems | filter:SmartTaskSearch)">
+                                                                            <td Style="width:2%">
+                                                                                <input type="checkbox" ng-click="tagExistingTaskItems(item)">
+                                                                            </td>
+                                                                            <td ng-if="item.siteType=='Main Site'" class="P_icon">
+                                                                                <img ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/siteIcons/Icon_P.png">
+                                                                            </td>
+                                                                            <td ng-if="item.siteType=='Community'" class="P_icon">
+                                                                                <img ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/siteIcons/Icon_MA.png">
+                                                                            </td>
+                                                                            <td ng-if="item.siteType=='Team'" class="P_icon">
+                                                                                <img ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/siteIcons/Icon_TM.png">
+                                                                            </td>
+                                                                            <td ng-if="item.siteType=='Admin'" class="P_icon">
+                                                                                <img ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/siteIcons/Icon_A.png">
+                                                                            </td>
+                                                                            <td ng-if="item.siteType=='Cep'" class="P_icon">
+                                                                                <img ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/24/icon_Cep.png">
+                                                                            </td>
+                                                                            <td>
+                                                                                <a target="_blank" ng-href="{{baseUrl}}/Team/Pages/Manage/TaskProfile.aspx?TaskId={{item.Id}}">
+                                                                                    {{item.Title}}
+                                                                                </a>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 webpart-div no-padding mt-10">
+                                                <div class="form-group">
+                                                    <div class="col-sm-12 padL-0 PadR0 mb-10" title="Drag Drop Documents">
+                                                        <div class="panel panel-default add-connect">
+                                                            <div class="panel-heading ">
+                                                                <h3 class="panel-title">
+                                                                    2. Create New Task
+                                                                </h3>
+                                                            </div>
+                                                            <div class="panel-body">
+                                                                <div class="col-sm-12 mb-10 heightbox354">
+                                                                    <label class="full_width">Task Name</label>
+                                                                    <input class="form-control" ng-model="task_title" type="text">
+                                                                    <div class="clearfix"></div>
+                                                                    <div class="col-sm-10 padL-0"></div>
+                                                                    <div class="col-sm-2 PadR0">
+                                                                        <label class="full_width"></label>
+                                                                        <button type="button" class="btn btn-primary" ng-click="createChildItems();" ng-disabled="!task_title">
+                                                                            Create
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 webpart-div  mt-10">
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading">
+                                                        <h3 class="panel-title">
+                                                            Already Tagged Tasks
+                                                        </h3>
+                                                    </div>
+                                                    <div class="panel-body">
+                                                        <div class="middlealign col-sm-12 mt-10">
+
+                                                            <div class="col-sm-12 padL-0 PadR0">
+                                                                <input id="searchinput" type="search" ng-model="SmarttagtaskSearch" style="display:block;" placeholder="Search..." class="form-control">
+                                                                <span class="searchclear" ng-click="clearAll('TaggedDocuments')">X</span>
+                                                            </div>
+
+                                                            <div class="col-sm-12 section-new padL-0 PadR0 heightbox209 mb-10">
+                                                                <div class="fixed-scroll-connectingitems">
+                                                                    <table id="taggedDocumentsId" ng-hide="tabtaggedItems.length==0" class="table table-hover" cellspacing="0" width="100%" style="margin-bottom:0px;">
+                                                                        <thead>
+                                                                            <tr class="tdrow">
+                                                                                <th style="width:2%;">
+                                                                                    <div style="width:2%;"></div>
+                                                                                </th>
+                                                                                <th style="width:2%;">
+                                                                                    <div style="width:2%;"></div>
+                                                                                </th>
+                                                                                <th style="width:2%;">
+                                                                                    <div style="width:2%;"></div>
+                                                                                </th>
+                                                                                <th style="width:40%;">
+                                                                                    <div style="width:40%;" class="title-glyph">
+                                                                                        <span style="cursor: pointer;" ng-click="orderBy='Title'; reverse=!reverse;">Title</span>
+
+                                                                                    </div>
+                                                                                </th>
+                                                                                <th style="width:12%;">
+                                                                                    <div style="width:83%;" class="serach-glyph">
+                                                                                        <span style="cursor: pointer;" ng-click="orderBy='Item_x0020_Rank'; reverse=!reverse;"></span>
+
+                                                                                    </div>
+                                                                                </th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+
+                                                                            <tr class="tdrow" ng-repeat="item in Task_Item_tagged | orderBy:orderBy:reverse| filter : SmarttagtaskSearch">
+                                                                                <td><input ng-checked="item.Selected" ng-click="unTagTask(item)" ng-model="item.Selected" type="checkbox"></td>
+                                                                                <td>
+                                                                                    <img style="width:24px;" ng-src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/SiteCollectionImages/ICONS/Special/icon_Tick.png">
+                                                                                </td>
+                                                                                <td>
+                                                                                    <img style="width:24px;" ng-src="/sites/HHHHTeams/SiteCollectionImages/ICONS/siteIcons/icon_sp.png">
+                                                                                </td>
+                                                                                <td>
+                                                                                    <span>
+                                                                                        <img style="max-width:18px;"
+                                                                                             ng-if="item.Item_x0020_Cover != null "
+                                                                                             ng-src="{{item.Item_x0020_Cover.Url}}?RenditionID=11" />
+                                                                                    </span>
+                                                                                    <a ng-if="item.File_x0020_Type == 'aspx'" target="_blank" ng-href="{{item.Url.Url}}">
+                                                                                        <span ng-if="item.Title!=undefined" data-ng-bind="item.Title"></span>
+                                                                                        <span ng-if="item.Title==undefined" data-ng-bind="item.FileLeafRef"></span>
+                                                                                    </a>
+                                                                                    <a target="_blank" ng-href="{{CurrentSubSiteUrl}}/SitePages/Task-Profile.aspx?taskId={{item.Id}}&Site={{site_name_item}}">
+                                                                                        <span ng-if="item.Title!=undefined" data-ng-bind="item.Title"></span>
+                                                                                        <span ng-if="item.Title==undefined" data-ng-bind="item.FileLeafRef"></span>
+
+                                                                                    </a>
+                                                                                    <!-- <span ng-click="EditTask(item)"><img ng-src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/SiteCollectionImages/ICONS/32/edititem.gif"></span> -->
+                                                                                </td>
+
+                                                                                <td>{{item.Item_x0020_Rank}}</td>
+
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="clearfix"></div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div id="RelevantComponent" class=" ">
+                                        <div class="container mt-0 ">
+                                            <div class="col-sm-12 no-padding mt-10">
+                                                <div class="col-sm-6 webpart-div mt-10">
+                                                    <div class="panel panel-default">
+                                                        <div class="panel-heading">
+                                                            <h3 class="panel-title">
+                                                                1. Connect Existing Component
+                                                            </h3>
+                                                        </div>
+                                                        <div class="panel-body">
+                                                            <div class="col-sm-12 mt-10 mb-10 heightbox354">
+                                                                <input id="searchinput" style="display:block;" type="search" ng-model="SmartComponentSearch" placeholder="Search..." class="form-control">
+                                                                <span class="searchclear-project" ng-click="clearAll('existingcomponent')">X</span>
+
+                                                                <div class="fixed-scroll-ExistingConnectingItems">
+                                                                    <table id="ComponentID" class="table table-hover" cellspacing="0" width="100%">
+                                                                        <tbody>
+                                                                            <tr class="tdrow" ng-repeat="item in filteredTask = (AllFilteredItems | filter:SmartComponentSearch)">
+                                                                                <td Style="width:2%">
+                                                                                    <input type="checkbox" ng-click="tagExistingComponentService(item)">
+                                                                                </td>
+
+
+
+                                                                                <td ng-if="item.siteType=='Cep'" class="P_icon">
+                                                                                    <img ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/24/icon_Cep.png">
+                                                                                </td>
+                                                                                <td>
+                                                                                    <a target="_blank" ng-href="{{baseUrl}}/Team/Pages/Manage/Portfolio-Profile.aspx?taskId={{item.Id}}">
+                                                                                        {{item.Title}}
+                                                                                    </a>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="clearfix"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 webpart-div no-padding mt-10">
+                                                    <div class="panel panel-default add-connect">
+                                                        <div class="panel-heading ">
+                                                            <h3 class="panel-title">
+                                                                2. Create Relevant Component
+                                                            </h3>
+                                                        </div>
+                                                        <div class="panel-body">
+                                                            <div class="col-sm-12 mt-10 mb-10 heightbox354" title="Drag Drop Documents">
+                                                                <label class="full_width">Component Name</label>
+                                                                <input class="form-control" ng-model="relevant_component_title" type="text">
+                                                                <div class="clearfix"></div>
+                                                                <div class="col-sm-10 padL-0"></div>
+                                                                <div class="col-sm-2 PadR0">
+                                                                    <label class="full_width"></label>
+                                                                    <button type="button" class="btn btn-primary" ng-click="CreateRelevantComponent('component')" ng-disabled="!relevant_component_title">
+                                                                        Create
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                                <div class="col-sm-6 webpart-div  mt-10">
+                                                    <div class="panel panel-default">
+                                                        <div class="panel-heading">
+                                                            <h3 class="panel-title">
+                                                                Already Tagged Component
+                                                            </h3>
+                                                        </div>
+                                                        <div class="panel-body">
+                                                            <div class="middlealign col-sm-12 mt-10">
+
+                                                                <div class="col-sm-12 padL-0 PadR0">
+                                                                    <input id="searchinput" type="search" ng-model="taggedcomponentSearch" style="display:block;" placeholder="Search..." class="form-control">
+                                                                    <span class="searchclear" ng-click="clearAll('TaggedComponent')">X</span>
+                                                                </div>
+
+                                                                <div class="col-sm-12 section-new padL-0 PadR0 heightbox209 mb-10">
+                                                                    <div class="fixed-scroll-connectingitems">
+                                                                        <table id="taggedDocumentsId" ng-hide="relevant_component_tagged.length==0" class="table table-hover" cellspacing="0" width="100%" style="margin-bottom:0px;">
+                                                                            <thead>
+                                                                                <tr class="tdrow">
+                                                                                    <th style="width:2%;">
+                                                                                        <div style="width:2%;"></div>
+                                                                                    </th>
+                                                                                    <th style="width:2%;">
+                                                                                        <div style="width:2%;"></div>
+                                                                                    </th>
+                                                                                    <th style="width:2%;">
+                                                                                        <div style="width:2%;"></div>
+                                                                                    </th>
+                                                                                    <th style="width:40%;">
+                                                                                        <div style="width:40%;" class="title-glyph">
+                                                                                            <span style="cursor: pointer;" ng-click="orderBy='Title'; reverse=!reverse;">Title</span>
+
+                                                                                        </div>
+                                                                                    </th>
+                                                                                    <th style="width:12%;">
+                                                                                        <div style="width:83%;" class="serach-glyph">
+                                                                                            <span style="cursor: pointer;" ng-click="orderBy='Item_x0020_Rank'; reverse=!reverse;"></span>
+
+                                                                                        </div>
+                                                                                    </th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+
+                                                                                <tr class="tdrow" ng-repeat="item in relevant_component_tagged | orderBy:orderBy:reverse| filter : taggedcomponentSearch">
+                                                                                    <td><input ng-checked="item.Selected" ng-click="unTagComponentService(item)" ng-model="item.Selected" type="checkbox"></td>
+                                                                                    <td>
+                                                                                        <img style="width:24px;" ng-src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/SiteCollectionImages/ICONS/Special/icon_Tick.png">
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <img style="width:24px;" ng-src="/sites/HHHHTeams/SiteCollectionImages/ICONS/siteIcons/icon_sp.png">
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <span>
+                                                                                            <img style="max-width:18px;"
+                                                                                                 ng-if="item.Item_x0020_Cover != null "
+                                                                                                 ng-src="{{item.Item_x0020_Cover.Url}}?RenditionID=11" />
+                                                                                        </span>
+                                                                                        <a ng-if="item.File_x0020_Type == 'aspx'" target="_blank" ng-href="{{item.Url.Url}}">
+                                                                                            <span ng-if="item.Title!=undefined" data-ng-bind="item.Title"></span>
+                                                                                            <span ng-if="item.Title==undefined" data-ng-bind="item.FileLeafRef"></span>
+                                                                                        </a>
+                                                                                        <a target="_blank" ng-href="{{CurrentSubSiteUrl}}/SitePages/Portfolio-Profile.aspx?taskId={{item.Id}}">
+                                                                                            <span ng-if="item.Title!=undefined" data-ng-bind="item.Title"></span>
+                                                                                            <span ng-if="item.Title==undefined" data-ng-bind="item.FileLeafRef"></span>
+
+                                                                                        </a>
+                                                                                        <!-- <span ng-click="EditTask(item)"><img ng-src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/SiteCollectionImages/ICONS/32/edititem.gif"></span> -->
+                                                                                    </td>
+
+                                                                                    <td></td>
+
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="clearfix"></div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div id="RelevantService" class=" ">
+                                        <div class="container mt-0 ">
+                                            <div class="col-sm-12 no-padding mt-10">
+                                                <div class="col-sm-6 webpart-div mt-10">
+                                                    <div class="panel panel-default">
+                                                        <div class="panel-heading">
+                                                            <h3 class="panel-title">
+                                                                1. Connect Existing Services
+                                                            </h3>
+                                                        </div>
+                                                        <div class="panel-body">
+                                                            <div class="col-sm-12 mt-10 mb-10 heightbox354">
+                                                                <input id="searchinput" style="display:block;" type="search" ng-model="SmartServiceSearch" placeholder="Search..." class="form-control">
+                                                                <span class="searchclear-project" ng-click="clearAll('ExistingService')">X</span>
+
+                                                                <div class="fixed-scroll-ExistingConnectingItems">
+                                                                    <table id="SerciveID" class="table table-hover" cellspacing="0" width="100%">
+                                                                        <tbody>
+                                                                            <tr class="tdrow" ng-repeat="item in filteredTask = (AllFilteredItems | filter:SmartServiceSearch)">
+                                                                                <td Style="width:2%">
+                                                                                    <input type="checkbox" ng-click="tagExistingComponentService(item)">
+                                                                                </td>
+
+
+
+                                                                                <td ng-if="item.siteType=='Cep'" class="P_icon">
+                                                                                    <img ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/24/icon_Cep.png">
+                                                                                </td>
+                                                                                <td>
+                                                                                    <a target="_blank" ng-href="{{baseUrl}}/Team/Pages/Manage/Portfolio-Profile.aspx?taskId={{item.Id}}">
+                                                                                        {{item.Title}}
+                                                                                    </a>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="clearfix"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 webpart-div no-padding mt-10">
+                                                    <div class="panel panel-default add-connect">
+                                                        <div class="panel-heading ">
+                                                            <h3 class="panel-title">
+                                                                2. Create Relevant Service
+                                                            </h3>
+                                                        </div>
+                                                        <div class="panel-body">
+                                                            <div class="col-sm-12 mb-10 mt-10 heightbox354" title="Drag Drop Documents">
+                                                                <label class="full_width">Service Name</label>
+                                                                <input class="form-control" ng-model="relevant_service_title" type="text">
+                                                                <div class="clearfix"></div>
+                                                                <div class="col-sm-10 padL-0"></div>
+                                                                <div class="col-sm-2 PadR0">
+                                                                    <label class="full_width"></label>
+                                                                    <button type="button" class="btn btn-primary" ng-click="CreateRelevantComponent('service');" ng-disabled="!relevant_service_title">
+                                                                        Create
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                                <div class="col-sm-6 webpart-div  mt-10">
+                                                    <div class="panel panel-default">
+                                                        <div class="panel-heading">
+                                                            <h3 class="panel-title">
+                                                                Already Tagged Service
+                                                            </h3>
+                                                        </div>
+                                                        <div class="panel-body">
+                                                            <div class="middlealign col-sm-12 mt-10">
+
+                                                                <div class="col-sm-12 padL-0 PadR0">
+                                                                    <input id="searchinput" type="search" ng-model="taggedserviceSearch" style="display:block;" placeholder="Search..." class="form-control">
+                                                                    <span class="searchclear" ng-click="clearAll('taggedservice')">X</span>
+                                                                </div>
+
+                                                                <div class="col-sm-12 section-new padL-0 PadR0 heightbox209 mb-10">
+                                                                    <div class="fixed-scroll-connectingitems">
+                                                                        <table id="taggedDocumentsId" ng-hide="relevant_service_tagged.length==0" class="table table-hover" cellspacing="0" width="100%" style="margin-bottom:0px;">
+                                                                            <thead>
+                                                                                <tr class="tdrow">
+                                                                                    <th style="width:2%;">
+                                                                                        <div style="width:2%;"></div>
+                                                                                    </th>
+                                                                                    <th style="width:2%;">
+                                                                                        <div style="width:2%;"></div>
+                                                                                    </th>
+                                                                                    <th style="width:2%;">
+                                                                                        <div style="width:2%;"></div>
+                                                                                    </th>
+                                                                                    <th style="width:40%;">
+                                                                                        <div style="width:40%;" class="title-glyph">
+                                                                                            <span style="cursor: pointer;" ng-click="orderBy='Title'; reverse=!reverse;">Title</span>
+
+                                                                                        </div>
+                                                                                    </th>
+                                                                                    <th style="width:12%;">
+                                                                                        <div style="width:83%;" class="serach-glyph">
+                                                                                            <span style="cursor: pointer;" ng-click="orderBy='Item_x0020_Rank'; reverse=!reverse;"></span>
+
+                                                                                        </div>
+                                                                                    </th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+
+                                                                                <tr class="tdrow" ng-repeat="item in relevant_service_tagged | orderBy:orderBy:reverse| filter : taggedserviceSearch">
+                                                                                    <td><input ng-checked="item.Selected" ng-click="unTagComponentService(item)" ng-model="item.Selected" type="checkbox"></td>
+                                                                                    <td>
+                                                                                        <img style="width:24px;" ng-src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/SiteCollectionImages/ICONS/Special/icon_Tick.png">
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <img style="width:24px;" ng-src="/sites/HHHHTeams/SiteCollectionImages/ICONS/siteIcons/icon_sp.png">
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <span>
+                                                                                            <img style="max-width:18px;"
+                                                                                                 ng-if="item.Item_x0020_Cover != null "
+                                                                                                 ng-src="{{item.Item_x0020_Cover.Url}}?RenditionID=11" />
+                                                                                        </span>
+                                                                                        <a ng-if="item.File_x0020_Type == 'aspx'" target="_blank" ng-href="{{item.Url.Url}}">
+                                                                                            <span ng-if="item.Title!=undefined" data-ng-bind="item.Title"></span>
+                                                                                            <span ng-if="item.Title==undefined" data-ng-bind="item.FileLeafRef"></span>
+                                                                                        </a>
+                                                                                        <a target="_blank" ng-href="{{CurrentSubSiteUrl}}/SitePages/Portfolio-Profile.aspx?taskId={{item.Id}}">
+                                                                                            <span ng-if="item.Title!=undefined" data-ng-bind="item.Title"></span>
+                                                                                            <span ng-if="item.Title==undefined" data-ng-bind="item.FileLeafRef"></span>
+
+                                                                                        </a>
+                                                                                        <!-- <span ng-click="EditTask(item)"><img ng-src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/SiteCollectionImages/ICONS/32/edititem.gif"></span> -->
+                                                                                    </td>
+
+                                                                                    <td></td>
+
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="clearfix"></div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" ng-disabled="disabled" data-dismiss="modal" ng-click="TagSelectedItems()">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--start of Associated Folder-->
+    <div id="AssociatedFolderPopUp" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="panel panel-default" ng-cloak>
+                    <ng-form name="ItemForm" novalidate role="form">
+                        <div class="modal-header padb-2">
+                            <div class="panel-title">
+                                <button type="button" class="close" data-dismiss="modal" ng-click="cancelAssociatedFolder()" style="min-width: 10px;">&times;</button>
+                                <h3 class="modal-title mt-0 padL-0"> Select Associated Folder</h3>
+                                <div class="mt-10 form-group mb-5">
+                                    <label class="full_width ng-binding" ng-bind-html="GetColumnDetails('RootFolder') | trustedHTML"></label>
+                                    <div ng-if="folderUrl == '' || folderUrl == undefined">
+                                        {{selectedFolderUrl}}&nbsp;&nbsp;&nbsp;&nbsp;
+                                    </div>
+                                    <div ng-if="folderUrl != undefined" class="font_weight">
+                                        {{selectedFolderUrl}}&nbsp;&nbsp;&nbsp;&nbsp;
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="tab-content bdrbox col-sm-12">
+                                <div id="table-wrapper">
+                                    <div id="table-scroll">
+                                        <div class="form-group">
+                                            <div class="col-sm-3" ng-repeat="item in folderStructureSourceLists">
+                                                <input type="radio" class="mr-5" name="item.siteName" ng-click="selectSiteFolder(item)" ng-checked="item.siteName==siteName" checked="checked">{{item.siteName}}
+                                                <!--<a class="hreflink" ng-click="selectSiteFolder(item)">{{item.siteName}} </a>-->
+                                            </div>
+                                        </div>
+                                        <div class="form-group inner-tabb col-sm-12 foldersTreeViewPopup">
+                                            <div class="col-sm-12" style="margin-top:-20px;">
+                                                <span ng-if="folderName!=''">
+                                                </span>{{folderName}}
+                                            </div>
+                                            <ul id="browser" class="filetree" style="padding-top:15px;" ng-click="getSelectfolderUrl()"></ul>
+                                        </div>
+                                        <div ng-show="iscreateSubFolderSelected">
+                                            <div ng-show="folderUrl == '' || folderUrl == undefined" class="blocks">
+                                                <label class="full_width">{{selectedFolderUrl}}&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                            </div>
+                                            <div ng-show="folderUrl != undefined" class="font_weight blocks">
+                                                <label class="full_width">{{selectedFolderUrl}}&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                            </div>
+                                            <div class="col-sm-12 form-group padL-0">
+                                                <div class="col-sm-8 "><input class="form-control" type="text" placeholder="type new folder name to create folder or subfolder" ng-model="SubFolderTitle" /></div>
+                                                <div class="col-sm-2"><button type="button" class="btn btn-primary" ng-click="createSubFolderItem()">Create Folder</button></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <label class="blocks">
+                                <input class="no-padding mr-4 mt-0" type="checkbox" ng-model="iscreateSubFolderchecked"
+                                       ng-click="createSubFolder(iscreateSubFolderchecked)" /><span id="font-icon">
+                                    Create
+                                    Folder
+                                </span>
+                            </label>
+                            <label class="ml5">
+
+                                <input class="no-padding mr-4 mt-0" type="checkbox" ng-model="ischecked"
+                                       ng-click="checkFolder(ischecked)" />
+                                <span id="font-icon">
+                                    Update Default Folder
+                                </span>
+                            </label>
+                            <button type="button" class="btn btn-primary" ng-click="selectFolder()">OK</button>
+                        </div>
+
+                    </ng-form>
+                </div>
+            </div>
+            <shareweb-progress-bar progressbarid="'createLinkToDocumentprogressbar'"></shareweb-progress-bar>
+        </div>
+
+    </div>
+    <!--End of Associated Folder-->
+    <div id="modalAllSliderImages" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" style="display: none;">
+        <div class="modal-dialog" style="width: 90%;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" style="min-width: 10px;" ng-click="cancelItemCover()" title="Click to exit">&times;</button>
+                    <h4 class="modal-title">Select Image</h4>
+                    <div class="pull-right">
+                        <button type="button" ng-disabled="rowPosition <= 115" class="btn btn-primary" ng-click="LoadPrevCovers(rowPosition)" title="Click to load prev 100 Covers">Prev</button>
+                        <button type="button" ng-disabled="rowPosition >= AllSharewebImages.length" class="btn btn-primary" ng-click="LoadNextCovers(rowPosition)" title="Click to load next 100 Covers">Next</button>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div id="coverImagesPopup">
+                        <ul class="imageinfo-gallery">
+                            <li ng-repeat="img in SharewebImages">
+                                <a class="preview hreflink" rel="{{img.EncodedAbsUrl}}" title="{{img.FileLeafRef}}">
+                                    <img id="{{img.Id}}_cover" ng-src="{{img.EncodedAbsUrl}}?RenditionID=9" ng-click="selectImage(img)" class="morecovers" />
+                                </a>
+
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <!--<button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="cancelItemCover()">OK</button>-->
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="bdrbox  modal fade in active" id="uploadDocumentPopup" role="dialog">
+        <div class="bg-white alertmsg width545 modal-dialog" style="width: 40%;">
+            <div class="col-sm-12 padLR">
+                <div class="padLR mt-5  bold">
+                    <h5 class="TxtSize mb-2">Upload Documents - Confirmation</h5>
+                </div>
+                <div class="padLR padb-2 mt-2">
+                    Folder : {{uploadFolderName}} <span>
+                        <a ng-href="https://hhhhteams.sharepoint.com{{folderUrl}}" target="_blank">
+                            <img class="" src="/_layouts/15/images/folder.gif">
+                        </a>
+                    </span>
+                </div>
+                <div class="padLR padb-2 mt-2">Metadata-Tag : {{Item.Title}}</div>
+                <div class="col-sm-12 tab-content bdrbox mt-5 pd5">
+                    <div class="section-event pt-0">
+                        <table cellspacing="0" class="table table-hover" style="width: 100.2%;">
+                            <thead>
+                            <td></td>
+                            <td style="width: 46%;"> <label class="bold">File Name</label> </td>
+                            <td style="width: 10%;"> <label class="bold">Uploaded</label> </td>
+                            <td style="width: 10%;"><label class="bold">Tagged</label> </td>
+                            <td style="width: 16%;"><label class="bold"> Share Link</label></td>
+                            </thead>
+                            <tbody>
+                                <tr class="bdrbox" ng-repeat="doc in draged_item">
+                                    <td>
+                                        <img ng-if="doc.icon_type == 'pdf'" alt="" class="arrow_up" title="{{doc.name}}" ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/24/icon_pdf_16.jpg">
+                                        <img ng-if="doc.icon_type == 'aspx'" alt="" class="arrow_up" title="{{doc.name}}" ng-src="/_layouts/15/images/icgen.gif?rev=23">
+                                        <img ng-if="doc.icon_type == 'docx'" alt="" class="arrow_up" title="{{doc.name}}" ng-src="/_layouts/15/images/icdocx.gif?rev=23">
+                                    </td>
+                                    <td style="width: 46%;">
+                                        <div>{{doc.name}}</div>
+                                    </td>
+                                    <td style="width: 10%;" class="text-center">
+                                        <img class="wid29" src="https://www.shareweb.ch/site/Joint/SiteCollectionImages/ICONS/siteIcons/Succesfully.png">
+                                        <!-- <div class="col-green">Uploaded</div> -->
+                                    </td>
+                                    <td style="width: 10%;" class="text-center">
+                                        <img class="wid29" src="https://www.shareweb.ch/site/Joint/SiteCollectionImages/ICONS/siteIcons/Succesfully.png">
+                                        <!-- <div class="col-green">Tagged</div> -->
+                                    </td>
+                                    <td style="width: 16%;" class="text-center">
+                                        <a ng-href="" ng-click="openmail(doc.name)">
+                                            <img class="" src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/SiteCollectionImages/ICONS/32/icon_maill.png">
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" ng-click="closeUploadDocumentPop()" class="btn btn-primary mt-10">
+                    OK
+                </button>
+            </div>
+        </div>
+
+    </div>
+    <!--End html uploaddocumentpopup Document-->
+
+
+
+    <shareweb-progress-bar progressbarid="'addandConnectDocumentprogressbar'"></shareweb-progress-bar>
+    <shareweb-progress-bar progressbarid="'uploadDocumentprogressbar'"></shareweb-progress-bar>
+    <shareweb-progress-bar progressbarid="'uploadImageprogressbar'"></shareweb-progress-bar>
+    <shareweb-progress-bar progressbarid="'dragDropDocumentprogressbar'"></shareweb-progress-bar>
+    <shareweb-progress-bar progressbarid="'createEventprogressbar'"></shareweb-progress-bar>
+    <shareweb-progress-bar progressbarid="'createNewsprogressbar'"></shareweb-progress-bar>
+    <!--<shareweb-progress-bar progressbarid="'createTaskprogressbar'"></shareweb-progress-bar>-->
+    <!--End of Showing Tagged Documents-->
+</div>

@@ -1,0 +1,193 @@
+﻿<script src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/Style%20Library/js/angular/Services/main.js"></script>
+<script type="text/ecmascript" src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/_layouts/15/clienttemplates.js"></script>
+<script type="text/ecmascript" src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/_layouts/15/clientforms.js"></script>
+<script type="text/ecmascript" src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/_layouts/15/clientpeoplepicker.js"></script>
+<script type="text/ecmascript" src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/_layouts/15/autofill.js"></script>
+
+<script src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/Style%20Library/js/angular/Online/Tasks%20Management/CreateTaskUser.js"></script>
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<style type="text/css">
+    #editsmatmetadataprogressbar {
+        width: 100%;
+        height: 100%;
+        top: 0px;
+        left: 0px;
+        position: fixed;
+        display: block;
+        opacity: 0.7;
+        z-index: 99;
+        text-align: center;
+        background: #fff;
+    }
+
+    input[type="radio"],
+    input[type="checkbox"] {
+        margin: 3px 1px 2px -4px !important;
+        line-height: normal;
+    }
+
+    .panel-body {
+        padding: 0px 5px !important;
+    }
+
+    .headerbox {
+        padding: 5px 5px;
+        font-weight: 600;
+        font-size: 14px !important;
+        width: 96%;
+        font-family: "Segoe UI" !important;
+        background: #e9e9e9;
+        letter-spacing: 0;
+        display: block;
+        color: #006;
+        border-bottom: 1px solid #006;
+    }
+
+    .mt-34 {
+        margin-top: 34px;
+    }
+
+    .b-right {
+        border-right: 1px solid #006;
+    }
+</style>
+<div ng-controller="CreateTaskUserController" ng-cloak>
+    <div ng-cloak>
+        <div class="panel panel-default" ng-cloak>
+            <div class="panel-title">
+                <button type="button" class="close" data-dismiss="modal" ng-click="cancelCreate()" style="min-width: 10px;">&times;</button>
+                <span class="pull-right">
+                    <page-settings-info webpartid="'AddMember'"></page-settings-info>
+                </span>
+                <h3 ng-if="createType=='taskUser'">
+                    Create New-User
+                    <!-- <span class="pull-right col-sm-1"><page-settings-info webpartid="'sharewebSmartMetadataPopup'"></page-settings-info></span> -->
+                </h3>
+                <h3 ng-if="createType=='taskgroup'">
+                    Create New-Group
+                    <!-- <span class="pull-right col-sm-1"><page-settings-info webpartid="'sharewebSmartMetadataPopup'"></page-settings-info></span> -->
+                </h3>
+
+            </div>
+            <div class="Edit_smart">
+                <div id="table-wrapper">
+                    <div id="table-scroll">
+                        <div class="panel-body">
+                            <div id="basicinfo" class="tab-pane fade in active">
+                                <div class="container fixed-divPanelBody imageinfo_border BTop mt-0 padL-0 PadR0 tab-content">
+                                    <ng-form name="UserForm" novalidate role="form">
+                                        <div class="col-sm-12 no-padding">
+                                            <div class="form-group mt-10">
+                                                <div class="col-sm-6 padL-0" ng-if="createType=='taskUser'">
+                                                    <label class="full_width">User Name</label>
+                                                    <div data-ng-disabled="false" ng-required="true" ui-people data-ng-model="User.AssingedToUser" pp-is-multiuser="true" pp-account-type="User,DL" id="updateAssignedToUser" class="form-control PeopleHeight" ng-change="updateTitle(User.AssingedToUser.results[0].Title)"></div>
+                                                </div>
+                                                <div class="col-sm-6 padL-0 PadR0" ng-if="createType=='taskgroup'">
+                                                    <label class="full_width">Title</label>
+                                                    <input class="form-control text-box" type="text" autocomplete="off" id="txtTitle" ng-required="true" ng-model="User.UserTitle" />
+
+                                                </div>
+                                                <div class=" col-sm-2 mb-10 PadR" ng-if="createType=='taskUser'">
+                                                    <label class="full_width">Suffix</label>
+                                                    <input class="form-control text-box" type="text" id="txtSuffix" ng-model="User.Suffix"
+                                                           autocomplete="off" />
+                                                </div>
+                                                <div class=" col-sm-2 mb-10 PadR" ng-if="createType=='taskgroup'">
+                                                    <label class="full_width">Suffix</label>
+                                                    <input class="form-control text-box" type="text" id="txtSuffix" ng-model="User.Suffix"
+                                                           autocomplete="off" />
+                                                </div>
+                                                <div class="col-sm-4" ng-if="createType=='taskUser'">
+                                                    <!--<label class="full_width" ng-bind-html="GetColumnDetails('SortOrder') | trustedHTML"><b class="span-error">*</b> </label>-->
+                                                    <label class="full_width">SortOrder</label>
+                                                    <input class="form-control text-box" type="text" autocomplete="off" ng-pattern="/^[0-9]+([,.][0-9]+)?$/" id="txtTitle" ng-model="User.SortOrder1" />
+                                                </div>
+                                                <div class="col-sm-4  form-group" ng-if="createType=='taskgroup'">
+                                                    <!-- <label class="full_width" ng-bind-html="GetColumnDetails('SortOrder') | trustedHTML"><b class="span-error">*</b> </label>-->
+                                                    <label class="full_width">SortOrder</label>
+                                                    <input class="form-control text-box" type="text" autocomplete="off" ng-pattern="/^[0-9]+([,.][0-9]+)?$/" id="txtTitle" ng-model="User.SortOrder1" />
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 no-padding" ng-if="createType=='taskUser'">
+                                            <div class="form-group">
+                                                <div class="col-sm-12 padL-0 PadR0">
+                                                    <div class="col-sm-8 padL-0 PadR0">
+                                                        <div class="col-sm-12 padL-0 PadR0" ng-if="createType=='taskUser'">
+                                                            <!-- <label class="col-sm-3 padL-0" ng-bind-html="GetColumnDetails('Title') | trustedHTML"><b class="span-error">*</b> </label>-->
+                                                            <label class="full_width">Title</label>
+                                                            <input class="form-control text-box" type="text" autocomplete="off" id="txtTitle" ng-model="User.UserTitle" />
+                                                            <!-- <div data-ng-disabled="false" ui-people ng-model="User.Title" style="margin-top: 18px;" pp-is-multiuser="true" pp-account-type="User,DL" id="" class="form-control PeopleHeight"></div> -->
+
+                                                        </div>
+                                                        <div class="col-sm-12 form-group padL-0 PadR0" ng-if="createType=='taskUser'">
+                                                            <label class="full_width">Approver</label>
+                                                            <div data-ng-disabled="false" ng-required="true" ui-people data-ng-model="User.EmpUserManager" pp-is-multiuser="false" pp-account-type="User,DL" id="updateManagerToUser" class="form-control PeopleHeight"></div>
+                                                        </div>
+                                                        <div class="col-sm-12 padL-0 PadR0" ng-if="createType=='taskgroup'">
+                                                            <!-- <label class="full_width" ng-bind-html="GetColumnDetails('Title') | trustedHTML"><b class="span-error">*</b> </label>-->
+                                                            <label class="full_width">Title</label>
+                                                            <input class="form-control text-box" type="text" autocomplete="off" id="txtTitle" ng-required="true" ng-model="User.UserTitle" />
+                                                            <!-- <div data-ng-disabled="false" ui-people ng-model="User.Title" style="margin-top: 18px;" pp-is-multiuser="true" pp-account-type="User,DL" id="" class="form-control PeopleHeight"></div> -->
+
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-sm-12 padL-0">
+                                                    <div ng-show="TaskGroup.length>0" class="col-sm-3 padL-0">
+                                                        <label class="full_width  headerbox">Group</label>
+                                                        <div class="mt-5 pl-5" ng-repeat="item in TaskGroup">
+                                                            <input type="radio" ng-required="true" value="{{item.Title}}"
+                                                                   ng-model="User.UserGroup"> {{item.Title}}
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="col-sm-3 padL-0">
+                                                        <label class="full_width headerbox">Roles</label>
+
+                                                        <div class="mt-5 pl-5"><input ng-model="DeliverableTeams"  ng-checked="User.Role.indexOf(' Deliverable Teams')>-1" class="no-padding" type="checkbox" ng-click="test('Deliverable Teams','isEnable')"> Component Teams</div>
+                                                        <div class="mt-5 pl-5"><input ng-model="ServiceTeams"   ng-checked="User.Role.indexOf(' Service Teams')>-1" class="no-padding" type="checkbox" ng-click="test('Service Teams','isEnable')"> Service Teams</div>
+
+                                                    </div>
+                                                    <div class="col-sm-3 padL-0 b-right">
+                                                        <label class="full_width headerbox">Company</label>
+
+                                                        <div class="mt-5 pl-5"><input name="Smalsus" class="no-padding" ng-checked="User.Company=='Smalsus'" type="radio" ng-click="test1('Smalsus')"> Smalsus Team</div>
+                                                        <div class="mt-5 pl-5"><input name="Smalsus" class="no-padding" ng-checked="User.Company=='HHHH'" type="radio" ng-click="test1('HHHH')"> HHHH Team</div>
+
+
+                                                    </div>
+                                                    <div class="col-sm-3 mt-34">
+
+
+                                                        <input type="checkbox" ng-model="checked" class="no-padding" type="checkbox" ng-click="verifyCheck()"> Task Notifications
+
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="clearfix"></div>
+                                            </div>
+
+                                            <div class="clearfix"></div>
+                                        </div>
+
+                                    </ng-form>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" ng-disabled="UserForm.$error.required" ng-click="createUser(User)">Save</button>
+                                <button type="button" class="btn btn-default" ng-click="cancelCreate()">Cancel</button>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

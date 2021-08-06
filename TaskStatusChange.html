@@ -1,0 +1,54 @@
+﻿<script src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/Style%20Library/js/angular/Templates/HCTemplateControllers.js"></script>
+<script src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/Style%20Library/js/angular/Online/Tasks%20Management/TaskStatusChange.js"></script>
+
+<div ng-controller="TaskStatusChangeController" ng-cloak>
+
+    <div class="row" style="padding-bottom:10px;">
+        <div class="col-sm-2">
+            Shareweb Sites:
+        </div>
+
+        <div class="col-sm-8">
+            <div style="padding-bottom:2px;" class="col-sm-3  no-padding" ng-repeat="item in SitesConfig">
+                <input type="checkbox" ng-model="item.Selected" ng-click="selecteditems(item)" class="chck_box">{{item.Title}} ({{item.Count}})
+            </div>
+        </div>
+
+        <div class="col-sm-2">
+            <div class="panel-title">Group By</div>
+            <div style="padding-bottom:2px;" class="no-padding">
+                <input type="radio" ng-click="groupBy('TaskCompanies')" name="taskGroup" /> Category
+            </div>
+            <div style="padding-bottom:2px;" class="no-padding">
+                <input type="radio" ng-click="groupBy('Priority')" name="taskGroup" /> Priority
+            </div>
+            <div style="padding-bottom:2px;" class="no-padding">
+                <input type="radio" ng-click="groupBy('Status')" name="taskGroup" /> Status
+            </div>
+            <div style="padding-bottom:2px;" class="no-padding">
+                <input type="radio" ng-click="groupBy('dueDateString')" name="taskGroup" /> Due Date             
+            </div>
+            <div style="padding-bottom:2px;" class="no-padding">
+                <input type="radio" ng-click="groupBy('taskLeader')" name="taskGroup" /> Task Leader
+            </div>
+        </div>
+    </div>
+    <table width="100%">
+        <tr>
+            <td ng-repeat="ItemsStatus in AllSitesTasks " valign="top" width=300px"">
+
+                <h5>{{ItemsStatus.Title}}</h5>
+                <input type="text" style="font-weight:normal;" id="searchTitle" placeholder="{{ItemStatus.Title}}" class="form-control searchbox_height" ng-model="searchTitle" />
+                <span class="searchclear" >X</span>
+
+                <div class="col-sm-" ng-repeat="item in filtered =(ItemsStatus.Items | filter:{Title:searchTitle})   ">
+
+                    <div class="row" ui-draggable="true" drag="item" data-toggle="popover" ui-on-drop="onDropRemoveItem($event,$data, ItemsStatus.Items,'{{ItemsStatus.Title}}')" on-drop-success="dropSuccessHandler($event, $index, ItemsStatus.Items)">
+                        {{item.Title}}
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+    <shareweb-progress-bar progressbarid="'showSmartMetaSearchTaskprogressbar'"></shareweb-progress-bar>
+</div>

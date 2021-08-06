@@ -1,0 +1,1987 @@
+<script src="/sites/HHHHTeams/Style%20Library/js/angular/Templates/ComponentTaskProfileWebpart.js"></script>
+<script src="/sites/HHHHTeams/Style%20Library/js/angular/Templates/ShowTaskTeamComponent.js"></script>
+<script src="/sites/HHHHTeams/Style%20Library/js/angular/Templates/TaskTimeOverview.js"></script>
+<script src="/sites/HHHHTeams/Style%20Library/js/angular/Templates/ComponentPopup.js"></script>
+<script src="/sites/HHHHTeams/Style%20Library/js/angular/Templates/SiteCompositionTemplate.js"></script>
+<script src="/sites/HHHHTeams/Style%20Library/js/angular/Templates/TeamComposition.js"></script>
+<script src="/sites/HHHHTeams/Style%20Library/js/angular/Services/froala_editor.pkgd.min.js"></script>
+<script src="/sites/HHHHTeams/Style%20Library/js/angular/Services/render.min.js?updated=07-29-2018-2"></script>
+<script src="/sites/HHHHTeams/Style%20Library/js/angular/Templates/HCTemplateControllers.js"></script>
+<script src="/sites/HHHHTeams/Style%20Library/js/angular/Components/compareContact.js"></script>
+<script src="/sites/HHHHTeams/Style%20Library/js/angular/Components/RestructuringTaskTool.js"></script>
+<script src="/sites/HHHHTeams/Style%20Library/js/angular/Tasks%20Management/CompareTaskTool.js"></script>
+<script src="/sites/HHHHTeams/Style%20Library/js/angular/Services/jquery.SPServices-2014.01.min.js"></script>
+<script src="/sites/HHHHTeams/Style%20Library/js/angular/Tasks%20Management/ComponentProfile.js?updated=17/02/2021"></script>
+<script src="/sites/HHHHTeams/Style%20Library/js/angular/Templates/SharewebFeedback.js"></script>
+<script src="/sites/HHHHTeams/Style%20Library/js/angular/Tasks%20Management/FoundationAddnConnectTool.js"></script>
+<script src="/sites/HHHHTeams/Style%20Library/js/angular/Templates/FoundationDocuments.js"></script>
+<script src="/sites/HHHHTeams/Style%20Library/js/angular/Templates/CommentMailComponent.js"></script>
+<script src="/sites/HHHHTeams/Style%20Library/js/angular/Templates/HHHH-EditSharewebItem.js"></script>
+<script src="/sites/HHHHTeams/Style%20Library/js/angular/Templates/ExpandTable.js?updated=13-02-2021-02"></script>
+<script src="/sites/HHHHTeams/Style%20Library/js/angular/Templates/CreatedandModifiedBy.js"></script>
+<script src="/sites/HHHHTeams/Style%20Library/js/angular/Templates/CreateMeetingNotesPopup.js"></script>
+<script src="/sites/HHHHTeams/Style%20Library/js/angular/Templates/AddActivityTaskComponent.js"></script>
+<script src="/sites/HHHHTeams/Style%20Library/js/angular/Templates/PortfolioStructureCreation.js"></script>
+<style>
+    #autosugesstion {
+        z-index: 1051;
+        position: absolute;
+        left: 489px;
+        top: 103px;
+        width: 557px;
+        background: #fff;
+    }
+
+
+    .userimgsize1 {
+        width: 24px !important;
+        height: 24px !important;
+    }
+
+    .suffixaddimg1 {
+        width: 26px !important;
+        height: 26px;
+        padding: 4px 4px;
+        top: 5px;
+        left: -5px;
+        font-size: 14px !important;
+    }
+
+    .ml-8 {
+        margin-left: 8px;
+    }
+
+    .PortfolioProfilePage .page-content {
+        height: 0px;
+    }
+
+    #pageTitle {
+        display: none;
+    }
+
+    .boxbdrdesign ul {
+        list-style: square;
+        padding-left: 17px;
+    }
+
+    #contentRow {
+        padding-top: 0px !important;
+    }
+
+    .relevant-menu .addtoggle.Feedback {
+        margin-top: -4px;
+    }
+
+    .marbtmpara span p {
+        margin-bottom: 0px !important;
+    }
+
+    .panel-default>.panel-heading {
+        color: #000066;
+    }
+
+    span.glyphicon.glyphicon.glyphicon-chevron-down.direction-arrow.arrow_down {
+        color: #ccc;
+        font-size: 13px;
+    }
+
+    .toggle-box-content+label:before {
+        margin-right: 2px;
+    }
+
+    .right-htext {
+        font-size: 13px;
+        margin-top: 22px;
+    }
+
+    #s4-bodyContainer {
+        width: 60% !important
+    }
+</style>
+<script>
+    $(document).ready(function () {
+        $("#accordion > div").click(function () {
+            if (false == $(this).next().is(':visible')) {
+                $('#accordion > ul').slideUp(300);
+            }
+            $(this).next().slideToggle(300);
+        });
+    });
+</script>
+<div ng-controller="TaskProfileController"
+    class="component componet-portfoliblue {{Task.Portfolio_x0020_Type=='Service'?'taskprofilepagegreen':''}}{{Task.Portfolio_x0020_Type=='Events'?'taskprofilepageorange':''}}">
+    <div class="PortfolioProfilePage">
+        <div class="taskprofilepage" ng-cloak>
+            <div class="panel-body">
+                <div class="row pull-right">
+                </div>
+                <div class="col-lg-12 pad0">
+                    <div class="col-sm-9 left-col">
+                        <div class="row">
+                            <div class="col-sm-12 col-sm-12 padL-0 PadR0">
+
+                                <div class="col-sm-12 no-padding" ng-if="(Task.Item_x0020_Type=='Component Category')">
+                                    <ul class="">
+                                        <li>
+                                            <span>
+                                                <a ng-if="Task.Portfolio_x0020_Type=='Component' && (Task.Item_x0020_Type=='Component Category')"
+                                                    ng-href="{{OtherUrl}}/SitePages/Component-Portfolio.aspx">
+                                                    Component-Portfolio<span>></span>
+                                                </a>
+                                            </span>
+                                            <span>
+                                                <a ng-if="Task.Portfolio_x0020_Type=='Service' &&(Task.Item_x0020_Type=='Component Category')"
+                                                    ng-href="{{OtherUrl}}/SitePages/Service-Portfolio.aspx">
+                                                    Service-Portfolio<span>></span>
+                                                </a>
+                                            </span>
+                                            <span>
+                                                <a ng-if="Task.Portfolio_x0020_Type=='Events' &&(Task.Item_x0020_Type=='Component Category')"
+                                                    ng-href="{{OtherUrl}}/SitePages/Event-Portfolio.aspx">
+                                                    Event-Portfolio<span>></span>
+                                                </a>
+                                            </span>
+                                            <span class="">
+                                                <a>{{Task.Title}}</a>
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-sm-12 no-padding"
+                                    ng-if="(maincollection.length==undefined||maincollection.length==0)&&(Task.Item_x0020_Type!='Component Category')">
+                                    <ul class="">
+                                        <li>
+                                            <span>
+                                                <a ng-if="Task.Portfolio_x0020_Type=='Component' && (maincollection==undefined || maincollection.length==0) &&(Task.Item_x0020_Type!='Component Category')"
+                                                    ng-href="{{OtherUrl}}/SitePages/Component-Portfolio.aspx">
+                                                    Component-Portfolio
+                                                    <span>></span>
+                                                </a>
+                                            </span>
+                                            <span>
+                                                <a ng-if="Task.Portfolio_x0020_Type=='Service' && (maincollection==undefined || maincollection.length==0) &&(Task.Item_x0020_Type!='Component Category')"
+                                                    ng-href="{{OtherUrl}}/SitePages/Service-Portfolio.aspx">
+                                                    Service-Portfolio<span>></span>
+                                                </a>
+                                            </span>
+                                            <span>
+                                                <a ng-if="Task.Portfolio_x0020_Type=='Events' && (maincollection==undefined || maincollection.length==0) &&(Task.Item_x0020_Type!='Component Category')"
+                                                    ng-href="{{OtherUrl}}/SitePages/Event-Portfolio.aspx">
+                                                    Event-Portfolio<span>></span>
+                                                </a>
+                                            </span>
+                                            <span class="">
+                                                <span ng-if="Task!=undefined"></span>
+                                                <a>{{Task.Title}}</a>
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-sm-12 padL-0"
+                                    ng-if="(maincollection.length>0&&Task.Item_x0020_Type!='Component Category')">
+                                    <ul class="" ng-repeat="breadcrumbitem in maincollection">
+                                        <li>
+                                            <span>
+                                                <a ng-if="Task.Portfolio_x0020_Type=='Component'"
+                                                    ng-href="{{OtherUrl}}/SitePages/Component-Portfolio.aspx">
+                                                    Component-Portfolio
+                                                    <span>></span>
+                                                </a>
+                                            </span>
+                                            <span>
+                                                <a ng-if="Task.Portfolio_x0020_Type=='Service'"
+                                                    ng-href="{{OtherUrl}}/SitePages/Service-Portfolio.aspx">
+                                                    Service-Portfolio<span>></span>
+                                                </a>
+                                            </span>
+                                            <span>
+                                                <a ng-if="Task.Portfolio_x0020_Type=='Events'"
+                                                    ng-href="{{OtherUrl}}/SitePages/Event-Portfolio.aspx">
+                                                    Event-Portfolio<span>></span>
+                                                </a>
+                                            </span>
+                                            <span ng-if="breadcrumbitem.Parentitem!=undefined">
+                                                <span ng-if="breadcrumbitem.Parentitem!=undefined"></span>
+
+                                                <a
+                                                    ng-href="{{OtherUrl}}/SitePages/Portfolio-Profile.aspx?taskId={{breadcrumbitem.Parentitem.Id}}">{{breadcrumbitem.Parentitem.Title}}</a>
+                                            </span>
+                                            <span ng-if="breadcrumbitem.Child!=undefined">
+                                                <span
+                                                    ng-if="breadcrumbitem.Child!=undefined &&  breadcrumbitem.Parentitem!=''">></span>
+
+                                                <a
+                                                    ng-href="{{OtherUrl}}/SitePages/Portfolio-Profile.aspx?taskId={{breadcrumbitem.Child.Id}}">{{breadcrumbitem.Child.Title}}</a>
+                                            </span>
+                                            <span ng-if="breadcrumbitem.Subchild!=undefined">
+                                                <span ng-if="breadcrumbitem.Subchild!=undefined">></span>
+
+                                                <a
+                                                    ng-href="{{OtherUrl}}/SitePages/Portfolio-Profile.aspx?taskId={{breadcrumbitem.Subchild.Id}}">{{breadcrumbitem.Subchild.Title}}</a>
+                                            </span>
+                                            <span>
+                                                <span
+                                                    ng-if="Task!=undefined&&Task.Item_x0020_Type!='Component'">></span>
+                                                <a>{{Task.Title}}</a>
+                                            </span>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                                <div class="task-title mb-10" style="vertical-align:top">
+                                    <h1 class="mb-5">
+                                        <span>
+                                            <img ng-if="Task.Item_x0020_Type =='Component'&&Task.Portfolio_x0020_Type=='Component'"
+                                                style="height: 24px;width:24px;margin-top: -2px;"
+                                                ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Shareweb/component_icon.png">
+                                            <img ng-if="Task.Item_x0020_Type =='Component'&&Task.Portfolio_x0020_Type=='Service'"
+                                                style="height: 24px;width:24px;margin-top: -2px;"
+                                                ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Service_Icons/component_icon.png">
+                                            <img ng-if="Task.Item_x0020_Type =='Component'&&Task.Portfolio_x0020_Type=='Events'"
+                                                style="height: 24px;width:24px;margin-top: -2px;"
+                                                ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Event_Icons/component_icon.png">
+                                            <img ng-if="Task.Item_x0020_Type =='SubComponent' &&Task.Portfolio_x0020_Type =='Component'"
+                                                style="height: 24px;width:24px;margin-top: -2px;"
+                                                ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Shareweb/SubComponent_icon.png">
+                                            <img ng-if="Task.Item_x0020_Type =='SubComponent' && Task.Portfolio_x0020_Type =='Service'"
+                                                style="height: 24px;width:24px;margin-top: -2px;"
+                                                ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Service_Icons/SubComponent_icon.png">
+                                            <img ng-if="Task.Item_x0020_Type =='SubComponent' && Task.Portfolio_x0020_Type =='Events'"
+                                                style="height: 24px;width:24px;margin-top: -2px;"
+                                                ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Events_Icons/SubComponent_icon.png">
+                                            <img ng-if="Task.Item_x0020_Type =='Feature' && Task.Portfolio_x0020_Type =='Component'"
+                                                style="height: 24px;width:24px;margin-top: -2px;"
+                                                ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Shareweb/feature_icon.png">
+                                            <img ng-if="Task.Item_x0020_Type =='Feature' &&Task.Portfolio_x0020_Type =='Service'"
+                                                style="height: 24px;width: 24px;margin-top: -2px;"
+                                                ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Service_Icons/feature_icon.png">
+                                            <img ng-if="Task.Item_x0020_Type =='Feature' &&Task.Portfolio_x0020_Type =='Events'"
+                                                style="height: 24px;width:24px;margin-top: -2px;"
+                                                ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Events_Icons/feature_icon.png">
+                                        </span>
+                                        {{Task.Title}}
+                                        <img class="icon-sites-img" ng-show="Task.isNewItem"
+                                            ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Service_Icons/NewItemIcon-green.png" />
+                                        <a ng-if="isMemberOwner==true && isOwner==true" class="hreflink"
+                                            title="EditTask" ng-click="EditTask(Task)">
+                                            <img ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/32/edititem.gif">
+                                        </a>
+                                        <a ng-if="isMemberOwner==true && Task.WebpartItemId!=undefined" class="hreflink"
+                                            title="Portfolio Description" target="_blank"
+                                            ng-href="{{OtherUrl}}/SitePages/PortfolioDescriptionForm.aspx?taskId={{Task.WebpartItemId}}">
+                                            <img class="wid22"
+                                                ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/32/help_Icon.png">
+                                        </a>
+                                        <span>
+                                            <img class="hreflink" title="Version History" ng-click="GetitemsVersionhistory(Task,Task.Id)"
+                                            ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Shareweb/Version_H.png">
+                                        </span>
+                                    </h1>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 pad0">
+                                <div class="col-lg-12 left-col">
+                                    <div class="row">
+                                        <div class="col-sm-12 padL-0 PadR0">
+                                            <div class="involve_actor">
+                                                <div class="tmvalue" title="due date">
+                                                    <label class="full_width">Due Date</label>
+                                                </div>
+                                                <div class="tlvalue impact-infoII ">
+                                                    {{DueDate}}
+                                                </div>
+                                                <div class="tmvalue" title="Priority of Task">
+                                                    <label class="full_width">Priority</label>
+                                                </div>
+                                                <div class="tlvalue impact-infoII ">
+                                                    {{Task.Priority}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 padL-0 PadR0">
+                                            <div class="involve_actor">
+                                                <div class="tmvalue">
+                                                    <label class="full_width">Start Date</label>
+                                                </div>
+                                                <div class="tlvalue impact-infoII ">
+                                                    {{StartDate}}
+                                                </div>
+                                                <div class="tmvalue">
+                                                    <label class="full_width">Completion Date</label>
+                                                </div>
+                                                <div class="tlvalue impact-infoII ">
+                                                    {{CompletedDate}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 padL-0 PadR0">
+                                            <div class="involve_actor">
+                                                <div class="tmvalue" title="Status">
+                                                    <label class="full_width">Status</label>
+                                                </div>
+                                                <div class="tlvalue impact-infoII ">
+                                                    {{Task.Status}}
+                                                </div>
+                                                <div class="tmvalue" title="Task Category">
+                                                    <label class="full_width">Categories </label>
+                                                </div>
+                                                <div class="tlvalue impact-infoII ">
+                                                    {{Task.Categories}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 padL-0 PadR0">
+                                            <div class="involve_actor blocks">
+                                                <div class="tmvalue" title="Assigned Person">
+                                                    <label class="full_width">Team Members</label>
+                                                </div>
+                                                <div class="tlvalue impact-infoII">
+                                                    <show-task-team sentid="Task.Id" sentitem="Task"
+                                                        webpartid="'ShowTaskTeamController'"></show-task-team>
+                                                </div>
+                                                <div class="tmvalue" title="% Complete">
+                                                    <label class="full_width">% Complete</label>
+                                                </div>
+
+                                                <div class="tlvalue impact-infoII " ng-if="Task.PercentComplete < 1">
+                                                    {{Task.PercentComplete*100}}
+                                                </div>
+                                                <div class="tlvalue impact-infoII " ng-if="Task.PercentComplete  >= 1">
+                                                    {{Task.PercentComplete}}
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <!--IsParentComponent-->
+                                        <div class="col-sm-12 padL-0 PadR0">
+                                            <div class="involve_actor ">
+                                                <div class="tmvalue" title="Tagged Parent"
+                                                    ng-show="Task.Parent.Title!=undefined">
+                                                    <label class="full_width">Parent</label>
+                                                </div>
+                                                <div class="tlvalue impact-infoII"
+                                                    ng-show="Task.Parent.Title!=undefined">
+                                                    <a class="hreflink" target="_blank"
+                                                        ng-href="{{OtherUrl}}/SitePages/Portfolio-Profile.aspx?taskId={{Task.Parent.Id}}">{{Task.Parent.Title}}
+                                                    </a>
+                                                </div>
+                                                <div class="tmvalue" title="Item Rank">
+                                                    <label class="full_width">Item Rank</label>
+                                                </div>
+                                                <div class="tlvalue impact-infoII">
+                                                    {{Task.ItemRank}}
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                        <!--new component-->
+                                        <div class="col-sm-12 padL-0 PadR0">
+                                            <div class="involve_actor">
+                                                <div ng-show="Task.Portfolio_x0020_Type=='Component'"
+                                                    class="tmvalue impact-infoI" title="ServicePortfolio">
+                                                    <label class="full_width">Service Portfolio</label>
+                                                </div>
+                                                <div ng-show="Task.Portfolio_x0020_Type=='Component'"
+                                                    class="tlvalue impact-infoII ">
+                                                    <div ng-hide="Task.ServicePortfolio.Id==undefined" class="">
+                                                        <a class="hreflink col-sm-4 block" target="_blank"
+                                                            ng-href="{{OtherUrl}}/SitePages/Portfolio-Profile.aspx?taskId={{Task.ServicePortfolio.Id}}">{{Task.ServicePortfolio.Title}}</a>
+                                                    </div>
+                                                </div>
+                                                <div ng-show="Task.Portfolio_x0020_Type=='Service'"
+                                                    class="tmvalue impact-infoI" title="ComponentPortfolio">
+                                                    <label class="full_width">Component Portfolio</label>
+                                                </div>
+                                                <div ng-show="Task.Portfolio_x0020_Type=='Service'"
+                                                    class="tlvalue impact-infoII ">
+                                                    <div ng-hide="Task.ComponentPortfolio.Id==undefined"
+                                                        class=" col-sm-4 block">
+                                                        <a class="hreflink" target="_blank"
+                                                            ng-href="{{OtherUrl}}/SitePages/Portfolio-Profile.aspx?taskId={{Task.ComponentPortfolio.Id}}">{{Task.ComponentPortfolio.Title}}</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--start expand collapse code-->
+
+                                    <div class="row mt-10">
+
+                                        <div class="row ml-0 mr-0">
+                                            <div
+                                                class="{{attachments.length==0?'col-sm-12 PadR0 padL-0':'col-sm-12 padL-0 PadR0'}} involve_actor">
+                                                <div class="col-sm-4 PadL0" ng-if="attachments.length >0">
+                                                    <div class=" no-padding" ng-repeat="attachedFiles in attachments">
+                                                        <div class="mt-10"
+                                                            ng-if="attachedFiles.FileName.toLowerCase().indexOf('.png'.toLowerCase())> -1 || attachedFiles.FileName.toLowerCase().indexOf('.jpg'.toLowerCase())> -1 || attachedFiles.FileName.toLowerCase().indexOf('.bmp'.toLowerCase())> -1">
+
+                                                            <div class="img" id="sit-sharewebImagePopup-demo">
+                                                                <a ng-if="deleteAttachedFile = true" class="sit-preview"
+                                                                    target="_blank"
+                                                                    href="{{CurrentSiteUrl}}/Lists/{{site}}/Attachments/{{attachedItemId}}/{{attachedFiles.FileName}}">
+                                                                    <img alt="{{attachedFiles.FileName}}"
+                                                                        style="width:398px;"
+                                                                        ng-src="{{CurrentSiteUrl}}/Lists/{{site}}/Attachments/{{attachedItemId}}/{{attachedFiles.FileName}}"
+                                                                        data-preview-url="{{baseUrl}}/Lists/{{site}}/Attachments/{{attachedItemId}}/{{attachedFiles.FileName}}">
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                        <div
+                                                            ng-if="attachedFiles.FileName.toLowerCase().indexOf('.txt'.toLowerCase())> -1 || attachedFiles.FileName.toLowerCase().indexOf('.docx'.toLowerCase())> -1  || attachedFiles.FileName.toLowerCase().indexOf('.pdf'.toLowerCase())> -1  || attachedFiles.FileName.toLowerCase().indexOf('.doc'.toLowerCase())> -1 || attachedFiles.FileName.toLowerCase().indexOf('.msg'.toLowerCase())> -1 || attachedFiles.FileName.toLowerCase().indexOf('.pptx'.toLowerCase())> -1 || attachedFiles.FileName.toLowerCase().indexOf('.xls'.toLowerCase())> -1 || attachedFiles.FileName.toLowerCase().indexOf('.xlsx'.toLowerCase())> -1">
+                                                            <a
+                                                                ng-href="{{CurrentSiteUrl}}/Lists/{{site}}/Attachments/{{attachedItemId}}/{{attachedFiles.FileName}}">
+                                                                {{$index+1}}.
+                                                                {{attachedFiles.FileName}}
+                                                            </a>
+                                                        </div>
+                                                        <div class="mt-2 font11 pull-right"
+                                                            ng-show="attachedFiles.FileName==imageInfo.ImageName"
+                                                            ng-repeat="imageInfo in BasicImageInfo">
+                                                            <span>{{imageInfo.UploadeDate}}</span>
+                                                            By <span>{{imageInfo.UserName}}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div
+                                                    class="{{attachments.length==0?'col-sm-12 no-padding':'col-sm-12 padL-0 PadR0'}} mt-10">
+                                                    <div ng-show="Task.ClientActivityJson.length>0"
+                                                        class="col-sm-12 padL-0 PadR0 dashboard-sm-12">
+                                                        <div class="panel panel-primary-head blocks"
+                                                            style=" box-shadow: none;transition: none;"
+                                                            id="t_draggable1">
+                                                            <div class="panel-heading profileboxclr"
+                                                                style="  background-color: #f5f5f5!important; border-color: #ddd; padding: 7px;">
+                                                                <h3 class="panel-title" style="text-align: inherit;">
+                                                                    <label for="identifier-3" class="lbltitleclr">Linked
+                                                                        Shareweb Pages<span
+                                                                            class="ml2">({{Task.ClientActivityJson.length}})</span></label>
+                                                                    <span class="pull-left">
+                                                                        <span
+                                                                            ng-if="!expand_collapseLinkedSharewebPages  &&Task.Portfolio_x0020_Type=='Component'"
+                                                                            style="cursor:pointer;"
+                                                                            ng-click="filterExpandSitecomposition(false)">
+                                                                            <img style="width:10px;"
+                                                                                ng-src="{{newURL}}/SiteCollectionImages/ICONS/24/right-list-icon.png">
+                                                                        </span>
+                                                                        <span
+                                                                            ng-if="!expand_collapseLinkedSharewebPages &&Task.Portfolio_x0020_Type=='Service'"
+                                                                            style="cursor:pointer;"
+                                                                            ng-click="filterExpandSitecomposition(false)">
+                                                                            <img style="width:10px;"
+                                                                                ng-src="{{newURL}}/SiteCollectionImages/ICONS/Service_Icons/Rightarrowicon-green.png">
+                                                                        </span>
+                                                                        <span
+                                                                            ng-if="!expand_collapseLinkedSharewebPages &&Task.Portfolio_x0020_Type=='Events'"
+                                                                            style="cursor:pointer;"
+                                                                            ng-click="filterExpandSitecomposition(false)">
+                                                                            <img style="width:10px;"
+                                                                                ng-src="{{newURL}}/SiteCollectionImages/ICONS/Event_Icons/Rightarrowicon-orange.png">
+                                                                        </span>
+
+                                                                        <span
+                                                                            ng-if="expand_collapseLinkedSharewebPages && Task.Portfolio_x0020_Type=='Component'"
+                                                                            style="cursor:pointer; "
+                                                                            ng-click="filterExpandSitecomposition(true)">
+                                                                            <img style="width:10px;"
+                                                                                ng-src="{{newURL}}/SiteCollectionImages/ICONS/24/list-icon.png">
+                                                                        </span>
+                                                                        <span
+                                                                            ng-if="expand_collapseLinkedSharewebPages && Task.Portfolio_x0020_Type=='Service'"
+                                                                            style="cursor:pointer; "
+                                                                            ng-click="filterExpandSitecomposition(true)">
+                                                                            <img style="width:10px;"
+                                                                                ng-src="{{newURL}}/SiteCollectionImages/ICONS/Service_Icons/Downarrowicon-green.png">
+                                                                        </span>
+                                                                        <span
+                                                                            ng-if="expand_collapseLinkedSharewebPages && Task.Portfolio_x0020_Type=='Events'"
+                                                                            style="cursor:pointer; "
+                                                                            ng-click="filterExpandSitecomposition(true)">
+                                                                            <img style="width:10px;"
+                                                                                ng-src="{{newURL}}/SiteCollectionImages/ICONS/Event_Icons/Downarrowicon-orange.png">
+                                                                        </span>
+                                                                    </span>
+                                                                    <span ng-show="isOwner" class="pull-right">
+                                                                        <page-settings-info
+                                                                            webpartid="'LinkingSiteInformation'">
+                                                                        </page-settings-info>
+                                                                    </span>
+                                                                    <a class="hreflink mr-32 mtop5 pull-right fontSize15"
+                                                                        ng-click="openAddSharewebLink()">Add Additional
+                                                                        Pages</a>
+                                                                </h3>
+
+                                                            </div>
+                                                            <div style="{{expand_collapseLinkedSharewebPages?'display:inline;':'display:none;'}}"
+                                                                id="testDiv2">
+                                                                <ul class="table table-hover">
+                                                                    <li ng-repeat="item in Task.ClientActivityJson"
+                                                                        class="for-lis project_active">
+                                                                        <div style="width:1%;">
+                                                                        </div>
+                                                                        <div style="width:7%;" class="padLR">
+                                                                            <img class="wid29"
+                                                                                ng-src="{{item.SiteIcon}}">
+                                                                        </div>
+
+                                                                        <div style="width:92%;" class="padLR">
+                                                                            <a class="hreflink" target="_blank"
+                                                                                ng-href="{{item.RedirectUrl}}">
+                                                                                {{item.RedirectUrl}}
+                                                                            </a>
+                                                                        </div>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div ng-if=" Task.Body!=undefined && Task.Body!='' "
+                                                        class="col-sm-12 padL-0 PadR0 dashboard-sm-12">
+                                                        <div class="panel panel-default" id="t_draggable1">
+                                                            <div class="panel-heading">
+                                                                <h3 class="panel-title">
+                                                                    <label for="identifier-3" class="no-padding">
+                                                                        Description
+                                                                    </label>
+                                                                    <span class="pull-left">
+                                                                        <span
+                                                                            ng-if="!Task.expanded7  &&Task.Portfolio_x0020_Type=='Component'"
+                                                                            style="cursor:pointer;"
+                                                                            ng-click="toggle7Smart(Task)">
+                                                                            <img style="width:10px;"
+                                                                                ng-src="{{newURL}}/SiteCollectionImages/ICONS/24/right-list-icon.png">
+                                                                        </span>
+                                                                        <span
+                                                                            ng-if="!Task.expanded7 &&Task.Portfolio_x0020_Type=='Service'"
+                                                                            style="cursor:pointer;"
+                                                                            ng-click="toggle7Smart(Task)">
+                                                                            <img style="width:10px;"
+                                                                                ng-src="{{newURL}}/SiteCollectionImages/ICONS/Service_Icons/Rightarrowicon-green.png">
+                                                                        </span>
+                                                                        <span
+                                                                            ng-if="!Task.expanded7 &&Task.Portfolio_x0020_Type=='Events'"
+                                                                            style="cursor:pointer;"
+                                                                            ng-click="toggle7Smart(Task)">
+                                                                            <img style="width:10px;"
+                                                                                ng-src="{{newURL}}/SiteCollectionImages/ICONS/Event_Icons/Rightarrowicon-orange.png">
+                                                                        </span>
+
+                                                                        <span
+                                                                            ng-if="Task.expanded7 && Task.Portfolio_x0020_Type=='Component'"
+                                                                            style="cursor:pointer; "
+                                                                            ng-click="toggle7Smart(Task)">
+                                                                            <img style="width:10px;"
+                                                                                ng-src="{{newURL}}/SiteCollectionImages/ICONS/24/list-icon.png">
+                                                                        </span>
+                                                                        <span
+                                                                            ng-if="Task.expanded7 && Task.Portfolio_x0020_Type=='Service'"
+                                                                            style="cursor:pointer; "
+                                                                            ng-click="toggle7Smart(Task)">
+                                                                            <img style="width:10px;"
+                                                                                ng-src="{{newURL}}/SiteCollectionImages/ICONS/Service_Icons/Downarrowicon-green.png">
+                                                                        </span>
+                                                                        <span
+                                                                            ng-if="Task.expanded7 && Task.Portfolio_x0020_Type=='Events'"
+                                                                            style="cursor:pointer; "
+                                                                            ng-click="toggle7Smart(Task)">
+                                                                            <img style="width:10px;"
+                                                                                ng-src="{{newURL}}/SiteCollectionImages/ICONS/Event_Icons/Downarrowicon-orange.png">
+                                                                        </span>
+                                                                    </span>
+                                                                </h3>
+                                                            </div>
+                                                            <div
+                                                                style="{{Task.expanded7?'display:inline;':'display:none;'}}">
+                                                                <div class="boxbdrdesign" id="testDiv1">
+                                                                    <!--<div>{{Task.Body}}</div>-->
+                                                                    <span ng-bind-html="Task.Body | trustedHTML"></span>
+                                                                </div>
+                                                            </div>
+
+
+                                                        </div>
+                                                    </div>
+                                                    <div ng-if=" Task.Short_x0020_Description_x0020_On!=undefined && Task.Short_x0020_Description_x0020_On!='' "
+                                                        class="col-sm-12 padL-0 PadR0 teamdashboard_col-sm-12">
+                                                        <div class="panel panel-default" id="t_draggable1">
+                                                            <div class="panel-heading">
+                                                                <h3 class="panel-title">
+                                                                    <label for="identifier-3" class="no-padding">
+                                                                        Short
+                                                                        Description
+                                                                    </label>
+                                                                    <span class="pull-left">
+                                                                        <span
+                                                                            ng-if="!Task.expanded2 && Task.Portfolio_x0020_Type=='Component'"
+                                                                            style="cursor:pointer;"
+                                                                            ng-click="toggle2Smart(Task)">
+                                                                            <img style="width:10px;"
+                                                                                ng-src="{{newURL}}/SiteCollectionImages/ICONS/24/right-list-icon.png">
+                                                                        </span>
+                                                                        <span
+                                                                            ng-if="!Task.expanded2 && Task.Portfolio_x0020_Type=='Service'"
+                                                                            style="cursor:pointer;"
+                                                                            ng-click="toggle2Smart(Task)">
+                                                                            <img style="width:10px;"
+                                                                                ng-src="{{newURL}}/SiteCollectionImages/ICONS/Service_Icons/Rightarrowicon-green.png">
+                                                                        </span>
+                                                                        <span
+                                                                            ng-if="!Task.expanded2 && Task.Portfolio_x0020_Type=='Events'"
+                                                                            style="cursor:pointer;"
+                                                                            ng-click="toggle2Smart(Task)">
+                                                                            <img style="width:10px;"
+                                                                                ng-src="{{newURL}}/SiteCollectionImages/ICONS/Event_Icons/Rightarrowicon-orange.png">
+                                                                        </span>
+                                                                        <span
+                                                                            ng-if="Task.expanded2 &&Task.Portfolio_x0020_Type=='Component'"
+                                                                            style="cursor:pointer; "
+                                                                            ng-click="toggle2Smart(Task)">
+                                                                            <img style="width:10px;"
+                                                                                ng-src="{{newURL}}/SiteCollectionImages/ICONS/24/list-icon.png">
+                                                                        </span>
+                                                                        <span
+                                                                            ng-if="Task.expanded2 &&Task.Portfolio_x0020_Type=='Service' "
+                                                                            style="cursor:pointer; "
+                                                                            ng-click="toggle2Smart(Task)">
+                                                                            <img style="width:10px;"
+                                                                                ng-src="{{newURL}}/SiteCollectionImages/ICONS/Service_Icons/Downarrowicon-green.png">
+                                                                        </span>
+                                                                        <span
+                                                                            ng-if="Task.expanded2 &&Task.Portfolio_x0020_Type=='Events' "
+                                                                            style="cursor:pointer; "
+                                                                            ng-click="toggle2Smart(Task)">
+                                                                            <img style="width:10px;"
+                                                                                ng-src="{{newURL}}/SiteCollectionImages/ICONS/Event_Icons/Downarrowicon-orange.png">
+                                                                        </span>
+                                                                    </span>
+                                                                </h3>
+                                                            </div>
+                                                            <div
+                                                                style="{{Task.expanded2?'display:inline;':'display:none;'}}">
+                                                                <div class="boxbdrdesign" id="testDiv1">
+                                                                    <span
+                                                                        ng-bind-html="Task.Short_x0020_Description_x0020_On | trustedHTML"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="ms-clear"></div>
+                                        </div>
+                                        <div ng-show="AllQuestion.length!=0"
+                                            class="col-sm-12 padL-0 PadR0 dashboard-sm-12">
+                                            <div class="panel panel-default"
+                                                style=" box-shadow: none; transition: none;" id="t_draggable1">
+                                                <div class="panel-heading">
+                                                    <h3 class="panel-title">
+                                                        <label for="identifier-3" class="no-padding">
+                                                            Questions
+                                                            Description
+                                                        </label>
+                                                        <span class="pull-left">
+                                                            <span
+                                                                ng-if="!expand_collapseQuestionDescription &&Task.Portfolio_x0020_Type=='Component'"
+                                                                style="cursor:pointer;"
+                                                                ng-click="toggleQuestionDescription(false)">
+                                                                <img style="width:10px;"
+                                                                    ng-src="{{newURL}}/SiteCollectionImages/ICONS/24/right-list-icon.png">
+                                                            </span>
+                                                            <span
+                                                                ng-if="!expand_collapseQuestionDescription &&Task.Portfolio_x0020_Type=='Service'"
+                                                                style="cursor:pointer;"
+                                                                ng-click="toggleQuestionDescription(false)">
+                                                                <img style="width:10px;"
+                                                                    ng-src="{{newURL}}/SiteCollectionImages/ICONS/Service_Icons/Rightarrowicon-green.png">
+                                                            </span>
+                                                            <span
+                                                                ng-if="!expand_collapseQuestionDescription &&Task.Portfolio_x0020_Type=='Events'"
+                                                                style="cursor:pointer;"
+                                                                ng-click="toggleQuestionDescription(false)">
+                                                                <img style="width:10px;"
+                                                                    ng-src="{{newURL}}/SiteCollectionImages/ICONS/Event_Icons/Rightarrowicon-orange.png">
+                                                            </span>
+
+                                                            <span
+                                                                ng-if="expand_collapseQuestionDescription && Task.Portfolio_x0020_Type=='Component'"
+                                                                style="cursor:pointer; "
+                                                                ng-click="toggleQuestionDescription(true)">
+                                                                <img style="width:10px;"
+                                                                    ng-src="{{newURL}}/SiteCollectionImages/ICONS/24/list-icon.png">
+                                                            </span>
+                                                            <span
+                                                                ng-if="expand_collapseQuestionDescription && Task.Portfolio_x0020_Type=='Service'"
+                                                                style="cursor:pointer; "
+                                                                ng-click="toggleQuestionDescription(true)">
+                                                                <img style="width:10px;"
+                                                                    ng-src="{{newURL}}/SiteCollectionImages/ICONS/Service_Icons/Downarrowicon-green.png">
+                                                            </span>
+                                                            <span
+                                                                ng-if="expand_collapseQuestionDescription && Task.Portfolio_x0020_Type=='Events'"
+                                                                style="cursor:pointer; "
+                                                                ng-click="toggleQuestionDescription(true)">
+                                                                <img style="width:10px;"
+                                                                    ng-src="{{newURL}}/SiteCollectionImages/ICONS/Event_Icons/Downarrowicon-orange.png">
+                                                            </span>
+                                                        </span>
+                                                    </h3>
+
+                                                </div>
+                                                <div
+                                                    style="{{expand_collapseQuestionDescription?'display:inline;':'display:none;'}}">
+                                                    <div class="boxbdrdesign" id="testDiv1">
+                                                        <div>
+                                                            <div class="accordin-header ng-scope"
+                                                                ng-repeat="item in AllQuestion">
+                                                                <input class="toggle-box-content"
+                                                                    id="identifier1-{{item.Id}}" type="checkbox">
+                                                                <label for="identifier1-{{item.Id}}" class="ng-binding">
+                                                                    <span>{{item.Title}}</span>
+                                                                </label>
+                                                                <div class="ng-binding">
+                                                                    <div class="accordin-content"
+                                                                        ng-bind-html="item.Body | trustedHTML">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div ng-show="AllQuestion.length==0"
+                                                                class="text-center panel-heading">
+                                                                No Questions Description available
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div ng-show="AllHelp.length!=0" class="col-sm-12 padL-0 PadR0 dashboard-sm-12">
+                                            <div class="panel panel-default" id="t_draggable1">
+                                                <div class="panel-heading">
+                                                    <h3 class="panel-title">
+                                                        <label for="identifier-3" class="no-padding">Help
+                                                            Description</label>
+                                                        <span class="pull-left">
+                                                            <span
+                                                                ng-if="!expand_collapseHelpDescription  &&Task.Portfolio_x0020_Type=='Component'"
+                                                                style="cursor:pointer;"
+                                                                ng-click="toggleHelpDescription(false)">
+                                                                <img style="width:10px;"
+                                                                    ng-src="{{newURL}}/SiteCollectionImages/ICONS/24/right-list-icon.png">
+                                                            </span>
+                                                            <span
+                                                                ng-if="!expand_collapseHelpDescription &&Task.Portfolio_x0020_Type=='Service'"
+                                                                style="cursor:pointer;"
+                                                                ng-click="toggleHelpDescription(false)">
+                                                                <img style="width:10px;"
+                                                                    ng-src="{{newURL}}/SiteCollectionImages/ICONS/Service_Icons/Rightarrowicon-green.png">
+                                                            </span>
+                                                            <span
+                                                                ng-if="!expand_collapseHelpDescription &&Task.Portfolio_x0020_Type=='Events'"
+                                                                style="cursor:pointer;"
+                                                                ng-click="toggleHelpDescription(false)">
+                                                                <img style="width:10px;"
+                                                                    ng-src="{{newURL}}/SiteCollectionImages/ICONS/Event_Icons/Rightarrowicon-orange.png">
+                                                            </span>
+
+                                                            <span
+                                                                ng-if="expand_collapseHelpDescription && Task.Portfolio_x0020_Type=='Component'"
+                                                                style="cursor:pointer; "
+                                                                ng-click="toggleHelpDescription(true)">
+                                                                <img style="width:10px;"
+                                                                    ng-src="{{newURL}}/SiteCollectionImages/ICONS/24/list-icon.png">
+                                                            </span>
+                                                            <span
+                                                                ng-if="expand_collapseHelpDescription && Task.Portfolio_x0020_Type=='Service'"
+                                                                style="cursor:pointer; "
+                                                                ng-click="toggleHelpDescription(true)">
+                                                                <img style="width:10px;"
+                                                                    ng-src="{{newURL}}/SiteCollectionImages/ICONS/Service_Icons/Downarrowicon-green.png">
+                                                            </span>
+                                                            <span
+                                                                ng-if="expand_collapseHelpDescription && Task.Portfolio_x0020_Type=='Events'"
+                                                                style="cursor:pointer; "
+                                                                ng-click="toggleHelpDescription(true)">
+                                                                <img style="width:10px;"
+                                                                    ng-src="{{newURL}}/SiteCollectionImages/ICONS/Event_Icons/Downarrowicon-orange.png">
+                                                            </span>
+                                                        </span>
+                                                    </h3>
+
+                                                </div>
+                                                <div
+                                                    style="{{expand_collapseHelpDescription?'display:inline;':'display:none;'}}">
+                                                    <div class="boxbdrdesign" id="testDiv1">
+                                                        <div>
+                                                            <div class="accordin-header ng-scope"
+                                                                ng-repeat="item in AllHelp">
+                                                                <input class="toggle-box-content"
+                                                                    id="identifier1-{{item.Id}}" type="checkbox">
+                                                                <label for="identifier1-{{item.Id}}" class="ng-binding">
+                                                                    <span>{{item.Title}}</span>
+                                                                </label>
+                                                                <div class="ng-binding">
+                                                                    <div class="accordin-content"
+                                                                        ng-bind-html="item.Body | trustedHTML">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div ng-show="AllHelp.length==0"
+                                                                class="text-center panel-heading">
+                                                                No Help Description available
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div ng-if="Task.Background!=undefined && Task.Background!='' && Task.Background!= null "
+                                            class="col-sm-12  padL-0 PadR0 teamdashboard_col-sm-12">
+                                            <div class="panel panel-default" id="t_draggable1">
+                                                <div class="panel-heading">
+                                                    <h3 class="panel-title">
+                                                        <label for="identifier-3" class="no-padding"
+                                                            ng-bind-html="GetColumnDetails('Background')"></label>
+                                                        <span class="pull-left">
+
+                                                            <span
+                                                                ng-if="!Task.expanded && Task.Portfolio_x0020_Type=='Component'"
+                                                                style="cursor:pointer;" ng-click="toggleSmart(Task)">
+                                                                <img style="width:10px;"
+                                                                    ng-src="{{newURL}}/SiteCollectionImages/ICONS/24/right-list-icon.png">
+                                                            </span>
+                                                            <span
+                                                                ng-if="!Task.expanded  && Task.Portfolio_x0020_Type=='Service'"
+                                                                style="cursor:pointer;" ng-click="toggleSmart(Task)">
+                                                                <img style="width:10px;"
+                                                                    ng-src="{{newURL}}/SiteCollectionImages/ICONS/Service_Icons/Rightarrowicon-green.png">
+                                                            </span>
+                                                            <span
+                                                                ng-if="!Task.expanded  && Task.Portfolio_x0020_Type=='Events'"
+                                                                style="cursor:pointer;" ng-click="toggleSmart(Task)">
+                                                                <img style="width:10px;"
+                                                                    ng-src="{{newURL}}/SiteCollectionImages/ICONS/Events_Icons/Rightarrowicon-orange.png">
+                                                            </span>
+                                                            <span
+                                                                ng-if="Task.expanded && Task.Portfolio_x0020_Type=='Component'"
+                                                                style="cursor:pointer; " ng-click="toggleSmart(Task)">
+                                                                <img style="width:10px;"
+                                                                    ng-src="{{newURL}}/SiteCollectionImages/ICONS/24/list-icon.png">
+                                                            </span>
+                                                            <span
+                                                                ng-if="Task.expanded && Task.Portfolio_x0020_Type=='Service'"
+                                                                style="cursor:pointer; " ng-click="toggleSmart(Task)">
+                                                                <img style="width:10px;"
+                                                                    ng-src="{{newURL}}/SiteCollectionImages/ICONS/Service_Icons/Downarrowicon-green.png">
+                                                            </span>
+
+                                                            <span
+                                                                ng-if="Task.expanded && Task.Portfolio_x0020_Type=='Events'"
+                                                                style="cursor:pointer; " ng-click="toggleSmart(Task)">
+                                                                <img style="width:10px;"
+                                                                    ng-src="{{newURL}}/SiteCollectionImages/ICONS/Events_Icons/Downarrowicon-orange.png">
+                                                            </span>
+                                                        </span>
+                                                    </h3>
+                                                </div>
+                                                <div style="{{Task.expanded?'display:inline;':'display:none;'}}">
+                                                    <div class="boxbdrdesign" id="testDiv1">
+                                                        <div>{{ Task.Background }}</div>
+                                                    </div>
+                                                </div>
+                                                <!--</fieldset>-->
+
+                                            </div>
+                                        </div>
+                                        <div ng-if="Task.Idea!=undefined && Task.Idea!='' "
+                                            class="col-sm-12 padL-0 PadR0 teamdashboard_col-sm-12">
+                                            <div class="panel panel-default" id="t_draggable1">
+                                                <div class="panel-heading">
+                                                    <h3 class="panel-title">
+                                                        <label for="identifier-3" class="no-padding"
+                                                            ng-bind-html="GetColumnDetails('Idea')"></label>
+                                                        <span class="pull-left">
+                                                            <span
+                                                                ng-if="!Task.expanded1 && Task.Portfolio_x0020_Type=='Component'"
+                                                                style="cursor:pointer;" ng-click="toggle1Smart(Task)">
+                                                                <img style="width:10px;"
+                                                                    ng-src="{{newURL}}/SiteCollectionImages/ICONS/24/right-list-icon.png">
+                                                            </span>
+                                                            <span
+                                                                ng-if="!Task.expanded1 && Task.Portfolio_x0020_Type=='Service'"
+                                                                style="cursor:pointer;" ng-click="toggle1Smart(Task)">
+                                                                <img style="width:10px;"
+                                                                    ng-src="{{newURL}}/SiteCollectionImages/ICONS/Service_Icons/Rightarrowicon-green.png">
+                                                            </span>
+                                                            <span
+                                                                ng-if="!Task.expanded1 && Task.Portfolio_x0020_Type=='Events'"
+                                                                style="cursor:pointer;" ng-click="toggle1Smart(Task)">
+                                                                <img style="width:10px;"
+                                                                    ng-src="{{newURL}}/SiteCollectionImages/ICONS/Event_Icons/Rightarrowicon-orange.png">
+                                                            </span>
+                                                            <span
+                                                                ng-if="Task.expanded1 && Task.Portfolio_x0020_Type=='Component'"
+                                                                style="cursor:pointer; " ng-click="toggle1Smart(Task)">
+                                                                <img style="width:10px;"
+                                                                    ng-src="{{newURL}}/SiteCollectionImages/ICONS/24/list-icon.png">
+                                                            </span>
+                                                            <span
+                                                                ng-if="Task.expanded1 && Task.Portfolio_x0020_Type=='Service'"
+                                                                style="cursor:pointer; " ng-click="toggle1Smart(Task)">
+                                                                <img style="width:10px;"
+                                                                    ng-src="{{newURL}}/SiteCollectionImages/ICONS/Service_Icons/Downarrowicon-green.png">
+                                                            </span>
+                                                            <span
+                                                                ng-if="Task.expanded1 && Task.Portfolio_x0020_Type=='Events'"
+                                                                style="cursor:pointer; " ng-click="toggle1Smart(Task)">
+                                                                <img style="width:10px;"
+                                                                    ng-src="{{newURL}}/SiteCollectionImages/ICONS/Event_Icons/Downarrowicon-orange.png">
+                                                            </span>
+                                                        </span>
+                                                    </h3>
+                                                </div>
+                                                <div style="{{Task.expanded1?'display:inline;':'display:none;'}}">
+                                                    <div class="boxbdrdesign" id="testDiv1">
+                                                        <div> {{Task.Idea}}</div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div ng-if=" Task.ValueAdded!=undefined && Task.ValueAdded!='' "
+                                            class="col-sm-12  padL-0 PadR0 teamdashboard_col-sm-12">
+                                            <div class="panel panel-default" id="t_draggable1">
+                                                <div class="panel-heading">
+                                                    <h3 class="panel-title">
+                                                        <label for="identifier-3" class="no-padding"
+                                                            ng-bind-html="GetColumnDetails('ValueAdded')"></label>
+                                                        <span class="pull-left">
+                                                            <span
+                                                                ng-if="!Task.expanded4 && Task.Portfolio_x0020_Type=='Component'"
+                                                                style="cursor:pointer;" ng-click="toggle4Smart(Task)">
+                                                                <img style="width:10px;"
+                                                                    ng-src="{{newURL}}/SiteCollectionImages/ICONS/24/right-list-icon.png">
+                                                            </span>
+                                                            <span
+                                                                ng-if="!Task.expanded4  && Task.Portfolio_x0020_Type=='Service'"
+                                                                style="cursor:pointer;" ng-click="toggle4Smart(Task)">
+                                                                <img style="width:10px;"
+                                                                    ng-src="{{newURL}}/SiteCollectionImages/ICONS/Service_Icons/Rightarrowicon-green.png">
+                                                            </span>
+                                                            <span
+                                                                ng-if="!Task.expanded4  && Task.Portfolio_x0020_Type=='Events'"
+                                                                style="cursor:pointer;" ng-click="toggle4Smart(Task)">
+                                                                <img style="width:10px;"
+                                                                    ng-src="{{newURL}}/SiteCollectionImages/ICONS/Event_Icons/Rightarrowicon-orange.png">
+                                                            </span>
+                                                            <span
+                                                                ng-if="Task.expanded4 && Task.Portfolio_x0020_Type=='Component'"
+                                                                style="cursor:pointer; " ng-click="toggle4Smart(Task)">
+                                                                <img style="width:10px;"
+                                                                    ng-src="{{newURL}}/SiteCollectionImages/ICONS/24/list-icon.png">
+                                                            </span>
+                                                            <span
+                                                                ng-if="Task.expanded4 && Task.Portfolio_x0020_Type=='Service'"
+                                                                style="cursor:pointer; " ng-click="toggle4Smart(Task)">
+                                                                <img style="width:10px;"
+                                                                    ng-src="{{newURL}}/SiteCollectionImages/ICONS/Service_Icons/Downarrowicon-green.png">
+                                                            </span>
+                                                            <span
+                                                                ng-if="Task.expanded4 && Task.Portfolio_x0020_Type=='Events'"
+                                                                style="cursor:pointer; " ng-click="toggle4Smart(Task)">
+                                                                <img style="width:10px;"
+                                                                    ng-src="{{newURL}}/SiteCollectionImages/ICONS/Event_Icons/Downarrowicon-orange.png">
+                                                            </span>
+                                                        </span>
+                                                    </h3>
+                                                </div>
+                                                <div style="{{Task.expanded4?'display:inline;':'display:none;'}}">
+                                                    <div class="boxbdrdesign" id="testDiv1">
+                                                        <div>{{ Task.ValueAdded }}</div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div ng-show=" Task.Help_x0020_Information!=undefined && Task.Help_x0020_Information!='' "
+                                            class="col-sm-12 padL-0 PadR0 dashboard-sm-12">
+                                            <div class="panel panel-default" id="t_draggable1">
+                                                <div class="panel-heading">
+                                                    <h3 class="panel-title">
+                                                        <label for="identifier-3" class="no-padding"
+                                                            ng-bind-html="GetColumnDetails('HelpInformation')"></label>
+                                                        <span class="pull-left">
+                                                            <span
+                                                                ng-if="!Task.expanded3  &&Task.Portfolio_x0020_Type=='Component'"
+                                                                style="cursor:pointer;" ng-click="toggle3Smart(Task)">
+                                                                <img style="width:10px;"
+                                                                    ng-src="{{newURL}}/SiteCollectionImages/ICONS/24/right-list-icon.png">
+                                                            </span>
+                                                            <span
+                                                                ng-if="!Task.expanded3 &&Task.Portfolio_x0020_Type=='Service'"
+                                                                style="cursor:pointer;" ng-click="toggle3Smart(Task)">
+                                                                <img style="width:10px;"
+                                                                    ng-src="{{newURL}}/SiteCollectionImages/ICONS/Service_Icons/Rightarrowicon-green.png">
+                                                            </span>
+                                                            <span
+                                                                ng-if="!Task.expanded3 &&Task.Portfolio_x0020_Type=='Events'"
+                                                                style="cursor:pointer;" ng-click="toggle3Smart(Task)">
+                                                                <img style="width:10px;"
+                                                                    ng-src="{{newURL}}/SiteCollectionImages/ICONS/Event_Icons/Rightarrowicon-orange.png">
+                                                            </span>
+
+                                                            <span
+                                                                ng-if="Task.expanded3 && Task.Portfolio_x0020_Type=='Component'"
+                                                                style="cursor:pointer; " ng-click="toggle3Smart(Task)">
+                                                                <img style="width:10px;"
+                                                                    ng-src="{{newURL}}/SiteCollectionImages/ICONS/24/list-icon.png">
+                                                            </span>
+                                                            <span
+                                                                ng-if="Task.expanded3 && Task.Portfolio_x0020_Type=='Service'"
+                                                                style="cursor:pointer; " ng-click="toggle3Smart(Task)">
+                                                                <img style="width:10px;"
+                                                                    ng-src="{{newURL}}/SiteCollectionImages/ICONS/Service_Icons/Downarrowicon-green.png">
+                                                            </span>
+                                                            <span
+                                                                ng-if="Task.expanded3 && Task.Portfolio_x0020_Type=='Events'"
+                                                                style="cursor:pointer; " ng-click="toggle3Smart(Task)">
+                                                                <img style="width:10px;"
+                                                                    ng-src="{{newURL}}/SiteCollectionImages/ICONS/Event_Icons/Downarrowicon-orange.png">
+                                                            </span>
+                                                        </span>
+                                                    </h3>
+                                                </div>
+                                                <div style="{{Task.expanded3?'display:inline;':'display:none;'}}">
+                                                    <div class="boxbdrdesign" id="testDiv1">
+                                                        <!--<div>{{ Task.Help_x0020_Information  }}</div>-->
+                                                        <span
+                                                            ng-bind-html="Task.Help_x0020_Information | trustedHTML"></span>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                        <div ng-show=" Task.TechnicalExplanations!=undefined && Task.TechnicalExplanations!='' "
+                                            class="col-sm-12 padL-0 PadR0 dashboard-sm-12">
+                                            <div class="panel panel-default" id="t_draggable1">
+                                                <div class="panel-heading">
+                                                    <h3 class="panel-title">
+                                                        <label for="identifier-3" class="no-padding">
+                                                            Technical
+                                                            Explanation
+                                                        </label>
+                                                        <span class="pull-left">
+                                                            <span
+                                                                ng-if="!Task.expanded5  &&Task.Portfolio_x0020_Type=='Component'"
+                                                                style="cursor:pointer;" ng-click="toggle5Smart(Task)">
+                                                                <img style="width:10px;"
+                                                                    ng-src="{{newURL}}/SiteCollectionImages/ICONS/24/right-list-icon.png">
+                                                            </span>
+                                                            <span
+                                                                ng-if="!Task.expanded5 &&Task.Portfolio_x0020_Type=='Service'"
+                                                                style="cursor:pointer;" ng-click="toggle5Smart(Task)">
+                                                                <img style="width:10px;"
+                                                                    ng-src="{{newURL}}/SiteCollectionImages/ICONS/Service_Icons/Rightarrowicon-green.png">
+                                                            </span>
+                                                            <span
+                                                                ng-if="!Task.expanded5 &&Task.Portfolio_x0020_Type=='Events'"
+                                                                style="cursor:pointer;" ng-click="toggle5Smart(Task)">
+                                                                <img style="width:10px;"
+                                                                    ng-src="{{newURL}}/SiteCollectionImages/ICONS/Event_Icons/Rightarrowicon-orange.png">
+                                                            </span>
+
+                                                            <span
+                                                                ng-if="Task.expanded5 && Task.Portfolio_x0020_Type=='Component'"
+                                                                style="cursor:pointer; " ng-click="toggle5Smart(Task)">
+                                                                <img style="width:10px;"
+                                                                    ng-src="{{newURL}}/SiteCollectionImages/ICONS/24/list-icon.png">
+                                                            </span>
+                                                            <span
+                                                                ng-if="Task.expanded5 && Task.Portfolio_x0020_Type=='Service'"
+                                                                style="cursor:pointer; " ng-click="toggle5Smart(Task)">
+                                                                <img style="width:10px;"
+                                                                    ng-src="{{newURL}}/SiteCollectionImages/ICONS/Service_Icons/Downarrowicon-green.png">
+                                                            </span>
+                                                            <span
+                                                                ng-if="Task.expanded5 && Task.Portfolio_x0020_Type=='Events'"
+                                                                style="cursor:pointer; " ng-click="toggle5Smart(Task)">
+                                                                <img style="width:10px;"
+                                                                    ng-src="{{newURL}}/SiteCollectionImages/ICONS/Event_Icons/Downarrowicon-orange.png">
+                                                            </span>
+                                                        </span>
+                                                    </h3>
+                                                </div>
+                                                <div style="{{Task.expanded5?'display:inline;':'display:none;'}}">
+                                                    <div class="boxbdrdesign" id="testDiv1">
+
+                                                        <!--<div>{{Task.TechnicalExplanations}}</div>-->
+
+                                                        <span
+                                                            ng-bind-html="Task.TechnicalExplanations | trustedHTML"></span>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                        <div ng-show=" Task.Deliverables!=undefined && Task.Deliverables!='' "
+                                            class="col-sm-12 padL-0 PadR0 dashboard-sm-12">
+                                            <div class="panel panel-default" id="t_draggable1">
+                                                <div class="panel-heading">
+                                                    <h3 class="panel-title">
+                                                        <label for="identifier-3" class="no-padding">
+                                                            Deliverables</label>
+                                                        <span class="pull-left">
+                                                            <span
+                                                                ng-if="!Task.expanded6  &&Task.Portfolio_x0020_Type=='Component'"
+                                                                style="cursor:pointer;" ng-click="toggle6Smart(Task)">
+                                                                <img style="width:10px;"
+                                                                    ng-src="{{newURL}}/SiteCollectionImages/ICONS/24/right-list-icon.png">
+                                                            </span>
+                                                            <span
+                                                                ng-if="!Task.expanded6 &&Task.Portfolio_x0020_Type=='Service'"
+                                                                style="cursor:pointer;" ng-click="toggle6Smart(Task)">
+                                                                <img style="width:10px;"
+                                                                    ng-src="{{newURL}}/SiteCollectionImages/ICONS/Service_Icons/Rightarrowicon-green.png">
+                                                            </span>
+                                                            <span
+                                                                ng-if="!Task.expanded6 &&Task.Portfolio_x0020_Type=='Events'"
+                                                                style="cursor:pointer;" ng-click="toggle6Smart(Task)">
+                                                                <img style="width:10px;"
+                                                                    ng-src="{{newURL}}/SiteCollectionImages/ICONS/Event_Icons/Rightarrowicon-orange.png">
+                                                            </span>
+
+                                                            <span
+                                                                ng-if="Task.expanded6 && Task.Portfolio_x0020_Type=='Component'"
+                                                                style="cursor:pointer; " ng-click="toggle6Smart(Task)">
+                                                                <img style="width:10px;"
+                                                                    ng-src="{{newURL}}/SiteCollectionImages/ICONS/24/list-icon.png">
+                                                            </span>
+                                                            <span
+                                                                ng-if="Task.expanded6 && Task.Portfolio_x0020_Type=='Service'"
+                                                                style="cursor:pointer; " ng-click="toggle6Smart(Task)">
+                                                                <img style="width:10px;"
+                                                                    ng-src="{{newURL}}/SiteCollectionImages/ICONS/Service_Icons/Downarrowicon-green.png">
+                                                            </span>
+                                                            <span
+                                                                ng-if="Task.expanded6 && Task.Portfolio_x0020_Type=='Events'"
+                                                                style="cursor:pointer; " ng-click="toggle6Smart(Task)">
+                                                                <img style="width:10px;"
+                                                                    ng-src="{{newURL}}/SiteCollectionImages/ICONS/Event_Icons/Downarrowicon-orange.png">
+                                                            </span>
+                                                        </span>
+                                                    </h3>
+                                                </div>
+                                                <div style="{{Task.expanded6?'display:inline;':'display:none;'}}">
+                                                    <div class="boxbdrdesign" id="testDiv1">
+                                                        <span ng-bind-html="Task.Deliverables | trustedHTML"></span>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-------------------------end------------------->
+
+
+
+                                </div>
+
+                                <div class="row">
+                                    <!--*********************************************linked component box**********************************************************************************-->
+                                    <!--
+                              <component-task-profile-webpart webpartid="'Subcomponents'"></component-task-profile-webpart>
+                          -->
+                                    <div class="panel panel-default" ng-show="AllSPPortfolio.length>0">
+                                        <div class="panel-heading pad10" title="All childs of the Component">
+                                            <label class="">SPComponents</label>
+
+                                            <span class="pull-right mt--5">
+                                                <span ng-show="isOwner">
+                                                    <page-settings-info webpartid="'SPComponents'"></page-settings-info>
+                                                </span>
+                                            </span>
+
+                                        </div>
+                                        <div class="panel-body fortablee">
+                                            <div class="section-event pt-0 mt-5 mb-5">
+                                                <ul class="table">
+                                                    <li class="for-lis">
+                                                        <div style="width:45%;">
+                                                            <div style="width:95%;" class="headcontainer">
+                                                                <input type="search" placeholder="Title"
+                                                                    class="searchbox_height width-90"
+                                                                    ng-model="SearchSPComponentTitle">
+                                                                <span class="searchclear"
+                                                                    ng-click="clearSearchBox('SearchSPComponentTitle')">X</span>
+                                                                <span
+                                                                    class="{{OrderBY1=='Title'&&!Reverse1?'glyphicon_active':'glyphicon'}}  glyphicon-chevron-up direction-arrow arrow_up"
+                                                                    ng-click="SortBY1('Title', false)"></span>
+                                                                <span
+                                                                    class="{{OrderBY1=='Title'&&Reverse1?'glyphicon_active':'glyphicon'}}  glyphicon-chevron-down direction-arrow arrow_down"
+                                                                    ng-click="SortBY1('Title', true)"></span>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <div class="container-new" id="portfolio1">
+                                                        <li class="for-lis bold {{item.expanded?'project_active tdrows':'tdrows'}} serviceColor_Active"
+                                                            ng-repeat="item in filterComponent=(AllSPPortfolio| orderBy:OrderBY1:Reverse1:true|filter:{Title:SearchSPComponentTitle})"
+                                                            lvl-drop-target="true" on-drop="dropped(dragSrc,item)">
+                                                            <div style="width:45%;" class="padLR">
+                                                                <span>
+                                                                    <a class="hreflink" target="_blank"
+                                                                        ng-href="{{OtherUrl}}/SitePages/Webpart-Profile.aspx?ItemId={{item.Id}}"
+                                                                        ng-bind-html="item.Title | trustedHTML">
+                                                                    </a>
+                                                                </span>
+                                                            </div>
+                                                        </li>
+                                                    </div>
+                                                </ul>
+                                            </div>
+                                            <div class="forNoTaggedTask" ng-if="Task.SPComponents.results.length==0">
+                                                <span>There are no Sub Components.</span>
+                                            </div>
+                                            <div class="modal-footer">
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <!--********************************relevant component******************************************************************************-->
+                                    <!------------------------------------------------------------------------------------------------------------------------------------>
+                                    <div class="row">
+                                        <div class="col-lg-12 no-padding form-group" ng-if="Task.Description!=null">
+
+
+                                            <div ng-if="Task.Description!=undefined" class="col-lg-12">
+                                                <div ng-repeat='item in DescriptionFields' class="bdrbtmdes">
+                                                    <div class="col-sm-1 mt1  no-padding" style="width:2%;">
+                                                        {{$index+1}}.
+                                                    </div>
+                                                    <div class="col-sm-11 mt1 padL-0 marbtmpara">
+                                                        <span ng-bind-html="item.Title | trustedHTML"></span>
+                                                    </div>
+                                                    <div class="feedbackcomment col-sm-offset-1 col-sm-11 no-padding">
+                                                        <div class=" col-sm-12 mb-2 add_cmnt"
+                                                            ng-repeat="comment in item.Comments">
+                                                            <div id="public-item">
+                                                                <div class="col-sm-1">
+                                                                    <img style="width:100%;"
+                                                                        ng-src="{{comment.AuthorImage}}">
+                                                                </div>
+                                                                <div class="col-sm-10">
+                                                                    <div class="">
+                                                                        {{comment.AuthorName}} -
+                                                                        {{comment.Created | date:'dd MMM yyyy HH:mm'}}
+                                                                    </div>
+                                                                    <div class="">
+                                                                        {{comment.Title}}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="ms-clear"></div>
+                                    </div>
+                                    <!--<foundation-documents isvisible="Profile.ProfileType!='True'" datasource="AllDocuments"
+                        webpartid="'FoundationProfileRelevantDocuments'"></foundation-documents>-->
+                                    <div class="form-group">
+
+                                        <div class="col-sm-12 padL-0">
+
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+
+                                </div>
+                                <div ng-show="AllTestCase.length>0" class="row mb-10 mt-10 pad0">
+                                    <div class="col-sm-12 panel panel-default padL-0 PadR0">
+                                        <div class="panel-heading panel-new-head pad10 full_width blue-clr">
+                                            <label class="">Test Cases</label>
+                                            <span class="dropdown">
+                                                <page-settings-info webpartid="'TestCase'"></page-settings-info>
+                                            </span>
+                                        </div>
+                                        <div class="col-sm-12 mt-10 padL-0 PadR0">
+
+
+                                            <li ng-show="smartFeaturesAvailable.length>0 &&item.flag==true"
+                                                ng-repeat-start="item in filteredItems =(smartFeaturesAvailable|orderBy:OrderByNew:reverse2)"
+                                                class="for-lis tdrows project_active">
+                                                <div class="full_width">
+                                                    <a class="hreflink"
+                                                        ng-show="item.childs.length>0&&!item.expanded && Task.Portfolio_x0020_Type=='Component'"
+                                                        ng-click="item.expanded=true"
+                                                        title="Tap to expand the {{item.newTitle}} childs">
+                                                        <img
+                                                            ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/24/right-list-icon.png">
+                                                    </a>
+                                                    <a class="hreflink"
+                                                        ng-show="item.childs.length>0&&!item.expanded  && Task.Portfolio_x0020_Type=='Service'"
+                                                        ng-click="item.expanded=true"
+                                                        title="Tap to expand the {{item.newTitle}} childs">
+                                                        <img
+                                                            ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Service_Icons/Rightarrowicon-green.png">
+                                                    </a>
+                                                    <a class="hreflink"
+                                                        ng-show="item.childs.length>0&&!item.expanded  && Task.Portfolio_x0020_Type=='Events'"
+                                                        ng-click="item.expanded=true"
+                                                        title="Tap to expand the {{item.newTitle}} childs">
+                                                        <img
+                                                            ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Event_Icons/Rightarrowicon-orange.png">
+                                                    </a>
+                                                    <a class="hreflink"
+                                                        ng-show="item.childs.length>0&&item.expanded && Task.Portfolio_x0020_Type=='Component'"
+                                                        ng-click="item.expanded=false"
+                                                        title="Tap to Shrink the {{item.newTitle}} childs">
+                                                        <img
+                                                            ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/24/list-icon.png">
+                                                    </a>
+                                                    <a class="hreflink"
+                                                        ng-show="item.childs.length>0&&item.expanded && Task.Portfolio_x0020_Type=='Service'"
+                                                        ng-click="item.expanded=false"
+                                                        title="Tap to Shrink the {{item.newTitle}} childs">
+                                                        <img
+                                                            ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Service_Icons/Downarrowicon-green.png">
+                                                    </a>
+                                                    <a class="hreflink"
+                                                        ng-show="item.childs.length>0&&item.expanded && Task.Portfolio_x0020_Type=='Events'"
+                                                        ng-click="item.expanded=false"
+                                                        title="Tap to Shrink the {{item.newTitle}} childs">
+                                                        <img
+                                                            ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Event_Icons/Downarrowicon-orange.png">
+                                                    </a>
+                                                    <span ng-show="item.childs.length>0">{{item.Title}}</span>
+                                                    <div ng-show="item.childs==undefined" class="" id="t_draggable1">
+                                                        <div class="full_width">
+
+                                                            <span class="no-padding">
+
+
+                                                                <span>{{item.Title}}</span>
+
+                                                            </span>
+                                                            <span class="pull-left">
+                                                                <a class="hreflink"
+                                                                    ng-show="item.childs==undefined&& item.Body!=undefined&&!item.expanded &&(item.TaskTestCase==true)"
+                                                                    ng-click="item.expanded=true"
+                                                                    title="Tap to expand the {{item.newTitle}} childs">
+                                                                    <img
+                                                                        ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/24/right-list-icon.png">
+                                                                </a>
+                                                                <a class="hreflink"
+                                                                    ng-show="item.childs==undefined&& item.Body!=undefined&&item.expanded &&(item.TaskTestCase==true)"
+                                                                    ng-click="item.expanded=false"
+                                                                    title="Tap to Shrink the {{item.newTitle}} childs">
+                                                                    <img
+                                                                        ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/24/list-icon.png">
+                                                                </a>
+                                                                <a class="hreflink"
+                                                                    ng-show="item.childs==undefined&& item.Body!=undefined && item.TaskTestCase==undefined&&!item.expanded &&(Task.Portfolio_x0020_Type=='Component' || Item.Portfolio_x0020_Type=='Deliverable')"
+                                                                    ng-click="item.expanded=true"
+                                                                    title="Tap to expand the {{item.newTitle}} childs">
+                                                                    <img
+                                                                        ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/24/right-list-icon.png">
+                                                                </a>
+                                                                <a class="hreflink"
+                                                                    ng-show="item.childs==undefined&& item.Body!=undefined&& item.TaskTestCase==undefined &&!item.expanded  && Task.Portfolio_x0020_Type=='Service'"
+                                                                    ng-click="item.expanded=true"
+                                                                    title="Tap to expand the {{item.newTitle}} childs">
+                                                                    <img
+                                                                        ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Service_Icons/Rightarrowicon-green.png">
+                                                                </a>
+                                                                <a class="hreflink"
+                                                                    ng-show="item.childs==undefined&& item.Body!=undefined&& item.TaskTestCase==undefined&&!item.expanded  && Task.Portfolio_x0020_Type=='Events'"
+                                                                    ng-click="item.expanded=true"
+                                                                    title="Tap to expand the {{item.newTitle}} childs">
+                                                                    <img
+                                                                        ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Event_Icons/Rightarrowicon-orange.png">
+                                                                </a>
+                                                                <a class="hreflink"
+                                                                    ng-show="item.childs==undefined&& item.Body!=undefined && item.TaskTestCase==undefined&&item.expanded &&(Task.Portfolio_x0020_Type=='Component' || Item.Portfolio_x0020_Type=='Deliverable')"
+                                                                    ng-click="item.expanded=false"
+                                                                    title="Tap to Shrink the {{item.newTitle}} childs">
+                                                                    <img
+                                                                        ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/24/list-icon.png">
+                                                                </a>
+                                                                <a class="hreflink"
+                                                                    ng-show="item.childs==undefined&& item.Body!=undefined && item.TaskTestCase==undefined&&item.expanded && Task.Portfolio_x0020_Type=='Service'"
+                                                                    ng-click="item.expanded=false"
+                                                                    title="Tap to Shrink the {{item.newTitle}} childs">
+                                                                    <img
+                                                                        ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Service_Icons/Downarrowicon-green.png">
+                                                                </a>
+                                                                <a class="hreflink"
+                                                                    ng-show="item.childs==undefined&& item.Body!=undefined&& item.TaskTestCase==undefined &&item.expanded && Task.Portfolio_x0020_Type=='Events'"
+                                                                    ng-click="item.expanded=false"
+                                                                    title="Tap to Shrink the {{item.newTitle}} childs">
+                                                                    <img
+                                                                        ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Event_Icons/Downarrowicon-orange.png">
+                                                                </a>
+
+                                                            </span>
+
+                                                        </div>
+                                                        <div ng-show="item.Body!=undefined"
+                                                            style="{{item.expanded?'display:inline;':'display:none;'}}">
+                                                            <div class="boxbdrdesign" id="testDiv1"
+                                                                style="background: #fff">
+
+                                                                <span ng-bind-html="item.Body | trustedHTML"></span>
+                                                            </div>
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+
+                                            </li>
+                                            <li style="list-style: none;" ng-if="item.expanded" ng-repeat-end>
+                                                <ul class="table">
+                                                    <li class="" ng-show="item.childs.length >0">
+                                                        <div ng-show="item.childs.length>0"
+                                                            ng-repeat="child in filterComponent=(item.childs)">
+
+
+                                                            <div class="" id="t_draggable1">
+                                                                <div class="testcaseheading">
+
+                                                                    <span class="no-padding">
+                                                                        {{child.Title}}
+                                                                    </span>
+                                                                    <span class="pull-left">
+                                                                        <span
+                                                                            ng-if="!child.expanded &&child.Body!=undefined && Task.Portfolio_x0020_Type=='Component'"
+                                                                            style="cursor:pointer;"
+                                                                            ng-click="toggleSmartTestCase(child)">
+                                                                            <img
+                                                                                ng-src="{{newURL}}/SiteCollectionImages/ICONS/24/right-list-icon.png">
+                                                                        </span>
+                                                                        <span
+                                                                            ng-if="!child.expanded &&child.Body!=undefined && Task.Portfolio_x0020_Type=='Service'"
+                                                                            style="cursor:pointer;"
+                                                                            ng-click="toggleSmartTestCase(child)">
+                                                                            <img
+                                                                                ng-src="{{newURL}}/SiteCollectionImages/ICONS/Service_Icons/Rightarrowicon-green.png">
+                                                                        </span>
+                                                                        <span
+                                                                            ng-if="!child.expanded &&child.Body!=undefined && Task.Portfolio_x0020_Type=='Events'"
+                                                                            style="cursor:pointer;"
+                                                                            ng-click="toggleSmartTestCase(child)">
+                                                                            <img
+                                                                                ng-src="{{newURL}}/SiteCollectionImages/ICONS/Event_Icons/Rightarrowicon-orange.png">
+                                                                        </span>
+                                                                        <span
+                                                                            ng-if="child.expanded &&child.Body!=undefined &&Task.Portfolio_x0020_Type=='Component'"
+                                                                            style="cursor:pointer; "
+                                                                            ng-click="toggleSmartTestCase(child)">
+                                                                            <img
+                                                                                ng-src="{{newURL}}/SiteCollectionImages/ICONS/24/list-icon.png">
+                                                                        </span>
+                                                                        <span
+                                                                            ng-if="child.expanded &&child.Body!=undefined &&Task.Portfolio_x0020_Type=='Service' "
+                                                                            style="cursor:pointer; "
+                                                                            ng-click="toggleSmartTestCase(child)">
+                                                                            <img
+                                                                                ng-src="{{newURL}}/SiteCollectionImages/ICONS/Service_Icons/Downarrowicon-green.png">
+                                                                        </span>
+                                                                        <span
+                                                                            ng-if="child.expanded &&child.Body!=undefined &&Task.Portfolio_x0020_Type=='Events' "
+                                                                            style="cursor:pointer; "
+                                                                            ng-click="toggleSmartTestCase(child)">
+                                                                            <img
+                                                                                ng-src="{{newURL}}/SiteCollectionImages/ICONS/Event_Icons/Downarrowicon-orange.png">
+                                                                        </span>
+                                                                    </span>
+
+                                                                </div>
+                                                                <div ng-show="child.Body!=undefined"
+                                                                    style="{{child.expanded?'display:inline;':'display:none;'}}">
+                                                                    <div class="boxbdrdesign" id="testDiv1">
+                                                                        <!--<div>{{ Task.Short_x0020_Description_x0020_On }}</div>-->
+                                                                        <span
+                                                                            ng-bind-html="child.Body | trustedHTML"></span>
+                                                                    </div>
+                                                                </div>
+
+
+                                                            </div>
+                                                    </li>
+
+                                                </ul>
+
+                                            </li>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        
+                            <div class="col-sm-12">
+                                <div class="row">
+                                    <component-task-profile-webpart webpartid="'Subcomponents'">
+                                    </component-task-profile-webpart>
+                                </div>
+                            </div>
+                        </div>
+                      
+
+                        <div class="col-sm-12 padL-0 PadR0">
+                            <div class="col-sm-6 padL-0 ItemInfo mb-20" style="padding-top:15px;">
+                                <div>
+                                    Created <span>{{Task.DateCreated}}</span> by <span
+                                        class="footerUsercolor">{{Task.Author.Title}}</span>
+                                </div>
+                                <div>
+                                    Last modified <span>{{Task.ModifiedDate}}</span> by <span
+                                        class="footerUsercolor">{{Task.Editor.Title}}</span>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+
+
+                    <div class="col-sm-3 padL-25 mt60">
+                        <div ng-show="SiteComposition.length!=0" class="col-sm-12 padL-0 PadR0 dashboard-sm-12">
+                            <div class="panel panel-primary-head blocks" style=" box-shadow: none;
+                    transition: none;" id="t_draggable1">
+                                <div class="panel-heading profileboxclr" style="  background-color: #f5f5f5;
+                        border-color: #ddd; padding: 7px;">
+                                    <h3 class="panel-title" style="text-align: inherit;">
+                                        <label for="identifier-3" class="lbltitleclr">Site Composition</label>
+                                        <a ng-if="isMemberOwner==true" class="hreflink"
+                                            title="Analyse Site Composition"
+                                            ng-click="EditSiteCompositionTask(Task)">
+                                            <img class="wid22"
+                                                ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/32/analyze.png">
+                                        </a>
+                                        <span class="pull-left">
+                                            <span
+                                                ng-if="!expand_collapseSiteComosition  &&Task.Portfolio_x0020_Type=='Component'"
+                                                style="cursor:pointer;"
+                                                ng-click="filterExpandSitecomposition(false)">
+                                                <img style="width:10px;"
+                                                    ng-src="{{newURL}}/SiteCollectionImages/ICONS/24/right-list-icon.png">
+                                            </span>
+                                            <span
+                                                ng-if="!expand_collapseSiteComosition &&Task.Portfolio_x0020_Type=='Service'"
+                                                style="cursor:pointer;"
+                                                ng-click="filterExpandSitecomposition(false)">
+                                                <img style="width:10px;"
+                                                    ng-src="{{newURL}}/SiteCollectionImages/ICONS/Service_Icons/Rightarrowicon-green.png">
+                                            </span>
+                                            <span
+                                                ng-if="!expand_collapseSiteComosition &&Task.Portfolio_x0020_Type=='Events'"
+                                                style="cursor:pointer;"
+                                                ng-click="filterExpandSitecomposition(false)">
+                                                <img style="width:10px;"
+                                                    ng-src="{{newURL}}/SiteCollectionImages/ICONS/Event_Icons/Rightarrowicon-orange.png">
+                                            </span>
+
+                                            <span
+                                                ng-if="expand_collapseSiteComosition && Task.Portfolio_x0020_Type=='Component'"
+                                                style="cursor:pointer; "
+                                                ng-click="filterExpandSitecomposition(true)">
+                                                <img style="width:10px;"
+                                                    ng-src="{{newURL}}/SiteCollectionImages/ICONS/24/list-icon.png">
+                                            </span>
+                                            <span
+                                                ng-if="expand_collapseSiteComosition && Task.Portfolio_x0020_Type=='Service'"
+                                                style="cursor:pointer; "
+                                                ng-click="filterExpandSitecomposition(true)">
+                                                <img style="width:10px;"
+                                                    ng-src="{{newURL}}/SiteCollectionImages/ICONS/Service_Icons/Downarrowicon-green.png">
+                                            </span>
+                                            <span
+                                                ng-if="expand_collapseSiteComosition && Task.Portfolio_x0020_Type=='Events'"
+                                                style="cursor:pointer; "
+                                                ng-click="filterExpandSitecomposition(true)">
+                                                <img style="width:10px;"
+                                                    ng-src="{{newURL}}/SiteCollectionImages/ICONS/Event_Icons/Downarrowicon-orange.png">
+                                            </span>
+                                        </span>
+                                    </h3>
+
+                                </div>
+                                <div style="{{expand_collapseSiteComosition?'display:inline;':'display:none;'}}"
+                                    id="testDiv1">
+                                    <!--class="boxbdrdesign"-->
+                                    <ul class="table table-hover">
+                                        <li ng-repeat="item in SiteComposition | orderBy:orderBy1:revers"
+                                            class="for-lis project_active">
+                                            <div style="width:1%;">
+                                            </div>
+                                            <div style="width:20%;" class="padLR">
+                                                <img style="width:22px;" ng-src={{item.SiteImages}}>
+                                                <!--{{item.Title}}-->
+                                            </div>
+
+                                            <div style="width:24%;" class="padLR">
+                                                <span ng-show="item.ClienTimeDescription!=undefined">
+                                                    {{item.ClienTimeDescription}}%
+                                                </span>
+                                            </div>
+                                            <div style="width:40%;" class="padLR">
+                                                {{item.Date}}
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="panel panel-default" ng-show="RelevantComponent.length>0">
+                            <div class="panel-heading">
+                                <label class="full_width blue-clr">
+                                    Relevant Component
+                                    <span class="addtoggle pull-right">
+                                        <span class="dropdown" ng-if="isOwner==true">
+                                            <page-settings-info webpartid="'CommentBox'"></page-settings-info>
+                                        </span>
+                                    </span>
+                                </label>
+                            </div>
+                            <div class="panel-body" ng-cloak>
+                                <div style="width:100%;" class="panel1 panel-default" ng-cloak>
+
+                                    <div class="col-sm-12 padL-0 mb-10"
+                                        ng-repeat="item in RelevantComponent track by $index">
+                                        <img class="icon-sites-img" ng-show="item.ItemType=='Component'"
+                                            ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Shareweb/component_icon.png">
+                                        <img class="icon-sites-img" ng-show="item.ItemType=='SubComponent'"
+                                            ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Shareweb/SubComponent_icon.png">
+                                        <img class="icon-sites-img" ng-show="item.ItemType=='Feature'"
+                                            ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Shareweb/feature_icon.png">
+                                        <a class="hreflink" target="_blank"
+                                            ng-href="{{OtherUrl}}/SitePages/Portfolio-Profile.aspx?taskId={{item.Id}}"
+                                            ng-bind-html="item.Title"></a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default" ng-show="RelevantService.length>0">
+                            <div class="panel-heading">
+                                <label class="full_width blue-clr">
+                                    Relevant Service
+                                    <span class="addtoggle pull-right">
+                                        <span class="dropdown">
+                                            <page-settings-info webpartid="'CommentBox'"></page-settings-info>
+                                        </span>
+                                    </span>
+                                </label>
+                            </div>
+
+                            <div class="panel-body" ng-cloak>
+                                <div style="width:100%;" class="panel1 panel-default" ng-cloak>
+
+                                    <div class="col-sm-12 padL-0 mb-10"
+                                        ng-repeat="item in RelevantService track by $index">
+                                        <img class="icon-sites-img" ng-show="item.ItemType=='Component'"
+                                            ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Service_Icons/component_icon.png">
+                                        <img class="icon-sites-img" ng-show="item.ItemType=='SubComponent'"
+                                            ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Service_Icons/SubComponent_icon.png">
+                                        <img class="icon-sites-img" ng-show="item.ItemType=='Feature'"
+                                            ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Service_Icons/feature_icon.png">
+
+                                        <a class="hreflink" target="_blank"
+                                            ng-href="{{OtherUrl}}/SitePages/Portfolio-Profile.aspx?taskId={{item.Id}}"
+                                            ng-bind-html="item.Title"></a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div ng-show="itemcolumnimag.length>0" class="col-sm-12 mb-10 padL-0 bdrbox">
+
+                            <a>
+                                <img alt="{{itemcolumnimag}}" style="width:280px;height: 145px;"
+                                    ng-src="{{itemcolumnimag}}" />
+                            </a>
+
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="panel panel-default displayhide " ng-if="isOwner==true">
+                            <div class="panel-heading">
+                                <label class="blue-clr">
+                                    Add & Connect Tool
+                                </label>
+                                <span class="addtoggle pull-right">
+                                    <span class="dropdown">
+                                        <page-settings-info webpartid="'sharewebAnCToolPopup'">
+                                        </page-settings-info>
+                                    </span>
+                                </span>
+                            </div>
+                            <div class="panel-body">
+                                <div class=" col-sm-12 Doc-align inner-tabb">
+                                    <a class="hreflink padding-left" ng-click="TagItems();">
+                                        Click here to add more content
+                                    </a>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- isvisible="Profile.ProfileType!='True'" -->
+                        <div class="mt-25">
+                            <foundation-documents 
+                                datasource="AllDocuments" isvisible="true"
+                                webpartid="'FoundationPortfolioProfileRelevantDocuments'">
+                            </foundation-documents>
+                        </div>
+                        <div class="">
+
+                            <!--*************************************************UPLOAD DOCUMENTS********************************************************************************-->
+
+
+                        </div>
+                        <div class="panel panel-default mt-25" ng-show="Task.Events.results.length>0">
+                            <div class="panel-heading">
+                                <label class="full_width blue-clr">
+                                    Relevant Event
+                                    <span class="addtoggle pull-right">
+                                        <span class="dropdown">
+                                            <page-settings-info webpartid="'CommentBox'"></page-settings-info>
+                                        </span>
+                                    </span>
+                                </label>
+                            </div>
+                            <div class="panel-body" ng-cloak>
+                                <div style="width:100%;" class="panel1 panel-default" ng-cloak>
+
+                                    <div class="col-sm-12 padL-0 mb-10"
+                                        ng-repeat="item in Task.Events.results track by $index">
+                                        <img class="icon-sites-img" ng-show="item.ItemType=='Component'"
+                                            ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Event_Icons/component_icon.png">
+                                        <img class="icon-sites-img" ng-show="item.ItemType=='SubComponent'"
+                                            ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Event_Icons/SubComponent_icon.png">
+                                        <img class="icon-sites-img" ng-show="item.ItemType=='Feature'"
+                                            ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Event_Icons/feature_icon.png">
+                                    </div>
+                                    <a class="hreflink" target="_blank"
+                                        ng-href="{{OtherUrl}}/SitePages/Portfolio-Profile.aspx?taskId={{item.Id}}"
+                                        ng-bind-html="item.Title"></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default displayhide mt-25" ng-show="Folders!=undefined"
+                            ng-if="isOwner==true">
+                            <div class="panel-heading" title="Main Folder">
+                                <label class="full_width blue-clr">
+                                    Main Folder
+                                    <span class="addtoggle pull-right">
+                                        <span class="dropdown">
+                                            <page-settings-info webpartid="'MainFolder'"></page-settings-info>
+                                        </span>
+                                    </span>
+
+
+
+                                </label>
+                            </div>
+                            <div class="panel-body" ng-cloak>
+                                <div style="width:100%;" class="panel1 panel-default" ng-cloak>
+
+                                    <div class="col-sm-12 padL-0 mb-10">
+                                        <div class="col-sm-12 padL-0 PadR0">
+                                            <img ng-src="/_layouts/15/images/folder.gif?rev=23" />
+                                            <a class="hreflink" target="_blank" ng-href="{{Folders.ServerUrl}}">
+                                                {{Folders.FileLeafRef}}
+                                            </a>
+                                        </div>
+
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div ng-if="isOwner==true">
+                            <Comments-Mail siteType="Task.siteType" textid="'portfolioprofiletxtid'"
+                                editid="'portfolioprofileid'" autoid="'portfolioprofile'" id="Task.Id"
+                                webpartid="'CommentMailComponent'"></Comments-Mail>
+                        </div>
+
+                        <div>
+                            <component-imageslider></component-imageslider>
+                        </div>
+                    </div>
+                    <!--End of description Box-->
+                </div>
+                <!------------------------------------------------------PopUp To Create Component END Here------------------------------------>
+                <div id="TagProjects" class="modal fade in " tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                    aria-hidden="false" style="display: none;">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <task-profile-add-connect-tool webpartid="'TaskProfileAnCToolWebpartId'">
+                            </task-profile-add-connect-tool>
+                        </div>
+                    </div>
+                </div>
+                <!-----------comment edit popup --------------------->
+                <div id="UpdatecommentItem" class="modal fade in" tabindex="-1" role="dialog"
+                    aria-labelledby="myModalLabel" aria-hidden="false" style="display: none;">
+                    <div class="modal-dialog modal-help">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" ng-click="cancelCommentPopUp()"
+                                    style="min-width: 10px;">
+                                    &times;
+                                </button>
+                                <h4 class="modal-title">Update Comment</h4>
+                            </div>
+                            <div class="modal-body" style="overflow-y: hidden;">
+                                <div class="" style="padding-top:15px;">
+                                    <div class="col-md-12">
+                                        <div id="updateCommentItem"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer" style="border-top:1px solid transparent;">
+                                <div>
+                                    <span class="pull-right">
+                                        <button type="button" class="btn btn-primary" ng-click="saveUpdateComment()">
+                                            Save
+                                        </button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal"
+                                            ng-click="cancelCommentPopUp()">
+                                            Cancel
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div id="Sharewebselection" class="modal fade in" tabindex="-1" role="dialog"
+                    aria-labelledby="myModalLabel" aria-hidden="false" style="display: none;">
+                    <div class="modal-dialog modal-sm" style="width: 610px;">
+                        <div class="panel panel-default table-expandsize">
+
+                            <div class="panel-title">
+                                <button type="button" class="close" data-dismiss="modal"
+                                    ng-click="Sharewebselectionclose()" style="min-width: 10px;">
+                                    &times;
+                                </button>
+                                <h3>
+                                    Select Option
+                                    <span class="col-sm-1 pull-right pr-10">
+                                        <page-settings-info webpartid="'Sharewebopen'">
+                                        </page-settings-info>
+                                    </span>
+                                </h3>
+                            </div>
+                            <div class="panel-body pad-5">
+
+                                <div class="col-sm-12 tab-content bdrbox small_undo_icon">
+                                    <ul class="col-sm-12 text-center padL-0 form-group mt-10 mb-10">
+                                        <li class="news_upload hreflink t-normalsize"
+                                            title="Create in Service Existing">
+                                            <div ng-click="EditComponent('Services',item)"
+                                                class="content_wrap text-center">
+                                                <div class="permission mt43" style=" font-size: 12px;">
+                                                    Tag in Existing Service
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="news_upload hreflink t-normalsize" title="Create in Service New">
+                                            <div ng-click="Creatsharewebitem()" class="content_wrap text-center">
+                                                <div class="permission mt43" style=" font-size: 12px;"> Create New One
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary mt-10" ng-click="Sharewebselectionclose()">
+                                    OK
+                                </button>
+                                <button type="button" class="mt-10" ng-click="Sharewebselectionclose()">
+                                    Cancel
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-----------Add Additional Link Edit Popup Start Here--------------------->
+                <div id="AdditionalLink" class="modal fade in" tabindex="-1" role="dialog"
+                    aria-labelledby="myModalLabel" aria-hidden="false" style="display: none;">
+                    <div class="modal-dialog">
+                        <div class="panel panel-default">
+                            <div class="panel-title">
+                                <button type="button" class="close" ng-click="cancelAdditionalLink()"
+                                    style="min-width: 10px;">
+                                    &times;
+                                </button>
+                                <span class="pull-right mt--5">
+                                    <page-settings-info webpartid="'AddAdditionalPagesPopup'"></page-settings-info>
+                                </span>
+                                <h3 class="modal-title">
+                                    Add Additional Pages
+                                </h3>
+                            </div>
+                            <div class="modal-body" style="overflow-y: hidden;">
+                                <div class="">
+                                    <div class="col-sm-12">
+                                        <textarea cols="15" rows="6" ng-model="AdditionalLink"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer pr-5 ">
+                                <button type="button" class="btn btn-primary ml5 pull-right"
+                                    ng-click="cancelAdditionalLink()">
+                                    Cancel
+                                </button>
+                                <button type="button" class="btn btn-primary pull-right"
+                                    ng-click="saveAdditionalLink()">
+                                    Save
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-----------Add Additional Link Edit Popup End Here--------------------->
+                <!-----------Version History Edit Popup Start Here--------------------->
+                <div id="Versionhistorypopup" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                aria-hidden="false" style="display: none;">
+                    <div class="modal-dialog" style="width: 900px;">
+                        <div class="panel panel-default">
+                            <div class="panel-title">
+                                <button type="button" style="min-width:10px;" class="close"
+                                    ng-click="cancelversionpopup()">
+                                    &times;
+                                </button>
+                                <span class="pull-right mt--2">
+                                    <page-settings-info webpartid="'versionHistory'"></page-settings-info>
+                                </span>
+                                <h3>Version History</h3>
+                            </div>
+                            <div class="modal-body">
+                                <div class="tab-content bdrbox table_scroll">
+                                    <div id="versionhistory" class="break_url es"></div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" ng-click="cancelversionpopup()">
+                                    Cancel
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>

@@ -1,0 +1,30 @@
+﻿
+<link rel="stylesheet" href="https://www.hochhuth-consting.de/Style%20Library/js/angular/Services/froala_style.min.css" type="text/css">
+<script src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/Style%20Library/js/angular/Services/froala_editor.pkgd.min.js"></script>
+<link rel="stylesheet" href="https://hhhhteams.sharepoint.com/sites/HHHHTeams/Style%20Library/js/angular/Services/font-awesome.css" type="text/css">
+<link rel="stylesheet" href="https://hhhhteams.sharepoint.com/sites/HHHHTeams/Style%20Library/js/angular/Services/froala_editor.pkgd.min.css" type="text/css">
+<link rel="stylesheet" href="https://hhhhteams.sharepoint.com/sites/HHHHTeams/Style%20Library/js/angular/Services/froala_style.min.css" type="text/css">
+<script src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/Style%20Library/js/angular/Online/Tasks%20Management/CreateNotes.js"></script>
+<script src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/Style%20Library/js/angular/Templates/HCTemplateControllers.js"></script>
+<style>
+    .fr-toolbar .fr-command.fr-btn.fr-active, .fr-popup .fr-command.fr-btn.fr-active {
+    color: #1e88e5;
+    background: 0 0;
+    float: right !important;
+}
+</style>
+<div ng-controller="CreateNotesController">
+    <legend>Task Name</legend>
+    <div class="col-sm-9 padL-0 form-group">
+        <input type="text" class="form-control" placeholder="Enter Task Name..."  ng-model="TaskTitle"/>
+    </div>
+    <div id="TechnicalExplanations" class="col-sm-9 padL-0 form-group">
+    </div>
+    <div class="col-sm-9">
+        <button type="button" class="btn btn-primary pull-right" style="margin-top: 10px;" ng-click="SaveData()">Submit</button>
+    </div>
+
+
+
+
+</div>

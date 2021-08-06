@@ -1,0 +1,259 @@
+﻿<script src="https://static.sharepointonline.com/bld/_layouts/15/16.0.8929.1228/sp.requestexecutor.js"></script>
+<script src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/Style%20Library/js/angular/Templates/HCTemplateControllers1.js"></script>
+<script type="text/javascript" src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/Style%20Library/js/angular/Online/Tasks%20Management/TaskProfile1.js"></script>
+<div ng-controller="TaskProfileController1">
+    <div class="panel" ng-cloak>
+        <div class="panel-body">
+            <div class="row pull-right">
+
+            </div>
+            <div class="col-lg-12 pad0">
+                <div class="col-lg-9 left-col">
+                    <div class="row">
+                        <div class="col-sm-12 no-padding">
+                            <!--<div class="col-sm-2 task-name" title="Task Name">
+                                <!--<h2>Task Name</h2>
+                            </div>-->
+                            <div class="task-title" style="vertical-align:top">
+                                <h1>{{Task.Title}} <a ng-if="isMemberOwner==true" class="hreflink" ng-click="EditTask(Task)"><img src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/SiteCollectionImages/ICONS/32/edititem.gif"></a></h1>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12  blocks">
+
+                                <div class="col-lg-2 label" title="due date">
+                                    <label class="full_width">Due Date</label>
+                                </div>
+                                <div class="col-lg-4 labeltext">
+                                    {{DueDate}}
+                                </div>
+
+                                <div class="col-lg-2 label" title="Priority of Task">
+                                    <label class="full_width">Priority</label>
+                                </div>
+                                <div class="col-lg-4 labeltext">
+                                    {{Task.Priority}}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-12  blocks">
+
+                                <div class="col-lg-2 label" title="Status">
+                                    <label class="full_width">Status</label>
+                                </div>
+                                <div class="col-lg-4 labeltext">
+                                    {{Task.Status}}
+                                </div>
+
+                                <div class="col-lg-2 label" title="Task Category">
+                                    <label class="full_width">Company</label>
+                                </div>
+                                <div class="col-lg-4 labeltext">
+                                    {{Task.TaskCompanies}}
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-lg-12  blocks">
+
+                                <div class="col-lg-2 label" title="Status">
+                                    <label class="full_width">Task Leader</label>
+                                </div>
+                                <div class="col-lg-4 labeltext">
+                                    {{getMultiUserValues(AssignedTo)}}
+                                </div>
+
+                                <div class="col-lg-2 label" title="Task Category">
+                                    <label class="full_width">% Complete</label>
+                                </div>
+
+                                <div class="col-lg-4 labeltext" ng-if="Task.PercentComplete < 1">
+                                    {{Task.PercentComplete*100}}
+                                </div>
+                                <div class="col-lg-4 labeltext" ng-if="Task.PercentComplete  >= 1">
+                                    {{Task.PercentComplete}}
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-lg-12  blocks">
+
+                                <div class="col-lg-2 label" title="Status">
+                                    <label class="full_width">Url</label>
+                                </div>
+                                <div class="col-sm-10 pdl">
+                                    <a target="_blank" ng-href="{{Task.component_x0020_link.Url}}" class="labeltext" style="width:98%;">{{Task.component_x0020_link.Url}}</a>
+                                    </div>
+
+                                </div></div>
+
+                            </div>
+
+                            <div class="row" ng-if="forAllTaggedTask.length>0">
+                                <table class="table table-hover" style="border: 1px solid #c9c9c9;" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr class="header">
+                                            <th style="width:4%;">
+                                                Site
+                                            </th>
+                                            <th style="width:32%;">
+                                                Task Title
+                                            </th>
+                                            <th style="width:18%;">
+                                                Priority Rank
+                                            </th>
+                                            <th style="width:20%;">
+                                                Modified
+                                            </th>
+                                            <th style="width:20%;">
+                                                Due Date
+                                            </th>
+                                            <th style="width:3%;"></th>
+                                            <th style="width:3%;"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="item in forAllTaggedTask">
+                                            <td>
+                                                <img style="width:18px;" ng-if="item.siteType =='Gruene'" class="icon-sites-img" ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Foundation/logo-gruene.png">
+                                                <img style="width:18px;" ng-if="item.siteType =='Gender'" class="icon-sites-img" ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Shareweb/site_gender.png">
+                                                <img style="width:18px;" ng-if="item.siteType =='DE'" class="icon-sites-img" ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Shareweb/site_de.png" />
+                                                <img style="width:18px;" ng-if="item.siteType =='DRR'" class="icon-sites-img" ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Shareweb/site_drr.png">
+                                                <img style="width:18px;" ng-if="item.siteType =='Education'" class="icon-sites-img" ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Shareweb/site_education.png">
+                                                <img style="width:18px;" ng-if="item.siteType =='EI'" class="icon-sites-img" ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Shareweb/site_ei.png">
+                                                <img style="width:18px;" ng-if="item.siteType =='EPS'" class="icon-sites-img" ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Shareweb/site_eps.png">
+                                                <img style="width:18px;" ng-if="item.siteType =='Health'" class="icon-sites-img" ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Shareweb/site_health.png">
+                                                <img style="width:18px;" ng-if="item.siteType =='QA'" class="icon-sites-img" ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Shareweb/site_qa.png">
+                                                <img style="width:18px;" ng-if="item.siteType =='Shareweb'" class="icon-sites-img" ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Shareweb/site_shareweb.png">
+                                                <img style="width:18px;" ng-if="item.siteType =='HHHH'" class="icon-sites-img" ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Foundation/icon_hhhh.png">
+                                                <img style="width:18px;" ng-if="item.siteType =='Small Projects'" class="icon-sites-img" ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Shareweb/small_project.png">
+                                            </td>
+                                            <td>
+                                                {{item.Title}}
+                                            </td>
+                                            <td>
+                                                {{item.Priority_x0020_Rank}}
+                                            </td>
+                                            <td>
+                                                {{item.Modified}}
+                                            </td>
+                                            <td>
+                                                {{item.DueDate}}
+                                            </td>
+                                            <td>
+                                                <a class="hreflink" title="Edit" data-toggle="modal" ng-click="EditTask(item)"><img class="img-focus" ng-src="/_layouts/images/edititem.gif"> </a>
+                                            </td>
+                                            <td style="width:1%;">
+                                                <a class="hreflink" title="Delete" data-toggle="modal" ng-click="deleteitem(item,forAllTaggedTask);"><img ng-src="/_layouts/images/delete.gif"></a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="forNoTaggedTask" ng-if="forAllTaggedTask!=undefined&&forAllTaggedTask.length==0" >
+                                <span >No Pending Task Available for the Component. </span>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 no-padding form-group" ng-if="Task.Body!=null">
+                                    <div class="col-lg-12 Description"> <h2> Description</h2>
+                                        {{Task.Body}}
+                                    </div>
+
+                                    <div class="col-lg-12" ng-if="Task.Categories!='Feedback;'">
+                                        <span ng-bind-html="Task.Body | trustedHTML"></span>
+                                    </div>
+                                    <div ng-if="Task.Categories=='Feedback;'" class="col-lg-12">
+                                        <div ng-repeat='item in DescriptionFields'>
+                                            <div class="col-sm-1 mt1  no-padding" style="width:1px;">
+                                                {{$index+1}}.
+                                            </div>
+                                            <div class="col-sm-11 mt1">
+                                                <span ng-bind-html="item.Title | trustedHTML"></span>
+                                            </div>
+                                            <div class="feedbackcomment col-sm-offset-1 col-sm-11 no-padding">
+                                                <div class=" col-sm-12 mb-2 add_cmnt" ng-repeat="comment in item.Comments">
+                                                    <div id="public-item">
+                                                        <div class="col-sm-1">
+                                                            <img style="width:100%;" ng-src="{{comment.AuthorImage}}">
+                                                        </div>
+                                                        <div class="col-sm-10">
+                                                            <div class="">
+                                                                {{comment.AuthorName}} - {{comment.Created | date:'dd MMM yyyy HH:mm'}}
+                                                            </div>
+                                                            <div class="">
+                                                                {{comment.Title}}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ms-clear"></div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-12 Description" ng-if="attachments.length > 0"> <h2> Attachments</h2></div>
+                                <div  class="col-sm-12" ng-repeat="attachedFiles in attachments">
+                                    <div ng-if="attachedFiles.FileName.toLowerCase().indexOf('.png'.toLowerCase())> -1 || attachedFiles.FileName.toLowerCase().indexOf('.jpg'.toLowerCase())> -1 || attachedFiles.FileName.toLowerCase().indexOf('.bmp'.toLowerCase())> -1">
+                                        {{$index+1}}. {{attachedFiles.FileName}}
+
+                                        <img ng-if="deleteAttachedFile = true" style="max-width:90%;" ng-src="{{baseUrl}}/Lists/{{site}}/Attachments/{{attachedItemId}}/{{attachedFiles.FileName}}">
+                                    </div>
+                                    <div ng-if="attachedFiles.FileName.toLowerCase().indexOf('.txt'.toLowerCase())> -1 || attachedFiles.FileName.toLowerCase().indexOf('.docx'.toLowerCase())> -1  || attachedFiles.FileName.toLowerCase().indexOf('.pdf'.toLowerCase())> -1  || attachedFiles.FileName.toLowerCase().indexOf('.doc'.toLowerCase())> -1 || attachedFiles.FileName.toLowerCase().indexOf('.msg'.toLowerCase())> -1 || attachedFiles.FileName.toLowerCase().indexOf('.pptx'.toLowerCase())> -1 || attachedFiles.FileName.toLowerCase().indexOf('.xls'.toLowerCase())> -1 || attachedFiles.FileName.toLowerCase().indexOf('.xlsx'.toLowerCase())> -1">
+                                        <a ng-href="{{baseUrl}}/Lists/{{site}}/Attachments/{{attachedItemId}}/{{attachedFiles.FileName}}">{{$index+1}}. {{attachedFiles.FileName}}</a>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 right-col">
+                            <div class="panel panel-default">
+
+                                <div class="panel-heading" title="Comments" style="color: #333;background-color: #f5f5f5;border-color: #ddd;padding: 7px;">
+
+                                    <label class="full_width" style="margin-top:-7px;">Comments</label>
+
+                                </div>
+                                <div class="panel-body">
+                                    <div style="width:100%;" class="panel1 panel-default " id="commentScroll" ng-cloak>
+                                        <div class="row">
+                                            <div class="publicationItem" ng-repeat="item in AllCommentDetails">
+                                                <div class="row" style="padding:5px;">
+                                                    <div class="col-sm-2">
+                                                        <img style="width:95%; padding-left:0px;" ng-src="{{item.AuthorImage}}" />
+                                                    </div>
+                                                    <div class="col-sm-10">
+                                                        <div class="row" style="color:#069;font-size:small;margin-left:-23px;">
+                                                            {{item.AuthorName}} - {{item.Created | date:'dd MMM yyyy hh:mm'}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <div style="margin-left:18px;margin-bottom:2px" ng-if="item.editable==undefined || item.editable==false" ng-bind-html="item.Description | trustedHTML"></div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+        </div>
+
+    </div>
+
+
+</div>
+

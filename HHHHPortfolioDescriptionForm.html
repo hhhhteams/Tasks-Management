@@ -1,0 +1,566 @@
+﻿<script src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/Style%20Library/js/angular/Services/main.js"></script>
+<script src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/_layouts/15/sp.RequestExecutor.js"></script>
+<script type="text/javascript" src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/Style%20Library/js/angular/Services/jquery.SPServices-2014.01.min.js"></script>
+<script src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/Style%20Library/js/angular/Services/render.min.js?updated=07-29-2018-2"></script>
+<script type="text/javascript" src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/Style%20Library/js/angular/Services/froala_editor.pkgd.min.js"></script>
+<script src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/Style%20Library/js/angular/Online/Tasks%20Management/HHHHPortfolioDescriptionForm.js"></script>
+<style>
+    #pageTitle a {
+        display: none !important;
+    }
+
+    #contentRow {
+        padding-top: 0px !important;
+        margin-top: -15px;
+    }
+    .fr-toolbar.fr-desktop.fr-top.fr-basic{z-index: 998!important;}
+    .fr-box.fr-basic.fr-top{z-index: 998!important;}
+    #HelpInformation .fr-element.fr-view{min-height: 225px!important;}
+</style>
+<div ng-controller="HHHHPortfolioDescriptionFormController"
+     class={{Item.Portfolio_x0020_Type=='Service'?'taskprofilepagegreen':''}}{{Item.Portfolio_x0020_Type=='Events'?'taskprofilepageorange':''}} ng-cloak>
+    <div class="col-sm-12  padL-0 PadR0">
+
+        <div class="task-title" style="vertical-align:top">
+            <h1>
+
+                {{Item.Title}}               
+            </h1>
+        </div>
+    </div>
+    <div class="col-sm-12 col-sm-12 padL-0 PadR0">
+        <div class="col-sm-6 padL-0">
+            <div class="col-sm-12 no-padding" ng-if="(Item.Item_x0020_Type=='Component Category')">
+                <ul class="">
+                    <li>
+                        <span>
+                            <a ng-if="Item.Portfolio_x0020_Type=='Component' && (Item.Item_x0020_Type=='Component Category')"
+                               ng-href="{{SubSiteUrl}}/SitePages/Component-Portfolio.aspx">
+                                Component-Portfolio<span>></span>
+                            </a>
+                        </span>
+                        <span>
+                            <a ng-if="Item.Portfolio_x0020_Type=='Service' &&(Item.Item_x0020_Type=='Component Category')"
+                               ng-href="{{SubSiteUrl}}/SitePages/Service-Portfolio.aspx">
+                                Service-Portfolio<span>></span>
+                            </a>
+                        </span>
+                        <span>
+                            <a ng-if="Item.Portfolio_x0020_Type=='Events' &&(Item.Item_x0020_Type=='Component Category')"
+                               ng-href="{{SubSiteUrl}}/SitePages/Event-Portfolio.aspx">
+                                Event-Portfolio<span>></span>
+                            </a>
+                        </span>
+                        <span class="">
+                            <a>{{Item.Title}}</a>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-sm-12 no-padding"
+                 ng-if="(maincollection.length==undefined||maincollection.length==0)&&(Item.Item_x0020_Type!='Component Category')">
+                <ul class="">
+                    <li>
+                        <span>
+                            <a ng-if="Item.Portfolio_x0020_Type=='Component' && (maincollection==undefined || maincollection.length==0) &&(Item.Item_x0020_Type!='Component Category')"
+                               ng-href="{{SubSiteUrl}}/SitePages/Component-Portfolio.aspx">
+                                Component-Portfolio
+                                <span>></span>
+                            </a>
+                        </span>
+                        <span>
+                            <a ng-if="Item.Portfolio_x0020_Type=='Service' && (maincollection==undefined || maincollection.length==0) &&(Item.Item_x0020_Type!='Component Category')"
+                               ng-href="{{SubSiteUrl}}/SitePages/Service-Portfolio.aspx">
+                                Service-Portfolio<span>></span>
+                            </a>
+                        </span>
+                        <span>
+                            <a ng-if="Item.Portfolio_x0020_Type=='Events' && (maincollection==undefined || maincollection.length==0) &&(Item.Item_x0020_Type!='Component Category')"
+                               ng-href="{{SubSiteUrl}}/SitePages/Event-Portfolio.aspx">
+                                Event-Portfolio<span>></span>
+                            </a>
+                        </span>
+                        <span class="">
+                            <span ng-if="Item!=undefined"></span>
+                            <a>{{Item.Title}}</a>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-sm-12 padL-0"
+                 ng-if="(maincollection.length>0&&Item.Item_x0020_Type!='Component Category')">
+                <ul class="" ng-repeat="breadcrumbitem in maincollection">
+                    <li>
+                        <span>
+                            <a ng-if="Item.Portfolio_x0020_Type=='Component'"
+                               ng-href="{{SubSiteUrl}}/SitePages/Component-Portfolio.aspx">
+                                Component-Portfolio
+                                <span>></span>
+                            </a>
+                        </span>
+                        <span>
+                            <a ng-if="Item.Portfolio_x0020_Type=='Service'"
+                               ng-href="{{SubSiteUrl}}/SitePages/Service-Portfolio.aspx">
+                                Service-Portfolio<span>></span>
+                            </a>
+                        </span>
+                        <span>
+                            <a ng-if="Item.Portfolio_x0020_Type=='Events'"
+                               ng-href="{{SubSiteUrl}}/SitePages/Event-Portfolio.aspx">
+                                Event-Portfolio<span>></span>
+                            </a>
+                        </span>
+
+
+                        <span ng-if="breadcrumbitem.Parentitem!=undefined">
+                            <span ng-if="breadcrumbitem.Parentitem!=undefined"></span>
+
+                            <a ng-href="{{SubSiteUrl}}/SitePages/Portfolio-Profile.aspx?taskId={{breadcrumbitem.Parentitem.Id}}">{{breadcrumbitem.Parentitem.Title}}</a>
+                        </span>
+                        <span ng-if="breadcrumbitem.Child!=undefined">
+                            <span ng-if="breadcrumbitem.Child!=undefined &&  breadcrumbitem.Parentitem!=''">></span>
+
+                            <a ng-href="{{SubSiteUrl}}/SitePages/Portfolio-Profile.aspx?taskId={{breadcrumbitem.Child.Id}}">{{breadcrumbitem.Child.Title}}</a>
+                        </span>
+                        <span ng-if="breadcrumbitem.Subchild!=undefined">
+                            <span ng-if="breadcrumbitem.Subchild!=undefined">></span>
+
+                            <a ng-href="{{SubSiteUrl}}/SitePages/Portfolio-Profile.aspx?taskId={{breadcrumbitem.Subchild.Id}}">{{breadcrumbitem.Subchild.Title}}</a>
+                        </span>
+                        <span>
+                            <span ng-if="Item!=undefined&&Item.Item_x0020_Type!='Component'">></span>
+                            <a>{{Item.Title}}</a>
+                        </span>
+                    </li>
+
+                </ul>
+            </div>
+            <div class="task-title" style="vertical-align:top">
+                <h5>
+                    <span>
+                        <img ng-if="Item.Item_x0020_Type =='Component'&&Item.Portfolio_x0020_Type=='Component'"
+                             style="height: 24px;width:24px;margin-top: -2px;"
+                             ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Shareweb/component_icon.png">
+                        <img ng-if="Item.Item_x0020_Type =='Component'&&Item.Portfolio_x0020_Type=='Service'"
+                             style="height: 24px;width:24px;margin-top: -2px;"
+                             ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Service_Icons/component_icon.png">
+                        <img ng-if="Item.Item_x0020_Type =='Component'&&Item.Portfolio_x0020_Type=='Events'"
+                             style="height: 24px;width:24px;margin-top: -2px;"
+                             ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Event_Icons/component_icon.png">
+                        <img ng-if="Item.Item_x0020_Type =='SubComponent' &&Item.Portfolio_x0020_Type =='Component'"
+                             style="height: 24px;width:24px;margin-top: -2px;"
+                             ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Shareweb/SubComponent_icon.png">
+                        <img ng-if="Item.Item_x0020_Type =='SubComponent' && Item.Portfolio_x0020_Type =='Service'"
+                             style="height: 24px;width:24px;margin-top: -2px;"
+                             ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Service_Icons/SubComponent_icon.png">
+                        <img ng-if="Item.Item_x0020_Type =='SubComponent' && Item.Portfolio_x0020_Type =='Events'"
+                             style="height: 24px;width:24px;margin-top: -2px;"
+                             ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Events_Icons/SubComponent_icon.png">
+                        <img ng-if="Item.Item_x0020_Type =='Feature' && Item.Portfolio_x0020_Type =='Component'"
+                             style="height: 24px;width:24px;margin-top: -2px;"
+                             ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Shareweb/feature_icon.png">
+                        <img ng-if="Item.Item_x0020_Type =='Feature' &&Item.Portfolio_x0020_Type =='Service'"
+                             style="height: 24px;width: 24px;margin-top: -2px;"
+                             ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Service_Icons/feature_icon.png">
+                        <img ng-if="Item.Item_x0020_Type =='Feature' &&Item.Portfolio_x0020_Type =='Events'"
+                             style="height: 24px;width:24px;margin-top: -2px;"
+                             ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Events_Icons/feature_icon.png">
+                    </span>
+                    {{Item.Title}}
+                    <span>
+                        <img class="hreflink" ng-src="{{mainsiteurl}}/SiteCollectionImages/ICONS/32/edititem.gif" ng-click="openEditComponentData('Components')" src="{{mainsiteurl}}/SiteCollectionImages/ICONS/32/edititem.gif">
+                    </span>
+                </h5>
+            </div>
+        </div>
+        <div class="col-sm-6 padL-0 taskprofilepagegreen">
+            <div class="col-sm-12 no-padding" ng-if="(ServiceItems.Item_x0020_Type=='Component Category')">
+                <ul class="">
+                    <li>
+                        <span>
+                            <a ng-if="ServiceItems.Portfolio_x0020_Type=='Component' && (ServiceItems.Item_x0020_Type=='Component Category')"
+                               ng-href="{{SubSiteUrl}}/SitePages/Component-Portfolio.aspx">
+                                Component-Portfolio<span>></span>
+                            </a>
+                        </span>
+                        <span>
+                            <a ng-if="ServiceItems.Portfolio_x0020_Type=='Service' &&(ServiceItems.Item_x0020_Type=='Component Category')"
+                               ng-href="{{SubSiteUrl}}/SitePages/Service-Portfolio.aspx">
+                                Service-Portfolio<span>></span>
+                            </a>
+                        </span>
+                        <span>
+                            <a ng-if="ServiceItems.Portfolio_x0020_Type=='Events' &&(ServiceItems.Item_x0020_Type=='Component Category')"
+                               ng-href="{{SubSiteUrl}}/SitePages/Event-Portfolio.aspx">
+                                Event-Portfolio<span>></span>
+                            </a>
+                        </span>
+                        <span class="">
+                            <a>{{ServiceItems.Title}}</a>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-sm-12 no-padding"
+                 ng-if="(maincollectionService.length==undefined||maincollectionService.length==0)&&(ServiceItems.Item_x0020_Type!='Component Category')">
+                <ul class="">
+                    <li>
+                        <span>
+                            <a ng-if="ServiceItems.Portfolio_x0020_Type=='Component' && (maincollectionService==undefined || maincollectionService.length==0) &&(ServiceItems.Item_x0020_Type!='Component Category')"
+                               ng-href="{{SubSiteUrl}}/SitePages/Component-Portfolio.aspx">
+                                Component-Portfolio
+                                <span>></span>
+                            </a>
+                        </span>
+                        <span>
+                            <a ng-if="ServiceItems.Portfolio_x0020_Type=='Service' && (maincollectionService==undefined || maincollectionService.length==0) &&(ServiceItems.Item_x0020_Type!='Component Category')"
+                               ng-href="{{SubSiteUrl}}/SitePages/Service-Portfolio.aspx">
+                                Service-Portfolio<span>></span>
+                            </a>
+                        </span>
+                        <span>
+                            <a ng-if="ServiceItems.Portfolio_x0020_Type=='Events' && (maincollectionService==undefined || maincollectionService.length==0) &&(ServiceItems.Item_x0020_Type!='Component Category')"
+                               ng-href="{{SubSiteUrl}}/SitePages/Event-Portfolio.aspx">
+                                Event-Portfolio<span>></span>
+                            </a>
+                        </span>
+                        <span class="">
+                            <span ng-if="ServiceItems!=undefined"></span>
+                            <a>{{ServiceItems.Title}}</a>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-sm-12 padL-0"
+                 ng-if="(maincollectionService.length>0&&ServiceItems.Item_x0020_Type!='Component Category')">
+                <ul class="" ng-repeat="breadcrumbitem in maincollectionService">
+                    <li>
+                        <span>
+                            <a ng-if="ServiceItems.Portfolio_x0020_Type=='Component'"
+                               ng-href="{{SubSiteUrl}}/SitePages/Component-Portfolio.aspx">
+                                Component-Portfolio
+                                <span>></span>
+                            </a>
+                        </span>
+                        <span>
+                            <a ng-if="ServiceItems.Portfolio_x0020_Type=='Service'"
+                               ng-href="{{SubSiteUrl}}/SitePages/Service-Portfolio.aspx">
+                                Service-Portfolio<span>></span>
+                            </a>
+                        </span>
+                        <span>
+                            <a ng-if="ServiceItems.Portfolio_x0020_Type=='Events'"
+                               ng-href="{{SubSiteUrl}}/SitePages/Event-Portfolio.aspx">
+                                Event-Portfolio<span>></span>
+                            </a>
+                        </span>
+
+
+                        <span ng-if="breadcrumbitem.Parentitem!=undefined">
+                            <span ng-if="breadcrumbitem.Parentitem!=undefined"></span>
+
+                            <a ng-href="{{SubSiteUrl}}/SitePages/Portfolio-Profile.aspx?taskId={{breadcrumbitem.Parentitem.Id}}">{{breadcrumbitem.Parentitem.Title}}</a>
+                        </span>
+                        <span ng-if="breadcrumbitem.Child!=undefined">
+                            <span ng-if="breadcrumbitem.Child!=undefined &&  breadcrumbitem.Parentitem!=''">></span>
+
+                            <a ng-href="{{SubSiteUrl}}/SitePages/Portfolio-Profile.aspx?taskId={{breadcrumbitem.Child.Id}}">{{breadcrumbitem.Child.Title}}</a>
+                        </span>
+                        <span ng-if="breadcrumbitem.Subchild!=undefined">
+                            <span ng-if="breadcrumbitem.Subchild!=undefined">></span>
+
+                            <a ng-href="{{SubSiteUrl}}/SitePages/Portfolio-Profile.aspx?taskId={{breadcrumbitem.Subchild.Id}}">{{breadcrumbitem.Subchild.Title}}</a>
+                        </span>
+                        <span>
+                            <span ng-if="ServiceItems!=undefined&&ServiceItems.Item_x0020_Type!='Component'">></span>
+                            <a>{{ServiceItems.Title}}</a>
+                        </span>
+                    </li>
+
+                </ul>
+            </div>
+            <div class="task-title" style="vertical-align:top">
+                <h5>
+                    <span>
+
+                        <img ng-if="ServiceItems.Item_x0020_Type =='Component'"
+                             style="height: 24px;width:24px;margin-top: -2px;"
+                             ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Service_Icons/component_icon.png">
+
+                        <img ng-if="ServiceItems.Item_x0020_Type =='SubComponent'"
+                             style="height: 24px;width:24px;margin-top: -2px;"
+                             ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Service_Icons/SubComponent_icon.png">
+
+                        <img ng-if="ServiceItems.Item_x0020_Type =='Feature'"
+                             style="height: 24px;width: 24px;margin-top: -2px;"
+                             ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Service_Icons/feature_icon.png">
+
+                    </span>
+                    <span ng-show="ServiceItems!=undefined">{{ServiceItems.Title}}</span>
+                    <span ng-show="ServiceItems==undefined">Select Service</span>
+                    <span>
+                        <img class="hreflink" ng-src="{{mainsiteurl}}/SiteCollectionImages/ICONS/32/edititem.gif" ng-click="openEditComponentData('Services')" src="{{mainsiteurl}}/SiteCollectionImages/ICONS/32/edititem.gif">
+                    </span>
+                </h5>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"> </div>
+    <div class="panel panel-default">
+        <div class="tabBox clearfix">
+            <div class="tab-pane">
+                <div class="container">
+                    <div class="col-sm-12">
+                        <div class="col-sm-10 padL-0 PadR0 form-group">
+                            <label ng-bind-html="GetColumnDetails('ShortDescriptionOnlineHelp')"></label>
+                            <div id="ShortDescriptionOnlineHelp"></div>
+                        </div>
+
+                        <div class="col-sm-2 PadR0 mt-1">
+                            <label>
+                                Help Status
+                                <a ng-click="ClearSelectionHelpStatus()" class=" hreflink"><img ng-src="/_layouts/images/delete.gif"></a>
+                            </label>
+                            <div ng-repeat="item in HelpStatusChoiceData" style="margin-bottom:2px">
+                                <input type="radio" name="WebpartType" id="{{item}}" value="{{item}}" class="form-check-input" ng-click="addHelpStatus(item)" ng-model="HelpStatus" style="margin-right:5px" />{{item}}
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 padL-0 PadR0">
+                            <label ng-bind-html="GetColumnDetails('HelpInformation')"></label>
+                            <div id="HelpInformation"></div>
+                        </div>
+                        <div class="col-md-12 padL-0 PadR0">
+                            <div class="col-sm-12  mt-10 padL-0 PadR0"> <label class="">Questions Description</label><a class="hreflink pull-right" ng-click="AskQuestion('Question')">Add Questions</a></div>
+                            <div class="col-sm-12 padL-0 PadR0 section-event pt-0">
+                                <table class="mb-10" width="100%" cellspacing="0">
+
+                                    <div class="accordin-header ng-scope" ng-repeat="item in AllComponentRelated">
+                                        <input class="toggle-box-content" id="identifier-{{item.Id}}" type="checkbox">
+                                        <label for="identifier-{{item.Id}}" class="ng-binding">
+                                            <span>{{item.Title}}</span>
+                                            <span class="pull-right"><a class="hreflink" ng-click="UpdateQuestion(item)"> <img ng-src="{{mainsiteurl}}/SiteCollectionImages/ICONS/32/edititem.gif"></a> <a class="hreflink" ng-click="DeleteQuestion(item)"><img src="/_layouts/images/delete.gif" /></a></span>
+                                        </label>
+                                        <div class="ng-binding">
+                                            <div class="accordin-content" ng-bind-html="item.Body | trustedHTML">
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </table>
+                                <div ng-show="AllComponentRelated.length==0" class="text-center panel-heading">
+                                    No Questions Description available
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-12 padL-0 PadR0">
+
+                            <div class="col-sm-12 mb-5 mt-10 padL-0 PadR0"> <label class="">Help Description</label> <a class="pull-right hreflink" ng-click="AskQuestion('Help')">Add Help</a></div>
+                            <div class="col-sm-12 padL-0 PadR0 section-event pt-0">
+                                <table width="100%" cellspacing="0" class="mb-10">
+                                    <div class="accordin-header ng-scope" ng-repeat="item in AllComponentRelatedHelp">
+                                        <input class="toggle-box-content" id="identifier-{{item.Id}}" type="checkbox">
+                                        <label for="identifier-{{item.Id}}" class="ng-binding">
+                                            <span>{{item.Title}}</span>
+                                            <span class="pull-right"><a class="hreflink" ng-click="UpdateHelp(item)"> <img ng-src="{{mainsiteurl}}/SiteCollectionImages/ICONS/32/edititem.gif"></a> <a class="hreflink" ng-click="DeleteHelp(item)"><img src="/_layouts/images/delete.gif" /></a></span>
+                                        </label>
+                                        <div class="ng-binding">
+                                            <div class="accordin-content" ng-bind-html="item.Body | trustedHTML">
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </table>
+                                <div ng-show="AllComponentRelatedHelp.length==0" class="text-center panel-heading">
+                                    No Help Description available
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" ng-click="SaveAllData()" style="margin-top:15px">Save</button>
+                    </div>
+                </div>
+            </div>
+            <div id="AskQuestionPopUP" class="modal fade in FeedBackIconSize" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" style="display: none;">
+                <div class="modal-dialog" style="width: 969px;">
+                    <div class="modal-content">
+                        <ng-form name="createContactConfirmationPopUPForm" novalidate role="form">
+                            <div class="panel-title">
+                                <button type="button" class="close mt-2" data-dismiss="modal" ng-click="cancelQuestionPopUP()" style="min-width: 10px;">&times;</button>
+                                <h3>
+                                    <span>Add {{ComponentItemtype}}</span>
+
+                                    <span class="pull-right ">
+                                        <span ng-show="ComponentItemtype=='Help'">
+                                            <page-settings-info webpartid="'helpdescriptions'"></page-settings-info>
+                                        </span>
+                                        <span ng-show="ComponentItemtype=='Question'">
+                                            <page-settings-info webpartid="'Questiondescriptions'"></page-settings-info>
+                                        </span>
+                                    </span>
+                                </h3>
+                            </div>
+                            <div class="panel-body ">
+                                <div class="col-sm-12 form-group tab-content bdrbox">
+
+
+                                    <div class="form-group">
+                                        <div class="contact">
+                                            <div class="col-sm-12 form-group">
+                                                <label>Title</label>
+                                                <div>
+                                                    <input type="text" id="txtFirstName" ng-model="ComponentName" class="form-control" ng-required="true" />
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12 form-group" ng-show="ComponentItemtype=='Question'">
+                                                <label>
+                                                    Permission
+                                                    <a ng-click="ClearSelectionPermission(Permission)" class=" hreflink"><img ng-src="/_layouts/images/delete.gif"></a>
+                                                </label>
+                                                <div>
+                                                    <span ng-repeat="item in PermissionChoiceData" style="margin-bottom:2px;margin-right:36px;">
+                                                        <input type="radio" name="Permission" id="{{item}}" value="{{item}}" class="form-check-input" ng-click="addPermission(item,'Permission')" ng-model="Permission" style="margin-right:5px" />{{item}}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12 form-group">
+                                                <label>Description</label>
+                                                <div>
+                                                    <div id="AskDescription"></div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="modal-footer pr-10">
+                                <div class="col-sm-12 PadR0">
+                                    <button type="button" class="btn btn-primary" ng-click="AskAddQuestion()">Save</button>
+                                    <button type="button" class="btn btn-default" ng-click="cancelQuestionPopUP()">Cancel</button>
+                                </div>
+                            </div>
+                        </ng-form>
+                    </div>
+                </div>
+            </div>
+            <div id="UpdateQuestionPopUP" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" style="display: none;">
+                <div class="modal-dialog" style="width: 969px;">
+                    <div class="modal-content">
+                        <ng-form name="createContactConfirmationPopUPForm" novalidate role="form">
+                            <div class="panel-title">
+                                <h3>
+                                    <span>Update {{updateItem.ItemType}}</span>
+                                    <button type="button" class="close" data-dismiss="modal" ng-click="cancelUpdateQuestionPopUP()" style="min-width: 10px;">&times;</button>
+                                    <span class="pull-right">
+                                        <page-settings-info webpartid="'helpdescriptions'"></page-settings-info>
+                                    </span>
+                                </h3>
+                            </div>
+                            <div class="panel-body tab-content">
+                                <div class="col-sm-12 form-group">
+                                    <div id="">
+                                        <div id="">
+                                            <div class="form-group">
+                                                <div class="contact">
+                                                    <div class="col-sm-12 form-group">
+                                                        <label>Title</label>
+                                                        <div>
+                                                            <input type="text" id="txtFirstName" ng-model="updateItem.Title" class="form-control" ng-required="true" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-12 form-group">
+                                                        <label>
+                                                            Permission
+                                                            <a ng-click="ClearSelectionPermission(updateItem.Permission)" class=" hreflink"><img ng-src="/_layouts/images/delete.gif"></a>
+                                                        </label>
+                                                        <div>
+                                                            <span ng-repeat="item in PermissionChoiceData" style="margin-bottom:2px;margin-right:36px;">
+                                                                <input type="radio" name="Permission1" id="{{item}}" value="{{item}}" class="form-check-input" ng-click="addPermission(item,updateItem.Permission)" ng-model="updateItem.Permission" style="margin-right:5px" disabled />{{item}}
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-12 form-group">
+                                                        <label>Description</label>
+                                                        <div>
+                                                            <div id="UpdateDescription"></div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <div class="col-sm-12">
+                                    <button type="button" class="btn btn-primary" ng-click="updateItemQuestion()">Save</button>
+                                    <button type="button" class="btn btn-default" ng-click="cancelUpdateQuestionPopUP()">Cancel</button>
+                                </div>
+                            </div>
+                        </ng-form>
+                    </div>
+                </div>
+            </div>
+            <div id="UpdateHelpPopUP" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" style="display: none;">
+                <div class="modal-dialog" style="width: 969px;">
+                    <div class="modal-content">
+                        <ng-form name="createContactConfirmationPopUPForm" novalidate role="form">
+                            <div class="panel-title">
+                                <h3>
+                                    <span>Update {{updateItem.ItemType}}</span>
+                                    <button type="button" class="close" data-dismiss="modal" ng-click="cancelUpdateHelpPopUP()" style="min-width: 10px;">&times;</button>
+                                    <span class="pull-right">
+                                        <page-settings-info webpartid="'helpdescriptions'"></page-settings-info>
+                                    </span>
+                                </h3>
+                            </div>
+                            <div class="panel-body tab-content">
+                                <div class="col-sm-12 form-group">
+                                    <div id="">
+                                        <div id="">
+                                            <div class="form-group">
+                                                <div class="contact">
+                                                    <div class="col-sm-12 form-group">
+                                                        <label>Title</label>
+                                                        <div>
+                                                            <input type="text" id="txtFirstName" ng-model="updateItem.Title" class="form-control" ng-required="true" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-12 form-group">
+                                                        <label>Description</label>
+                                                        <div>
+                                                            <div id="UpdateHelpDescription"></div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <div class="col-sm-12">
+                                    <button type="button" class="btn btn-primary" ng-click="updateItemHelp()">Save</button>
+                                    <button type="button" class="btn btn-default" ng-click="cancelUpdateHelpPopUP()">Cancel</button>
+                                </div>
+                            </div>
+                        </ng-form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

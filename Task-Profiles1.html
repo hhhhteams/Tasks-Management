@@ -1,0 +1,1145 @@
+﻿<script src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/Style%20Library/js/angular/Online/Tasks%20Management/SharewebCommon.js"></script>
+<script src="https://static.sharepointonline.com/bld/_layouts/15/16.0.8929.1228/sp.requestexecutor.js"></script>
+<script src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/Style%20Library/js/angular/Templates/HCTemplateControllers.js"></script>
+
+<script src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/Style%20Library/js/angular/Online/Tasks%20Management/Task-Profiles1.js"></script>
+
+<link rel="stylesheet" type="text/css" href="https://hhhhteams.sharepoint.com/sites/HHHHTeams/Style%20Library/js/angular/Services/froala_style.min.css" />
+<link rel="stylesheet" href="https://hhhhteams.sharepoint.com/sites/HHHHTeams/Style%20Library/js/angular/Services/froala_editor.pkgd.min.css" />
+<link rel="stylesheet" href="https://hhhhteams.sharepoint.com/sites/HHHHTeams/Style%20Library/js/angular/Services/font-awesome.min.css" />
+<script type="text/javascript" src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/Style%20Library/js/angular/Services/rzslider.js"></script>
+<script src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/Style%20Library/js/angular/Services/foundation.min.js"></script>
+
+
+
+<script type="text/javascript" src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/Style%20Library/js/angular/Services/froala_editor.pkgd.min.js"></script>
+<script src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/Style%20Library/js/angular/Services/alasql.min.js"></script>
+<script src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/Style%20Library/js/angular/Services/alasql.min.js"></script>
+
+
+
+<script src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/Style%20Library/js/angular/Online/Tasks%20Management/FoundationAddnConnectTool.js"></script>
+<script src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/Style%20Library/js/angular/Templates/FoundationDocuments.js"></script>
+<script src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/Style%20Library/js/angular/Templates/HHHH-EditSharewebItem.js"></script>
+
+<script src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/Style%20Library/js/angular/Templates/EditTaskManagement.js"></script>
+
+
+
+<style type="text/css">
+
+    .document {
+        padding-left: 6px;
+    }
+
+    .pagetitleheader {
+        display: none !important;
+        /*only usable for this page*/
+    }
+
+    .completewidth {
+        width: 27%;
+    }
+
+    .smallwidth {
+        width: 73%;
+    }
+
+    /***this is used for breadcrum****/
+    .Breadcrumb {
+        display: none;
+    }
+
+    .ml-3 {
+        margin-left: 3px !important;
+    }
+
+    .for-team-img {
+        width: 30px;
+        height: 30px;
+        border-radius: 50px;
+        display: inline-flex;
+        margin-right: 2px;
+    }
+</style>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#tasktabs").tabs();
+        $('#tasktabs').tabs("option", "active", 0);
+    });
+
+</script>
+
+<div ng-controller="TaskProfileController1">
+    <div class="col-sm-12 no-padding smart-folder">
+        <!--<div>
+            <ul class="DisplayInline" style="width:100%;">
+                <span>
+                    <a ng-href="{{MainUrl}}/team/Pages/Manage/Dashboard.aspx" <span
+                        id="spnsubtopic">Dashboard</span></a>
+                    <span ng-if="TaskBreadcrumb.length>0" class="right-icon" id="spnsubtopic"> > </span>
+                </span>
+                <li ng-repeat="item in TaskBreadcrumb | orderBy:'$index':true">
+                    <a ng-if="TaskBreadcrumb.length-1 !=$index"
+                       ng-href="{{MainUrl}}/Team/Pages/Manage/TaskProfile.aspx?TaskId={{item.Id}}">
+                        {{item.Title}}
+
+                    </a>
+                    <span ng-if="TaskBreadcrumb.length-1 ==$index">
+                        {{item.Title}}
+
+                    </span>
+                    <span ng-if="TaskBreadcrumb.length !=$index+1"> > </span>
+                </li>
+            </ul>
+        </div>-->
+    </div>
+
+    <div>
+        <div class="col-sm-12 padL-0">
+            <h1>
+                <span class="col-sm-10 padL-0">
+                    {{ItemType}} - {{Item.Title}} <a class="hreflink" ng-click="EditTask(Item)">
+                        <img src="/_layouts/images/edititem.gif">
+                    </a>
+                    <!--{{Task.Title}} <a ng-if="isMemberOwner==true" class="hreflink" ng-click="EditTask(Task)"><img src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/SiteCollectionImages/ICONS/32/edititem.gif"></a>-->
+                </span>
+                <!--<span class="col-sm-4"></span>-->
+                <!--<span ng-if="ShowFeedbackIcon" class="col-sm-2 PadR0"> <a  class="hreflink pull-right" ng-click="AdminComment()">Admin Comments</a></span>-->
+            </h1>
+        </div>
+        <div class="col-sm-8 mt-3">
+
+            <div id="GeneralInfo" style="margin-bottom:15px;" aria-labelledby="ui-id-1" role="tabpanel">
+                <div class="row">
+                    <div class="col-sm-6 PadR0 padL-0 involve_actor">
+                        <div class="tmvalue">Task Id</div>
+                        <div class="tlvalue">
+                            {{Item.Shareweb_x0020_ID}}
+                            <!-- <span ng-bind-html="SharewebIDs | trustedHTML"></span> -->
+
+                        </div>
+                    </div>
+                    <div ng-if="item.IsShowProfile =='Yes' && selectedsubsite =='/cep'"
+                         class="col-sm-6 PadR0 involve_actor" ng-repeat="item in ShowColumnsTitle">
+                        <div class="tmvalue">{{item.Title}}</div>
+                        <div class="tlvalue"><span ng-bind-html="Item[item.InternalName]"></span></div>
+                    </div>
+                    <div class="col-sm-6 padL-0 PadR0 involve_actor">
+                        <div class="tmvalue">Due Date</div>
+                        <div class="tlvalue ">{{Item.DueDate}}</div>
+                    </div>
+
+                </div>
+                <div class="clearfix"></div>
+                <div class="row">
+                    <div class="col-sm-6 PadR0 padL-0 involve_actor">
+                        <div class="tmvalue">% Completed</div>
+                        <div class="tlvalue" ng-if="Item.PercentComplete < 1">
+                            {{Item.PercentComplete*100}}
+
+                        </div>
+                        <div class="tlvalue" ng-if="Item.PercentComplete  >= 1">
+                            {{Item.PercentComplete}}
+                        </div>
+                    </div>
+                    <div class="col-sm-6 PadR0 padL-0 involve_actor">
+                        <div class="tmvalue">Priority</div>
+                        <div class="tlvalue">{{Item.Priority}}</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 padL-0 PadR0 involve_actor">
+                        <div class="tmvalue impact-infoI">Team</div>
+                        <div class="tlvalue impact-infoII TeamLeaderImg">
+                            <img class="for-team-img" ng-if="image.userImage != undefined" title="{{image.Title}}" data-toggle="popover"
+                                 data-trigger="hover" class="TeamLeader" ng-repeat="image in UserImage"
+                                 ng-src="{{image.userImage}}" />
+                            <div title="{{image.Title}}" class="text-center title2 alltaskimage" ng-if="image.userImage == undefined"
+                                 data-toggle="popover" data-trigger="hover" ng-repeat="image in UserImage">
+                                <div class="text-center ng-binding">{{image.Suffix}}</div>
+                            </div>
+                            <span ng-show="ShowTeamMemberUser.length>0" class="pipe"> | </span>
+                            <img ng-if="image.userImage !=undefined" title="{{image.Title}}" data-toggle="popover"
+                                 data-trigger="hover" class="TeamLeader" ng-repeat="image in ShowTeamMemberUser"
+                                 ng-src="{{image.userImage}}" />
+
+                            <div class="" title="{{image.Title}}"
+                                 ng-if="image.userImage==undefined && image.Suffix !=undefined" data-toggle="popover"
+                                 data-trigger="hover" ng-repeat="image in ShowTeamMemberUser">
+                                <div class="text-center title2 alltaskimageprofile ng-binding">
+                                    {{image.Suffix}}
+                                </div>
+                            </div>
+
+
+
+                            <!--<img class="content_wrap text-center TeamLeader shadow" ng-if="image.userImage==undefined" title="{{image.Title}}" data-toggle="popover" data-trigger="hover" ng-repeat="image in UserImage" ng-src="https://www.shareweb.ch/site/Gender/PublishingImages/Portraits/icon_user.jpg" />-->
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 PadR0 padL-0 involve_actor">
+                        <div class="tmvalue impact-infoI">Status</div>
+                        <div class="tlvalue impact-infoII">{{Item.Status}}</div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 involve_actor padL-0 PadR0">
+                        <div class="tmvalue impact-infoI">Url</div>
+                        <div class="tlvalue impact-infoII">
+                            <a target="_blank" ng-href="{{Item.componentlink.Url}}" class="labeltext"
+                               style="width:98%;">{{Item.componentlink.Url}}</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div ng-show="showsitetype=='ei'" class="row">
+                    <div class="col-sm-12 padL-0 PadR0">
+                        <div class="involve_actor">
+                            <!-- <div class="tmvalue">{{column.Title}}</div>  -->
+                            <div class="tmvalue impact-infoI">Key Partners</div>
+                            <div class="tlvalue impact-infoII">
+
+                                <p class="block ml-3 mb0" ng-if="item.Role =='KeyClient'"
+                                   ng-repeat="item in SharewebDisplayLocal">
+                                    <a style="color: #fff !important;"
+                                       ng-href="{{MainUrl}}/team/Pages/Institution-Profile.aspx?contactId={{item.Id}}&name={{item.Title}}"
+                                       target="_blank">{{item.Title}}</a>
+
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 padL-0 PadR0 ">
+                        <div class="involve_actor">
+                            <!-- <div class="tmvalue">{{column.Title}}</div>  -->
+                            <div class="tmvalue impact-infoI">Internal Client</div>
+                            <div class="tlvalue impact-infoII">
+                                <!-- {{Item[column.InternalName]}} -->
+
+                                <p class="block ml-3 mb0" ng-repeat="item in InternalClientItems">
+                                    <a style="color: #fff !important;"
+                                       ng-if="item.TaxType == 'Organization' || item.TaxType == 'Institution'|| item.TaxType == 'Division' || item.TaxType == 'Sub-Division'"
+                                       ng-href="{{MainUrl}}/team/Pages/Institution-Profile.aspx?contactId={{item.Id}}&name={{item.Title}}"
+                                       target="_blank">{{item.Title}}</a>
+                                    <a style="color: #fff !important;" ng-if="item.ItemType == 'Contact'"
+                                       ng-href="{{MainUrl}}/team/Pages/Contact-Profile.aspx?contactId={{item.Id}}&name={{item.Title}}"
+                                       target="_blank">{{item.Title}}</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div ng-show="showsitetype=='ei'" class=" row ">
+                    <div class="col-sm-12 involve_actor padL-0 PadR0">
+                        <div class="tmvalue impact-infoI">Other Partners</div>
+                        <div class="tlvalue impact-infoII">
+
+                            <p class="block ml-3 mb0" ng-if="item.Role =='GeneralClient'"
+                               ng-repeat="item in SharewebDisplayLocal">
+                                <a style="color: #fff !important;"
+                                   ng-if="item.TaxType == 'Organization' || item.TaxType == 'Institution'|| item.TaxType == 'Division' || item.TaxType == 'Sub-Division'"
+                                   ng-href="{{MainUrl}}/team/Pages/Institution-Profile.aspx?contactId={{item.Id}}&name={{item.Title}}"
+                                   target="_blank">{{item.Title}}</a>
+                                <a style="color: #fff !important;" ng-if="item.TaxType == 'Contact'"
+                                   ng-href="{{MainUrl}}/team/Pages/Contact-Profile.aspx?contactId={{item.Id}}&name={{item.Title}}"
+                                   target="_blank">{{item.Title}}</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div ng-show="showsitetype=='ei'|| showsitetype=='eps'" class="row">
+                    <div class="process col-sm-12 involve_actor padL-0 PadR0">
+                        <div class="tmvalue impact-infoI">Process Categories</div>
+                        <div class="tlvalue impact-infoII">
+                            <!--<div class="block" ng-repeat="item in processCatagories">{{item.Title}}</div>-->
+                            <div class="block ml-3" ng-repeat="item in processCatagories">
+                                <a style="color: #fff !important;" ng-href="{{MainUrl}}/Pages/Content/Profiles.aspx?SmartID={{item.ID}}" ng-target="_blank">{{item.Title}}</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+
+                <div class="clearfix"></div>
+                <div class="row" ng-show="ItemType =='Task' && ItemBody !=undefined">
+                    <div class="col-lg-12 padL-0 PadR0 form-group">
+                        <div class="col-lg-12 Description padL-0 PadR0">
+                            <fieldset class="fieldsett">
+                                <legend> Description</legend>
+                                <div class="col-lg-12" id="description">
+                                    <span id="pageContent" ng-bind-html="Item.Body | trustedHTML"></span>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div class="ms-clear"></div>
+
+                    <!-- <div  ng-repeat="item in Admincomments"> -->
+                    <!-- <span ng-show="IsShowFeedback" ng-bind-html="item.Body | trustedHTML"> -->
+                    <!-- </span> -->
+                    <!-- </div> -->
+
+
+                </div>
+
+
+
+
+
+                <div class="row" ng-show="ItemType !='Task' && ItemBody != undefined">
+                    <div class="col-lg-12 padL-0 PadR0 form-group">
+                        <div class="col-lg-12 Description padL-0 PadR0">
+                            <fieldset class="fieldsett">
+                                <legend>
+                                    Description
+                                </legend>
+
+                                <div class="col-lg-12" id="description">
+                                    <span id="pageContent" ng-bind-html="Item.Body | trustedHTML"></span>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div class="ms-clear"></div>
+                </div>
+                <!-- Relevant workstream -->
+                <div class="row mt-10">
+                    <div class="panel panel-default" ng-show="ItemType =='Activities'">
+                        <div class="panel-heading panel-new-head">
+                            <h3 class="panel-title">Relevant Workstreams</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <div ng-show="WorkstreamItems =='undefined' || WorkstreamItems =='null' || WorkstreamItems.length==0">
+                                    <div role="alert" class="text-center mt-20">
+                                        No Workstream available
+                                    </div>
+                                </div>
+                                <div>
+                                    <div id="table-scroll"
+                                         ng-hide="WorkstreamItems =='undefined' || WorkstreamItems =='null' || WorkstreamItems.length==0">
+                                        <table class="table table-hover" cellspacing="0" width="100%">
+                                            <thead>
+                                                <tr>
+
+                                                    <th style="cursor: pointer; width:17%;"
+                                                        ng-click="orderBy='Shareweb_x0020_ID'; reverse=!reverse;">
+                                                        Task ID
+                                                    </th>
+                                                    <th style="cursor: pointer; width:31%;"
+                                                        ng-click="orderBy='Title'; reverse=!reverse;">Title</th>
+                                                    <th style="cursor: pointer; width:7%;"
+                                                        ng-click="orderBy='Status'; reverse=!reverse;">Status</th>
+                                                    <th style="cursor: pointer; width:22%;"
+                                                        ng-click="orderBy='Title'; reverse=!reverse;">Team</th>
+                                                    <th style="cursor: pointer; width:13%;"
+                                                        ng-click="orderBy='DueDate'; reverse=!reverse;">Due Date</th>
+                                                    <th width="3%"></th>
+                                                    <th width="3%"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!--<tr ng-repeat="item in WorkstreamItems | orderBy:orderBy:reverse">-->
+                                                <tr class="project_active" style="font-weight:bold"
+                                                    ng-repeat-start="item in filtered = (WorkstreamItems  | orderBy:orderBy:reverse)">
+
+
+                                                    <td ng-if="item.childs.length>0">
+                                                        <a class="flag_icon" ng-if="item.expanded"
+                                                           ng-click="item.expanded = false">
+                                                            <img style="margin-top:-5px; margin-right:4px;"
+                                                                 ng-src="{{MainUrl}}/SiteCollectionImages/ICONS/32/list-icon.png">
+                                                        </a>
+                                                        <a class="flag_icon" ng-if="!item.expanded"
+                                                           ng-click="item.expanded = true">
+                                                            <img style="margin-top:-5px; margin-right:4px;"
+                                                                 ng-src="{{MainUrl}}/SiteCollectionImages/ICONS/32/right-list-icon.png">
+                                                        </a>
+                                                        {{item.Shareweb_x0020_ID}}
+                                                    </td>
+                                                    <td ng-if="item.childs.length==0">
+
+                                                        {{item.Shareweb_x0020_ID}}
+                                                    </td>
+
+                                                    <td style="width:30%;">
+                                                        <a ng-href="{{siteConfig.SiteUrl}}/Pages/Manage/TaskProfile.aspx?TaskId={{item.Id}}"
+                                                           target="_blank">
+                                                            {{item.Title}}  <span ng-if="item.childs.length>0"> ({{item.childs.length}})</span>
+                                                        </a>
+                                                    </td>
+                                                    <td style="width:8%;">
+
+                                                        {{item.PercentComplete}}%
+                                                    </td>
+                                                    <td style="width:22%;">
+
+                                                        <img ng-if="image.userimage !=undefined" title="{{image.Title}}"
+                                                             data-toggle="popover" data-trigger="hover" class="TeamLeader"
+                                                             ng-repeat="image in item.UserImageworkstream"
+                                                             ng-src="{{image.userimage}}" />
+
+
+                                                        <!--<img class="content_wrap text-center TeamLeader shadow" ng-if="image.userimage==undefined" title="{{image.Title}}" data-toggle="popover" data-trigger="hover" ng-repeat="image in UserImageworkstream" ng-src="https://www.shareweb.ch/site/Gender/PublishingImages/Portraits/icon_user.jpg" />-->
+
+                                                        <div title="{{image.Title}}" class="text-center title2 alltaskimage"
+                                                             ng-if="image.userimage == undefined" data-toggle="popover"
+                                                             data-trigger="hover"
+                                                             ng-repeat="image in item.UserImageworkstream">
+                                                            <div class="text-center  ng-binding">{{image.Suffix}}</div>
+
+
+                                                        </div>
+                                                        <span ng-show="item.userImagesOther.length>0"
+                                                              class="pipe NewsletterCheckbox">
+                                                            |
+                                                        </span>
+                                                        <span ng-repeat="imag in item.userImagesOther">
+                                                            <img ng-if="imag.Item_x0020_Cover!=undefined || imag.Item_x0020_Cover!=null"
+                                                                 title="{{imag.Title}}" style="width:30px;"
+                                                                 class="TeamLeader" src="{{imag.Item_x0020_Cover.Url}}" />
+                                                            <div style="width:35px;"
+                                                                 class="text-center title2 alltaskimage ng-binding"
+                                                                 title="{{imag.Title}}"
+                                                                 ng-if="imag.Item_x0020_Cover==undefined || imag.Item_x0020_Cover==null">
+                                                                {{imag.Suffix}}
+                                                            </div>
+                                                        </span>
+
+
+                                                        <!--<img ng-if="image.userImage !=undefined" title="{{image.Title}}" data-toggle="popover" data-trigger="hover" class="TeamLeader" ng-repeat="image in UserImage" ng-src="{{image.userImage}}" />
+
+
+                                                        <img class="content_wrap text-center TeamLeader shadow" ng-if="image.userImage==undefined" title="{{image.Title}}" data-toggle="popover" data-trigger="hover" ng-repeat="image in UserImage" ng-src="https://www.shareweb.ch/site/Gender/PublishingImages/Portraits/icon_user.jpg" />-->
+
+
+                                                    </td>
+                                                    <td style="width:12%;">
+
+                                                        {{item.DueDate}}
+                                                    </td>
+
+                                                    <td>
+                                                        <a class="hreflink" ng-click="EditTask(item)">
+                                                            <img src="/_layouts/images/edititem.gif">
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        <a style="cursor:pointer;" ng-if="isOwner"
+                                                           ng-click="removeItem(item.Id, WorkstreamItems)">
+                                                            <img src="/_layouts/images/delete.gif">
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                <tr class="active" ng-if="item.expanded" ng-repeat-end>
+                                                    <td colspan="11">
+                                                        <table width="100%">
+                                                            <tr ng-repeat-start="child in item.childs" class="add">
+                                                                <td style="width: 1%;">
+                                                                    <!--<a class="flag_icon" ng-if="child.pexpanded" ng-click="child.pexpanded = false"> <img style="margin-top:-5px; margin-right:4px;" ng-src="{{MainUrl}}/SiteCollectionImages/ICONS/24/list-icon.png"></a>
+                                                                    <a class="flag_icon" ng-if="!child.pexpanded" ng-click="child.pexpanded = true"><img style="margin-top:-5px; margin-right:4px;" ng-src="{{MainUrl}}/SiteCollectionImages/ICONS/24/right-list-icon.png"> </a>-->
+                                                                </td>
+
+                                                                <td style="width:16%;">
+                                                                    {{child.Shareweb_x0020_ID}}
+                                                                </td>
+                                                                <td style="width:36%;">
+                                                                    <a ng-href="{{siteConfig.SiteUrl}}/Pages/Manage/TaskProfile.aspx?TaskId={{child.Id}}"
+                                                                       target="_blank">
+                                                                        {{child.Title}}
+                                                                    </a>
+                                                                </td>
+                                                                <td style="width:8%;">
+
+                                                                    {{child.PercentComplete}}%
+                                                                </td>
+                                                                <td style="width:24%;">
+
+                                                                    <img ng-show="images.userimage !=undefined"
+                                                                         title="{{images.Title}}" data-toggle="popover"
+                                                                         data-trigger="hover" class="TeamLeader"
+                                                                         ng-repeat="images in child.UserImagetask"
+                                                                         ng-src="{{images.userimage}}" />
+
+
+                                                                    <!--<img class="content_wrap text-center TeamLeader shadow" ng-show="images.userimage==undefined" title="{{images.Title}}" data-toggle="popover" data-trigger="hover" ng-repeat="images in UserImagetask" ng-src="https://www.shareweb.ch/site/Gender/PublishingImages/Portraits/icon_user.jpg" />-->
+                                                                    <div title="{{image.Title}}"
+                                                                         class="text-center title2 alltaskimage"
+                                                                         ng-if="image.userimage == undefined"
+                                                                         data-toggle="popover" data-trigger="hover"
+                                                                         ng-repeat="image in child.UserImagetask">
+                                                                        <div class="text-center  ng-binding">
+                                                                            {{image.Suffix}}
+                                                                        </div>
+
+                                                                    </div>
+
+
+                                                                </td>
+                                                                <td style="width:13%;">
+
+                                                                    {{child.DueDate}}
+                                                                </td>
+
+                                                                <td>
+                                                                    <a class="hreflink" ng-click="EditTask(child)">
+                                                                        <img src="/_layouts/images/edititem.gif">
+                                                                    </a>
+                                                                </td>
+                                                                <td>
+                                                                    <a style="cursor:pointer;" ng-if="isOwner"
+                                                                       ng-click="removeItem(child.Id, item.childs)">
+                                                                        <img src="/_layouts/images/delete.gif">
+                                                                    </a>
+                                                                </td>
+
+                                                            </tr>
+                                                            <tr ng-if="child.pexpanded" ng-repeat-end>
+                                                                <td colspan="11" class="sub-phase-td">
+                                                                    <table class="subphase" width="100%">
+                                                                        <tr class="tdrow"
+                                                                            ng-repeat="subphase in phase.SubPhases">
+                                                                            <td style="width:1%;"></td>
+                                                                            <td style="width:18%;">
+                                                                                {{subphase.ProjectNumber}}
+                                                                            </td>
+                                                                            <td style="width: 34%;">
+                                                                                <div ng-if="subphase.Search_x0020_Term==undefined">
+                                                                                    <a target="_blank"
+                                                                                       ng-href="{{baseUrl}}/memberarea/Pages/Content/project-profile.aspx?projectId={{subphase.ProjectNumber}}">
+                                                                                        {{subphase.Title}}
+                                                                                    </a>
+                                                                                </div>
+                                                                                <div ng-if="phase.Search_x0020_Term!=undefined">
+                                                                                    <a target="_blank"
+                                                                                       ng-href="{{baseUrl}}/memberarea/Pages/Content/project-profile.aspx?projectId={{subphase.ProjectNumber}}&searchterm={{subphase.Search_x0020_Term}}">
+                                                                                        {{subphase.Title}}
+                                                                                    </a>
+                                                                                </div>
+
+                                                                            </td>
+                                                                            <td style="width: 13%;">
+                                                                                {{subphase.Partner_x002d_Countries}}
+                                                                            </td>
+                                                                            <td style="width: 13%;">
+                                                                                {{subphase.StartDate}}
+                                                                            </td>
+                                                                            <td style="width: 13%;">
+                                                                                {{subphase.EndDate}}
+                                                                            </td>
+                                                                            <td style="width: 18%;">
+                                                                                {{subphase.Project_x0020_Status}}
+                                                                            </td>
+
+                                                                            <td class="border_td">
+                                                                                <a ng-if="isEditPermissionToEIProject"
+                                                                                   data-toggle="popover"
+                                                                                   data-placement="Right"
+                                                                                   data-trigger="hover"
+                                                                                   data-content="Edit Main Project Information"
+                                                                                   class="hreflink"
+                                                                                   ng-click="getProjectDetails(subphase)">
+                                                                                    <img ng-src="/_layouts/images/edititem.gif">
+                                                                                </a>
+                                                                            </td>
+
+                                                                        </tr>
+                                                                    </table>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <span>
+
+                                    <button type="button" style="margin-top: -13px;"
+                                            class="btn btn-primary pull-right mb-10 MR10"
+                                            ng-click="showaddNewWorkstreamPopUp()">
+
+                                        Create Workstream
+
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <!--start of Sub-Indicator-->
+                <div class="row">
+                    <div class="panel panel-default" ng-hide="ItemType =='Task'">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">
+                                <span>Relevant Tasks</span>
+                            </h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <div ng-show="TaskItems =='undefined' || TaskItems =='null' || TaskItems.length==0">
+                                    <div role="alert" class="text-center mt-20">
+                                        No Tasks available
+                                    </div>
+                                </div>
+                                <div>
+                                    <div id="table-scroll"
+                                         ng-hide="TaskItems =='undefined' || TaskItems =='null' || TaskItems.length==0">
+                                        <table class="table table-hover" style="border: 1px solid #c9c9c9;"
+                                               cellspacing="0" width="100%">
+                                            <thead>
+                                                <tr>
+                                                    <th width="17%" style="cursor: pointer;"
+                                                        ng-click="orderBy='Shareweb_x0020_ID'; reverse=!reverse;">
+                                                        Task
+                                                        ID
+                                                    </th>
+                                                    <th width="31%" style="cursor: pointer;"
+                                                        ng-click="orderBy='Title'; reverse=!reverse;">Title</th>
+                                                    <th width="7%">Status</th>
+                                                    <th width="22%">Team</th>
+                                                    <th width="13%">Due Date</th>
+                                                    <th width="3%"></th>
+                                                    <th width="3%"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="item in TaskItems | orderBy:orderBy:reverse">
+                                                    <!-- <tr class="project_active" style="font-weight:bold" ng-repeat-start="item in filtered = (WorkstreamItems  | orderBy:orderBy:reverse)"> -->
+
+                                                    <td>
+                                                        {{item.Shareweb_x0020_ID}}
+                                                    </td>
+                                                    <td>
+                                                        <a ng-href="{{siteConfig.SiteUrl}}/Pages/Manage/TaskProfile.aspx?TaskId={{item.Id}}"
+                                                           target="_blank">
+                                                            {{item.Title}}
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        {{item.PercentComplete}}%
+                                                    </td>
+
+                                                    <td style="width:14%;">
+                                                        <img class="for-team-img" ng-if="image.userImage != undefined"
+                                                             title="{{image.Title}}" data-toggle="popover"
+                                                             data-trigger="hover" class="TeamLeader"
+                                                             ng-repeat="image in UserImage"
+                                                             ng-src="{{image.userImage}}" />
+                                                        <div title="{{image.Title}}" class="text-center title2 alltaskimage "
+                                                             ng-if="image.userImage == undefined" data-toggle="popover"
+                                                             data-trigger="hover" ng-repeat="image in UserImage">
+                                                            <div class="text-center ng-binding">{{image.Suffix}}</div>
+                                                        </div>
+                                                        <span ng-show="item.userImagesOther.length>0"
+                                                              class="pipe NewsletterCheckbox">
+                                                            |
+                                                        </span>
+                                                        <span ng-repeat="imag in item.userImagesOther">
+                                                            <img ng-if="imag.Item_x0020_Cover!=undefined || imag.Item_x0020_Cover!=null"
+                                                                 title="{{imag.Title}}" style="width:30px;"
+                                                                 class="TeamLeader"
+                                                                 src="{{imag.Item_x0020_Cover.Url}}" />
+                                                            <div style="width:35px;"
+                                                                 class="text-center title2 alltaskimage ng-binding"
+                                                                 title="{{imag.Title}}"
+                                                                 ng-if="imag.Item_x0020_Cover==undefined || imag.Item_x0020_Cover==null">
+                                                                {{imag.Suffix}}
+                                                            </div>
+                                                        </span>
+
+                                                    </td>
+
+                                                    <td>
+                                                        {{item.DueDate}}
+
+                                                    </td>
+
+                                                    <td>
+                                                        <a class="hreflink" ng-click="EditTask(item)">
+                                                            <img src="/_layouts/images/edititem.gif">
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        <a style="cursor:pointer;" ng-if="isOwner"
+                                                           ng-click="removeItem(item.Id, TaskItems)">
+                                                            <img src="/_layouts/images/delete.gif">
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <span>
+
+                                    <button type="button" style="margin-top: -13px;"
+                                            class="btn btn-primary pull-right mb-10 MR10" ng-click="showaddNewTaskPopUp()">
+
+                                        Create Task
+
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--start of Tasks-->
+                <!--start of All Relevent Documents-->
+                <div class="row">
+                    <!--<task-shareweb-documents isvisible="true" datasource="AllDocuments"
+                                             webpartid="'DynamicProfileRelevantDocuments'"></task-shareweb-documents>-->
+
+                </div>
+                <div>
+                    <foundation-documents isvisible="Profile.ProfileType!='True'" datasource="AllDocuments" webpartid="'FoundationProfileRelevantDocuments'"></foundation-documents>
+                </div>
+
+
+                <div class="form-group row" ng-show="attachments.length >0">
+                    <div class="col-lg-12 Description padL-0 PadR0">
+                        <fieldset class="fieldsett">
+                            <legend> Attachments</legend>
+                            <div ng-if="attachments.length > 0" class="col-sm-12 no-padding"
+                                 ng-repeat="attachedFiles in attachments">
+                                <div ng-if="attachedFiles.FileName.toLowerCase().indexOf('.png'.toLowerCase())> -1 || attachedFiles.FileName.toLowerCase().indexOf('.jpg'.toLowerCase())> -1 || attachedFiles.FileName.toLowerCase().indexOf('.bmp'.toLowerCase())> -1">
+                                    {{$index+1}}. {{attachedFiles.FileName}}
+
+                                    <img ng-if="deleteAttachedFile = true" style="max-width:90%;"
+                                         ng-src="{{siteConfig.SiteUrl}}/Lists/{{siteConfig.ListName}}/Attachments/{{attachedItemId}}/{{attachedFiles.FileName}}">
+                                </div>
+                                <div ng-if="attachedFiles.FileName.toLowerCase().indexOf('.txt'.toLowerCase())> -1 || attachedFiles.FileName.toLowerCase().indexOf('.docx'.toLowerCase())> -1  || attachedFiles.FileName.toLowerCase().indexOf('.pdf'.toLowerCase())> -1  || attachedFiles.FileName.toLowerCase().indexOf('.doc'.toLowerCase())> -1 || attachedFiles.FileName.toLowerCase().indexOf('.msg'.toLowerCase())> -1 || attachedFiles.FileName.toLowerCase().indexOf('.pptx'.toLowerCase())> -1 || attachedFiles.FileName.toLowerCase().indexOf('.xls'.toLowerCase())> -1 || attachedFiles.FileName.toLowerCase().indexOf('.xlsx'.toLowerCase())> -1">
+                                    <a ng-href="{{siteConfig.SiteUrl}}/Lists/{{siteConfig.ListName}}/Attachments/{{attachedItemId}}/{{attachedFiles.FileName}}">
+                                        {{$index+1}}.
+                                        {{attachedFiles.FileName}}
+                                    </a>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div>
+                <!--<shareweb-news-items isvisible="true" webpartid="'DynamicProfileRelevantNewsId'"></shareweb-news-items>-->
+            </div>
+            <!--start of all relevant Events-->
+            <div>
+                <!--<shareweb-events-items isvisible="true" webpartid="'DynamicProfileMilestones'"></shareweb-events-items>-->
+            </div>
+            <div>
+                <!--<shareweb-links isvisible="true" datasource="AllDocuments" webpartid="'DynamicFeaturedProfileLinksId'">
+                </shareweb-links>-->
+            </div>
+            <!--start of  relevant Projects-->
+            <!--<shareweb-projects webpartid="'Dynamicprofilerelevantprojectsid'"></shareweb-projects>-->
+            <!--start of Main Folders-->
+            <div>
+                <span>
+                    <!--<shareweb-folders webpartid="'featuredprofilefolders'"></shareweb-folders>-->
+                </span>
+            </div>
+
+
+            <!--start of Latest Comments-->
+            <!--<span class="displayhide" ng-show="isCurrentUserContibuteOrAbovePermission==true">
+                <shareweb-comments></shareweb-comments>
+            </span>-->
+        </div>
+    </div>
+
+
+    <div class="col-md-3">
+        <div class="panel panel-default">
+
+            <div class="panel-heading" title="Comments" style="color: #333;background-color: #f5f5f5;border-color: #ddd;padding: 7px;">
+
+                <label class="full_width" style="margin-top:-7px;">Comments</label>
+
+            </div>
+            <div class="panel-body">
+
+                <div style="width:100%;" class="panel1 panel-default " id="commentScroll" ng-cloak>
+                    <div ng-show="AllCommentDetails==undefined">
+                        <div class="text">No comments available</div>
+                    </div>
+                    <div class="row">
+                        <div class="publicationItem" ng-repeat="item in AllCommentDetails |orderBy:'$index':true">
+                            <div class="row" style="padding:5px;">
+                                <div class="col-sm-2">
+                                    <img style="width:95%; padding-left:0px;" ng-src="{{item.AuthorImage}}" />
+                                </div>
+                                <div class="col-sm-10">
+                                    <div class="row" style="color:#069;font-size:small;margin-left:-23px;">
+                                        {{item.AuthorName}} - {{item.Created | date:'dd MMM yyyy hh:mm'}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div style="margin-left:18px;margin-bottom:2px" ng-if="item.editable==undefined || item.editable==false" ng-bind-html="item.Description | trustedHTML"></div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="panel panel-default displayhide mt-25">
+            <div class="panel-heading" style="padding:7px;">
+                <label style="margin-top:-7px;">
+                    Add & Connect Tool
+                </label>
+            </div>
+            <div class="panel-body">
+                <div class=" col-sm-12 Doc-align inner-tabb">
+                    <a class="hreflink padding-left" ng-click="TagItems();">
+                        Click here to add more content
+                    </a>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+
+    <!--start of all relevant News-->
+
+
+    <div id="TagDocuments" ng-if="keyName == 'TeamTasksConfiguration'" class="modal fade in " tabindex="-1"
+         role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" style="display: none;">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <shareweb-add-connect-tool webpartid="'TeamTasksProfileAnCToolWebpartId'"></shareweb-add-connect-tool>
+            </div>
+        </div>
+    </div>
+    <div id="TagDocuments" ng-if="keyName == 'CepTasksConfiguration'" class="modal fade in " tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel" aria-hidden="false" style="display: none;">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <shareweb-add-connect-tool webpartid="'CepTasksProfileAnCToolWebpartId'"></shareweb-add-connect-tool>
+            </div>
+        </div>
+    </div>
+    <div id="TagDocuments" ng-if="keyName == 'AdminTasksConfiguration'" class="modal fade in " tabindex="-1"
+         role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" style="display: none;">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <shareweb-add-connect-tool webpartid="'AdminTasksProfileAnCToolWebpartId'"></shareweb-add-connect-tool>
+            </div>
+        </div>
+    </div>
+    <div id="addNewTasks" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="false" style="display: none;">
+        <div class="modal-dialog">
+            <div class="panel panel-default">
+                <div class="panel-title">
+                    <button type="button" class="close" data-dismiss="modal" ng-click="cancelItem()"
+                            style="min-width: 10px;">
+                        &times;
+                    </button>
+                    <h3 class="modal-title">Add New Task</h3>
+                </div>
+                <div class="tab-content container modal-body">
+                    <ng-form name="TaskNewForm" novalidate role="form">
+                        <div class="form-horizontal">
+                            <div class="col-md-12 PadR0 form-group" style="padding-top:5px">
+                                <div class="col-sm-12 PadR0" title="Task Name">
+                                    <label class="full_width"
+                                           ng-bind-html="GetColumnDetails('TextTitle') | trustedHTML">
+                                        <span class="required">*</span>
+                                    </label>
+                                    <input type="text" class="form-control" placeholder="Task Name" ng-required="true"
+                                           ng-model="task.Title" />
+                                </div>
+                                <div class="col-sm-5">
+                                </div>
+                            </div>
+
+                        </div>
+                    </ng-form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" ng-disabled="TaskNewForm.$error.required"
+                            ng-click="addNewTask()">
+                        Save
+                    </button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal"
+                            ng-click="cancelItem()">
+                        Cancel
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div id="addNewWorkstream" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="false" style="display: none;">
+        <div class="modal-dialog">
+            <div class="panel panel-default">
+                <div class="panel-title">
+                    <button type="button" class="close" data-dismiss="modal" ng-click="cancelWorkstreamItem()"
+                            style="min-width: 10px;">
+                        &times;
+                    </button>
+                    <h3 class="modal-title">Add New Workstream</h3>
+                </div>
+                <div class="tab-content container modal-body">
+                    <ng-form name="WorkstreamNewForm" novalidate role="form">
+                        <div class="form-horizontal">
+                            <div class="col-md-12 PadR0 form-group" style="padding-top:5px">
+                                <div class="col-sm-12 PadR0" title="Workstream Name">
+                                    <label class="full_width"
+                                           ng-bind-html="GetColumnDetails('TextTitle') | trustedHTML">
+                                        <span class="required">*</span>
+                                    </label>
+                                    <input type="text" class="form-control" placeholder="Workstream Name"
+                                           ng-required="true" ng-model="Workstream.Title" />
+                                </div>
+                                <div class="col-sm-5">
+                                </div>
+                            </div>
+
+                        </div>
+                    </ng-form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" ng-disabled="WorkstreamNewForm.$error.required"
+                            ng-click="addNewWorkstreamTask()">
+                        Save
+                    </button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal"
+                            ng-click="cancelWorkstreamItem()">
+                        Cancel
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div id="AdminCommentspopup" class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="false" style="display: none;">
+        <div class="modal-dialog" ng-cloak>
+            <!--<div class="modal-dialog  modal-lg" ng-cloak>-->
+            <div class="panel panel-default">
+                <ng-form name="AdminComments" novalidate role="form">
+                    <div class="panel-title">
+                        <h3>
+                            Admin Comments
+                            <!--<a class="hreflink" title="Delete" data-toggle="modal" ng-click="deleteTaskFromPopUp()"></a>-->
+                            <button type="button" class="close" data-dismiss="modal" ng-click="cancelAdminpopup()"
+                                    style="min-width: 10px;">
+                                &times;
+                            </button>
+                            <!--<span class="pull-right col-sm-1 feedback-icons"><page-settings-info webpartid="'sharewebTaskManagementPopup'"></page-settings-info></span>-->
+                        </h3>
+                    </div>
+                    <div class="modal-body">
+
+                        <div id="table-wrapper">
+                            <div>
+                                <div class="tabBox clearfix">
+                                    <div id="tasktabs" class="exTab3">
+                                        <ul class="nav nav-pills">
+
+                                            <!--<li ng-show="ShowFeedbackIcons"><a data-toggle="tab" href="#AdminInfo">Admin</a></li>-->
+
+                                        </ul>
+                                        <div class="tab-content">
+
+                                            <div id="AdminInfo" class="">
+                                                <div class="container divPanelBody form-group">
+                                                    <ng-form name="CommentFormAdmin" novalidate role="form">
+                                                        "
+                                                        <div class="col-sm-6">
+                                                            <!--<label class="full_width" ng-bind-html="GetColumnDetails('Comments') | trustedHTML">
+                                                            </label>-->
+                                                        </div>
+                                                        <!-- <div class="col-sm-6"> <span><a class="pull-right morelink hreflink" title="Click to Reply" ng-show="AllCommentDetailsAdmin.length>3" ng-click="EditDiscussionAdminy(AllCommentDetailsAdmin,'comment')"> All Comments({{AllCommentDetailsAdmin.length}})</a></span></div> -->
+                                                        <div class="col-sm-12  commentForAdmin padL-0"
+                                                             style="width:100%" class="" ng-cloak>
+                                                            <table style="width:100%;">
+
+                                                                <tr>
+                                                                    <td style="width:80%;border:none"
+                                                                        ng-if="Admincomments.length>0"
+                                                                        class="EditTaskPopup _fixedScrollHeight">
+
+
+                                                                        -s
+                                                                        <div class="col-sm-12 padL-0 PadR0">
+                                                                            <!--comment-scroll-->
+                                                                            <div class="publicationItem"
+                                                                                 ng-repeat="item in Admincomments  | orderBy:'ID':true">
+                                                                                <div class="row" style="padding:5px;">
+
+                                                                                    <div class="col-sm-2"
+                                                                                         title="{{item.AuthorName}}"
+                                                                                         data-toggle="popover"
+                                                                                         data-trigger="hover">
+                                                                                        <img style="width:45px;"
+                                                                                             ng-if="item.AuthorImage==''"
+                                                                                             src="{{baseUrl}}/_layouts/15/userphoto.aspx">
+                                                                                        <img style="width:45px;"
+                                                                                             ng-if="item.AuthorImage!=''"
+                                                                                             ng-src="{{item.AuthorImage}}">
+                                                                                    </div>
+                                                                                    <div class="col-sm-10 padL-0">
+                                                                                        <div class="footerUsercolor pad0">
+                                                                                            {{item.AuthorName}} -
+                                                                                            {{item.Created | date:'dd MMM yyyy'}}
+                                                                                            <!--<a ng-if="isOwner==true" class="hreflink" ng-click="editcommentAdmin(item,'comment');"><img src="/_layouts/images/edititem.gif"></a>
+                                                                                            <a ng-if="item.editable!=true && (isOwner==true || userId==item.Author.Id)" class="hreflink" title="Delete" ng-click="saveCommentAdmin(item,'delete')"><img src="/_layouts/images/delete.gif"></a>
+                                                                                            <a ng-if="item.editable==true" class="hreflink" title="Save" ng-click="saveCommentAdmin(item,'update')"><img style="width:18px;" ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/32/save.png"></a>
+                                                                                            <a ng-if="item.editable==true" class="hreflink" title="Cancel" ng-click="cancelComment(item)"><img style="width:18px;" ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/32/cancel.png"></a>-->
+                                                                                        </div>
+                                                                                        <div class="col-sm-12 padL-0">
+                                                                                            <div class="col-sm-11 forimg padL-0"
+                                                                                                 style="font-size:smaller;">
+                                                                                                sm
+                                                                                                >
+
+                                                                                                <span ng-if="item.editable==undefined || item.editable==false"
+                                                                                                      ng-bind-html="item.Body | trustedHTML"></span>
+                                                                                                <textarea style="overflow:hidden;width:100%"
+                                                                                                          ng-if="item.editable==true"
+                                                                                                          rows="5"
+                                                                                                          ng-model="item.Body"></textarea>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                </div>
+
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </td>
+
+
+                                                                    <td style="width:80%;"
+                                                                        ng-show="Admincomments==undefined ||Admincomments.length==0">
+                                                                        <!-- ngRepeat: TaskConfig in AdminConfigUser -->
+                                                                        <div class="col-sm-12 ng-scope">
+                                                                            <span class="drop-color">
+                                                                                <div class="col-sm-12 mt-15 full_width borderH">
+                                                                                    <div class="DragUser_Images">
+
+                                                                                        <div>
+                                                                                            <span class="ng-binding">
+                                                                                                There
+                                                                                                is no comment...
+                                                                                            </span>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </span>
+                                                                        </div>
+                                                                        <!-- end ngRepeat: TaskConfig in AdminConfigUser -->
+
+                                                                    </td>
+
+
+                                                                </tr>
+                                                                <!--<tr>
+                                                                    <td style="width:80%;">
+                                                                        <div class="col-sm-12 mt-15">
+
+
+
+
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>-->
+
+
+
+
+                                                            </table>
+
+
+
+                                                        </div>
+
+
+
+                                                        ng
+
+
+
+                                                    </ng-form>
+                                                    v>
+                                                </div>
+
+
+                                            </div>
+
+
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <!--<div class="ItemInfo">
+                            <div>Created <span>{{Item.Created}}</span> by <span class="footerUsercolor ">{{Item.Author.Title}}</span></div>
+                            <div>Last modified <span>{{Item.Modified}}</span> by <span class="footerUsercolor">{{Item.Editor.Title}}</span></div>
+                            <div>
+                                <a ng-if="isOwner==true" style="cursor:pointer" ng-click="deleteTaskFromPopUp();"><img src="/_layouts/images/delete.gif"> Delete this item</a>
+                            </div>
+                        </div>-->
+
+
+                    </div>
+                </ng-form>
+            </div>
+
+        </div>
+
+
+
+
+    </div>
+
+    <div id="TagProjects" class="modal fade in " tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" style="display: none;">
+
+
+        
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                od
+                <task-profile-add-connect-tool webpartid="'TaskProfileAnCToolWebpartId'"></task-profile-add-connect-tool>
+
+
+            </div>
+
+
+        </div>
+    </div>
+
+</div>

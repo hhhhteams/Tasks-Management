@@ -1,0 +1,136 @@
+﻿<!--<script src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/_layouts/15/sp.RequestExecutor.js"></script>-->
+<link rel="stylesheet" href="https://www.hochhuth-consting.de/Style%20Library/js/angular/Services/froala_style.min.css" type="text/css">
+<script src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/Style%20Library/js/angular/Services/froala_editor.pkgd.min.js"></script>
+<link rel="stylesheet" href="https://hhhhteams.sharepoint.com/sites/HHHHTeams/Style%20Library/js/angular/Services/font-awesome.css" type="text/css">
+<link rel="stylesheet" href="https://hhhhteams.sharepoint.com/sites/HHHHTeams/Style%20Library/js/angular/Services/froala_editor.pkgd.min.css" type="text/css">
+<link rel="stylesheet" href="https://hhhhteams.sharepoint.com/sites/HHHHTeams/Style%20Library/js/angular/Services/froala_style.min.css" type="text/css">
+<script src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/Style%20Library/js/angular/Online/Tasks%20Management/CreateQuickTask.js"></script>
+<script src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/Style%20Library/js/angular/Templates/HCTemplateControllers.js"></script>
+<style>
+    .fr-toolbar .fr-command.fr-btn.fr-active, .fr-popup .fr-command.fr-btn.fr-active {
+        color: #1e88e5;
+        background: 0 0;
+        /* float: right !important; */
+    }
+    div#TechnicalExplanations .fr-element.fr-view {
+    min-height: 232px!important;
+}
+button#fullscreen-1 {
+    position: absolute;
+    right: 0px;
+    border-left: 1px solid #ccc;
+}
+ .divPanelBody #main-menu li:hover > ul.sub-menu {
+        display: block;
+    }
+    .cretaeqcik{
+        background: #f2f2f2;
+    border: 1px solid #ccc;
+    padding: 6px 5px!important;
+    }
+   .w-back{
+       background-color: #ffffff;
+   }
+   #contentRow {
+    padding-top: 20px;
+}
+</style>
+<div ng-controller="CreateQuickTaskController" ng-cloak>
+    <div class="col-sm-12 cretaeqcik mt-18">
+        <div class="col-md-12 bdrbox mb-10 w-back">
+            <div class="subcategoryTasks">
+                <span class="pull-right">
+                    <a ng-click="ClearSelection()" class=" hreflink">Clear Selection<img ng-src="/_layouts/images/delete.gif"></a>
+                </span>
+                <a ng-repeat="item in SomeCategories" ng-click="selectSubTaskCategory(item.Title, item.Id)" class="subcategoryTask" id="subcategorytasks{{item.Id}}">
+                    <span class="icon-box"><img class="icon-task" ng-if="item.Item_x005F_x0020_Cover!=undefined" src="{{item.Item_x005F_x0020_Cover.Url}}"></span>
+                    <span class="tasks-label">{{item.Title}}</span>
+                </a>
+            </div>
+        </div>
+  
+    <div class="col-sm-6 padL-0 PadR0 form-group">
+        <legend class="col-sm-12 padL-0">Task Name</legend>
+    
+            <input type="text" class="form-control" placeholder="Enter Task Name..." ng-model="TaskTitle">
+            <span class="searchclear" style="top:41px;" ng-click="clearControl('searchTitleinput')">X</span>
+      
+    </div>
+    <div ng-show="ComponentID !='' && smartComponent.length!=0" class="col-sm-2 mb-10 Lbl_down PadR0">
+        <div class="col-sm-12 block" ng-mouseover="HoverIn(item);" ng-mouseleave="ComponentTitle.STRING='';" title="{{ComponentTitle.STRING}}" ng-repeat="item in smartComponent track by $index">
+            <a class="hreflink" target="_blank" ng-href="https://hhhhteams.sharepoint.com/sites/HHHHTeams/sp/SitePages/Portfolio-Profile.aspx?taskId={{item.Id}}">{{item.Title}}</a>
+        </div>
+    </div>    
+    <div class="col-sm-8 padL-0 mb-10 PadR0">
+        <input type="text" class="form-control" ng-model="Siteurl">
+        <span class="searchclear" style="top:17px;" ng-click="clearControl('searchUrlinput')">X</span>
+    </div>
+
+
+    <div ng-show="ComponentID ==''" class="col-sm-3 padL-0 mb-10">
+      
+            <span>No Components</span>
+           
+        
+    </div>
+          
+
+
+    <div class="col-sm-12  commentForAdmin padL-0 PadR0" style="width:100%" ng-cloak>
+        <div class="col-sm-12 PadR0 padL-0">
+            <div class="col-sm-5  padL-0 padR0">
+                <div class="Doc-align padding-0">
+                    <div class="col-sm-5 padding-0">
+                        <a style="cursor:pointer;" ng-click="addCopyPasteEditor()">Add new image</a>
+                    </div>
+                    <div ng-repeat="editor in copyPasteEditorAdminIDS" ng-show="copyPasteEditorAdminIDS.length!=0">
+                        <label class="full_width" ng-bind-html="GetColumnDetails('copyandpastImage') | trustedHTML"> Copy & Paste Image</label>
+                        <div id={{editor.copyPasteEditorAdminID}}></div>
+                        <span>
+                            <a ng-show="copyPasteEditorAdminIDS.length>0" style="cursor:pointer;" title="Delete" data-toggle="modal" ng-click="removeAddCopyPasteEditor(copyPasteEditorAdminIDS,$inde)">
+                                <img ng-src="/_layouts/images/delete.gif" src="/_layouts/images/delete.gif">
+                            </a>
+                        </span>
+                    </div>
+                    <div>
+                        <!--<div class="col-sm-5 padding-0">
+                            <a style="cursor:pointer;" ng-click="addCopyPasteEditor()">Add new image</a>
+                        </div>-->
+                        <!--<div ng-repeat="upload in copyPasteEditorAdminIDS" class="col-sm-5 no-padding">
+                            <span class="pull-right" ng-show="$index+1==copyPasteEditorAdminIDS.length">
+                                <button type="button" class="btn btn-primary" ng-click="copyPasteCover(copyPasteEditorAdminIDS[0].copyPasteEditorAdminID)">Show Fullsize</button>
+                                <a style="cursor:pointer;" title="Delete" ng-click="removeCopyPasteEditor(copyPasteEditorAdminIDS,$index,'admin')">
+                                    <img class="cancel-icon" ng-src="/_layouts/images/delete.gif">
+                                </a>
+                            </span>
+                        </div>-->
+                    </div>
+                </div>
+            </div>
+            <shareweb-progress-bar progressBarId="'CopyPasteuploadImage'"></shareweb-progress-bar>
+            <div ng-show="hideFrolaEditor==true;" class="col-sm-7 padL-0 PadR0 ">
+                <label>Description</label>
+                <div class="col-sm-12 mb-10"></div>
+                <div class="col-sm-12 padding-0">
+
+                    <div class="forFullScreenButton" id="TechnicalExplanations"></div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    <div class="col-sm-12 PadR0 mt-10">
+        <div class="pull-right">
+            <!--<span>
+                <input type="checkbox" ng-model="Draft" class="ng-pristine ng-valid ng-empty ng-touched">
+                Check For Draft
+            </span>-->
+            <button type="button" class="btn btn-primary " ng-click="SaveData()">Save</button>
+        </div>
+    </div>
+    
+
+</div>
+</div>
+
+
