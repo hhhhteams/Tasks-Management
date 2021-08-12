@@ -1045,11 +1045,11 @@
                                                                  ng-repeat="comment in item.Comments | orderBy : '-NewestCreated' | date:'dd MMM yyyy HH:mm'">
 
                                                                 <div id="">
-                                                                   <div ng-show=comment.AuthorImage!=undefined"  class="col-sm-1 padL-0 wid35">
+                                                                   <div ng-show="comment.AuthorImage!=undefined"  class="col-sm-1 padL-0 wid35">
                                                                         <img class="AssignUserPhoto1"
                                                                              ng-src="{{comment.AuthorImage}}">
                                                                     </div>
-                                                                        <div ng-show=comment.AuthorImage==undefined" class="col-sm-1 padL-0 wid35">
+                                                                        <div ng-show="comment.AuthorImage==undefined" class="col-sm-1 padL-0 wid35">
                                                                     <img  class="AssignUserPhoto1 bdrbox" 
                                                 src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/SiteCollectionImages/ICONS/32/icon_user.jpg">
                                                      </div>
@@ -1101,11 +1101,11 @@ comment.Created | date:'dd MMM yyyy
                                                                     </a>
                                                                 </span>
                                                                 <div id="">
-                                                                    <div ng-show=comment.AuthorImage!=undefined"  class="col-sm-1 padL-0 wid35">
+                                                                    <div ng-show="comment.AuthorImage!=undefined"  class="col-sm-1 padL-0 wid35">
                                                                         <img class="AssignUserPhoto1"
                                                                              ng-src="{{comment.AuthorImage}}">
                                                                     </div>
-                                                                        <div ng-show=comment.AuthorImage==undefined" class="col-sm-1 padL-0 wid35">
+                                                                        <div ng-show="comment.AuthorImage==undefined" class="col-sm-1 padL-0 wid35">
                                                                     <img  class="AssignUserPhoto1 bdrbox" 
                                                 src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/SiteCollectionImages/ICONS/32/icon_user.jpg">
                                                      </div>
@@ -1225,11 +1225,11 @@ comment.Created | date:'dd MMM yyyy
                                                                      ng-repeat="comment in child.Comments | orderBy : '-NewestCreated' | date:'dd MMM yyyy HH:mm'">
 
                                                                     <div id="">
-                                                                        <div ng-show=comment.AuthorImage!=undefined"  class="col-sm-1 padL-0 wid35">
+                                                                        <div ng-show="comment.AuthorImage!=undefined"  class="col-sm-1 padL-0 wid35">
                                                                         <img class="AssignUserPhoto1"
                                                                              ng-src="{{comment.AuthorImage}}">
                                                                     </div>
-                                                                        <div ng-show=comment.AuthorImage==undefined" class="col-sm-1 padL-0 wid35">
+                                                                        <div ng-show="comment.AuthorImage==undefined" class="col-sm-1 padL-0 wid35">
                                                                     <img  class="AssignUserPhoto1 bdrbox" 
                                                 src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/SiteCollectionImages/ICONS/32/icon_user.jpg">
                                                      </div>
@@ -1270,11 +1270,11 @@ comment.Created | date:'dd MMM yyyy
                                                                 <div class=" col-sm-12 mb-2 add_cmnt"
                                                                      ng-repeat="comment in child.Comments | orderBy : '-Created' | date:'dd MMM yyyy HH:mm'">
                                                                     <div id="">
-                                                                         <div ng-show=comment.AuthorImage!=undefined"  class="col-sm-1 padL-0 wid35">
+                                                                         <div ng-show="comment.AuthorImage!=undefined"  class="col-sm-1 padL-0 wid35">
                                                                         <img class="AssignUserPhoto1"
                                                                              ng-src="{{comment.AuthorImage}}">
                                                                     </div>
-                                                                        <div ng-show=comment.AuthorImage==undefined" class="col-sm-1 padL-0 wid35">
+                                                                        <div ng-show="comment.AuthorImage==undefined" class="col-sm-1 padL-0 wid35">
                                                                     <img  class="AssignUserPhoto1 bdrbox" 
                                                 src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/SiteCollectionImages/ICONS/32/icon_user.jpg">
                                                      </div>
@@ -1572,11 +1572,11 @@ comment.Created | date:'dd MMM yyyy
 
                                             <div class="clearfix"></div>
                                             
-                                                 <div ng-show=item.AuthorImage!=undefined"  class="col-sm-1 padL-0 wid35">
+                                                 <div ng-show="item.AuthorImage!=undefined"  class="col-sm-1 padL-0 wid35">
                                                                         <img class="AssignUserPhoto1"
                                                                              ng-src="{{item.AuthorImage}}">
                                                                     </div>
-                                                                        <div ng-show=item.AuthorImage==undefined" class="col-sm-1 padL-0 wid35">
+                                                                        <div ng-show="item.AuthorImage==undefined" class="col-sm-1 padL-0 wid35">
                                                                     <img  class="AssignUserPhoto1 bdrbox" 
                                                 src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/SiteCollectionImages/ICONS/32/icon_user.jpg">
                                                      </div>
