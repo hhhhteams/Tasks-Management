@@ -1045,10 +1045,14 @@
                                                                  ng-repeat="comment in item.Comments | orderBy : '-NewestCreated' | date:'dd MMM yyyy HH:mm'">
 
                                                                 <div id="">
-                                                                    <div class="col-sm-1 padL-0 wid35">
+                                                                   <div ng-show=comment.AuthorImage!=undefined"  class="col-sm-1 padL-0 wid35">
                                                                         <img class="AssignUserPhoto1"
                                                                              ng-src="{{comment.AuthorImage}}">
                                                                     </div>
+                                                                        <div ng-show=comment.AuthorImage==undefined" class="col-sm-1 padL-0 wid35">
+                                                                    <img  class="AssignUserPhoto1 bdrbox" 
+                                                src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/SiteCollectionImages/ICONS/32/icon_user.jpg">
+                                                     </div>
                                                                     <div class="col-sm-11 no-padding">
                                                                         <div class="">
                                                                             {{comment.AuthorName}} -
@@ -1097,10 +1101,14 @@ comment.Created | date:'dd MMM yyyy
                                                                     </a>
                                                                 </span>
                                                                 <div id="">
-                                                                    <div class="col-sm-1 padL-0 wid35">
+                                                                    <div ng-show=comment.AuthorImage!=undefined"  class="col-sm-1 padL-0 wid35">
                                                                         <img class="AssignUserPhoto1"
                                                                              ng-src="{{comment.AuthorImage}}">
                                                                     </div>
+                                                                        <div ng-show=comment.AuthorImage==undefined" class="col-sm-1 padL-0 wid35">
+                                                                    <img  class="AssignUserPhoto1 bdrbox" 
+                                                src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/SiteCollectionImages/ICONS/32/icon_user.jpg">
+                                                     </div>
                                                                     <div class="col-sm-11 no-padding">
                                                                         <div class="">
                                                                             {{comment.AuthorName}} -
