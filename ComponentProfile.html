@@ -273,8 +273,10 @@
                                                 ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/32/help_Icon.png">
                                         </a>
                                         <span>
-                                            <img class="hreflink" title="Version History" ng-click="GetitemsVersionhistory(Task,Task.Id)"
-                                            ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Shareweb/Version_H.png">
+                                            <img ng-show="Task.Portfolio_x0020_Type=='Component'" class="hreflink" title="Version History" ng-click="GetitemsVersionhistory(Task,Task.Id)"
+                                                 ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Shareweb/Version_H.png">
+                                            <img  ng-show="Task.Portfolio_x0020_Type=='Service'" class="hreflink" title="Version History" ng-click="GetitemsVersionhistory(Task,Task.Id)"
+                                                 ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/Shareweb/Version_HG.png">
                                         </span>
                                     </h1>
                                 </div>
@@ -738,7 +740,7 @@
                                                                 <label for="identifier1-{{item.Id}}" class="ng-binding">
                                                                     <span>{{item.Title}}</span>
                                                                 </label>
-                                                                <div class="ng-binding">
+                                                                <div class="ng-binding" ng-show="item.QuestionStatus=='Approved'">
                                                                     <div class="accordin-content"
                                                                         ng-bind-html="item.Body | trustedHTML">
                                                                     </div>
@@ -1737,7 +1739,7 @@
                         <!-- isvisible="Profile.ProfileType!='True'" -->
                         <div class="mt-25">
                             <foundation-documents 
-                                datasource="AllDocuments" isvisible="true"
+                                datasource="AllDocuments" isvisible="Profile.ProfileType!='True'"
                                 webpartid="'FoundationPortfolioProfileRelevantDocuments'">
                             </foundation-documents>
                         </div>
